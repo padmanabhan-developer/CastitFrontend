@@ -1,0 +1,60 @@
+
+    
+    <div class="popup1">
+    
+        <div class="popup-header">
+              <div class="container-lg">
+                  <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
+                  <a href="#" class="close-icon" routerLink="/profiles" ></a>
+             </div>
+        </div><!--popup-header-->
+        
+        <div class="popup-content">
+             <div class="container-lg">
+                  <div class="cnt">
+                          <div class="cnt-block1">
+                            <h3>Profil login</h3>
+                            <p>For at kunne rette i din eksisterende <br>profil skal du logge ind. </p>
+                            <div class="form-block">
+                                 <form action="" #f="ngForm" (ngSubmit)="login(user)">
+                                  <div class="form-row">
+                                        <label>BRUGERNAVN</label>
+                                      <input name="email" type="text" class="input1" placeholder="Email" [(ngModel)]="user.name" required>
+                                 </div>
+                                 <div class="form-row">
+                                        <label>KODE</label>
+                                      <input name="password" type="password" class="input1" placeholder="*****" [(ngModel)]="user.pass" required>
+                                      <p class="forgot-password"><a href="#">Opret ny profil</a> &nbsp;  I  &nbsp; <a href="#">Glemt adgangskode</a></p>
+                                 </div>
+                                 <div class="form-row">
+                                      <input [disabled]="!f.valid" type="submit" class="submit1" value="Login" routerLink_diss="/login/1">
+                                 </div>
+                              </form>
+                            </div>
+                       </div>
+                       
+                       <div class="cnt-block2">
+                            <h3>Kunde login</h3>
+                            <p class="padding-none">For at kunne oprette og gemme dine <br>Lightbox skal du lave en kundeprofil.</p>
+                            <div class="form-block">
+                                  <div class="form-row">
+                                        <label>BRUGERNAVN</label>
+                                      <input type="text" class="input1" placeholder="Email">
+                                 </div>
+                                 <div class="form-row">
+                                        <label>KODE</label>
+                                      <input type="password" class="input1" placeholder="*****">
+                                      <p class="forgot-password"><a href="#">Opret ny profil</a> &nbsp;  I  &nbsp; <a href="#">Glemt adgangskode</a></p>
+                                 </div>
+                                 <div class="form-row">
+                                      <input type="submit" class="submit1" value="Login">
+                                 </div>
+                            </div>
+                       </div>
+                  </div>
+             </div>
+        </div><!--popup-content-->
+        
+   </div><!--popup1-->
+
+   <router-outlet></router-outlet>
