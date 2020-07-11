@@ -26,8 +26,9 @@
         "from":"From",
         "to":"To",
         "search":"Search",
-        "reset":"Reset",
-        "years":"Years"
+        "reset":"Clear search and refresh",
+        "years":"Years",
+        "noResults":"No profiles found"
     },
     "userinfo":{
         "images":"Photos",

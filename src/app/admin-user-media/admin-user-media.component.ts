@@ -40,6 +40,14 @@ export class AdminUserMediaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (!this.adminService.userData[0].uid_export) {
+      
+    } else {
+      this.loadMediaData();
+    }
+  }
+
+  loadMediaData() {
     this.photoStatusFromAPI = this.adminService.userData[0].field_photos.replace(' ', '').split(',');
     this.photoStatusFromAPI.forEach((str, idx) => {
       if ((str.trim() === 'online') || (str.trim() === '')) {

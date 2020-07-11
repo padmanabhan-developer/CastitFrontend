@@ -20,18 +20,21 @@ import { CustomerprofileComponent } from './customerprofile/customerprofile.comp
 import { CustomerloginComponent } from './customerlogin/customerlogin.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
+import { AdminUserInfoComponent } from './admin-user-info/admin-user-info.component';
+import { AdminUserMediaComponent } from './admin-user-media/admin-user-media.component';
+import { HomecarouselComponent } from './homecarousel/homecarousel.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'profiles'
+    component: HomecarouselComponent
   },
   {
     path: '#',
     pathMatch: 'full',
-    redirectTo: 'profiles'
+    component: HomecarouselComponent
   },
   {
     path: 'profiles',
@@ -60,8 +63,22 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminListComponent
-
+    // component: AdminListComponent
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: AdminListComponent
+      },
+      {
+        path: 'info/:id',
+        component: AdminUserInfoComponent
+      },
+      {
+        path: 'media/:id',
+        component: AdminUserMediaComponent
+      },
+    ]
   },
   {
     path: 'logout',

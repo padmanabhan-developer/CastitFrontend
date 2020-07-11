@@ -17,7 +17,7 @@
             <h2>{{ 'profiles.searchName' | translate }}</h2>
             <span class="side-searchbox">
               <input [(ngModel)]="searchFN" type="text" class="side-input ng-pristine ng-untouched ng-valid">
-              <input type="button" class="side-search">
+              <input type="button" class="side-search" disabled>
             </span>
           </div>
           <div class="leftbox">
@@ -31,9 +31,9 @@
             <h2 class="ng-binding">{{ 'profiles.age' | translate }}</h2>
             <div class="side-form">
               <span class="form-span">
-                <input value="" type="text" class="side-input2" placeholder="Fra">
+                <input [(ngModel)]="ageFrom" value="" type="text" class="side-input2" placeholder="Fra">
               </span> <span class="form-devider"></span> <span class="form-span">
-                <input type="text" value="" class="side-input2" placeholder="Til">
+                <input [(ngModel)]="ageTo" type="text" value="" class="side-input2" placeholder="Til">
               </span>
             </div>
           </div>
@@ -47,6 +47,7 @@
         <div class="rightbar">
           <div class="rightbar_inner scrollbar">
             <div class="overflow">
+              <p class="empty-results-error" *ngIf="emptyResults">{{ 'profiles.noResults' | translate }}</p>
               <ul>
                 <!-- <li>
                   <div class="galler-thumb">

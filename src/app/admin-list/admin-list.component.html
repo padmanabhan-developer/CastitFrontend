@@ -40,7 +40,7 @@
       [footerHeight]="50" rowHeight="auto" [limit]="15" [rows]="rows" [reorderable]="false" [selected]="selected"
       [displayCheck]="displayCheck" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="false"
       (activate)="onActivate($event)" (select)="onSelect($event)" [loadingIndicator]="loadingIndicator"
-      [messages]="messages" [trackByProp]="updated">
+      [messages]="messages" [(trackByProp)]="updated">
 
       <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}"
         headerCheckboxable="{{column.headerCheckboxable}}" checkboxable="{{column.checkboxable}}">
@@ -51,7 +51,7 @@
           </div>
 
           <!-- STATUS ACTIONS -->
-          <div *ngIf="column.prop === 'status'">
+          <div *ngIf="column.prop === 'status'" class="status-coloumn">
             <span class="cursor-pointer" (click)="setStatus(row.uid, '1')" [ngClass]="{'green': row.field_profile_status.toLowerCase() === 'online'}">Online</span> /
             <span class="cursor-pointer" (click)="setStatus(row.uid, '2')" [ngClass]="{'pink': row.field_profile_status.toLowerCase() === 'offline'}">Offline</span> /
             <span class="cursor-pointer" (click)="setStatus(row.uid, '3')" [ngClass]="{'orange': row.field_profile_status.toLowerCase() === 'pending'}">Pending</span> /
@@ -72,5 +72,5 @@
     </ngx-datatable>
   </div>
 </div>
-<app-admin-user-info *ngIf="adminService.showInfoComponent" [userData]="userData"></app-admin-user-info>
-<app-admin-user-media *ngIf="adminService.showMediaComponent"></app-admin-user-media>
+<!-- <app-admin-user-info *ngIf="adminService.showInfoComponent" [userData]="userData"></app-admin-user-info> -->
+<!-- <app-admin-user-media *ngIf="adminService.showMediaComponent"></app-admin-user-media> -->

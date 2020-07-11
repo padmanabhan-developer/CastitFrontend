@@ -80,6 +80,13 @@ export class AppDataService {
     return age;
   }
 
+  getAge__2(dateString){
+    const birthdate = new Date(dateString);
+    const cur = new Date();
+    const diff = 12345; // cur - birthdate;
+    const age = Math.floor(diff / 31536000000); // Divide by 1000*60*60*24*365.25
+  }
+
   getProfiles(queryString = '') {
     const url = this.allProfilesUrl + queryString;
     return this.http.get(url);

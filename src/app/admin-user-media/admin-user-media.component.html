@@ -1,5 +1,5 @@
 <div id="wrapper" class="admin-userinfo">
-  <!-- {{ adminService.userData | json }} Padmanabhann -->
+  {{ adminService.userData | json }} Padmanabhann
   <div id="content">
     <div class="page-top page-top2">
       <div class="container">
@@ -30,7 +30,7 @@
           <input class="input" name="tabs" type="radio" id="tab-1" checked="checked" />
           <label class="label" for="tab-1">Billeder</label>
           <div class="panel">
-            <h1 *ngIf="!photoStatusFromAPI.length">No images present for this profile {{photoStatusFromAPI[0]}} </h1>
+            <!-- <h1 *ngIf="!photoStatusFromAPI.length">No images present for this profile {{photoStatusFromAPI[0]}} </h1> -->
             <!-- <h1>Billeder</h1> -->
             <!-- <p>hhh</p> -->
             <!--  -->
@@ -57,7 +57,6 @@
           <input class="input" name="tabs" type="radio" id="tab-2" />
           <label class="label" for="tab-2">Videoer</label>
           <div class="panel">
-            <h1>Code refactoring in progress</h1>
             <div *ngFor="let photoUrl of adminService.userData[0].field_video_thumbnails_export; let i = index" class="product-box" id="media_id">
               <div class="product-box-inner">
                 <div class="img-box">
@@ -81,7 +80,6 @@
           <input class="input" name="tabs" type="radio" id="tab-3" />
           <label class="label" for="tab-3">Blandet</label>
           <div class="panel">
-            <h1>Code refactoring in progress</h1>
             <!-- photos -->
             <div *ngFor="let photoUrl of adminService.userData[0].field_photos_export; let i = index" class="product-box" id="media_id">
               <div class="product-box-inner">

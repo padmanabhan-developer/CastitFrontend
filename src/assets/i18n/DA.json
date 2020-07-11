@@ -26,8 +26,9 @@
         "from":"Fra",
         "to":"til",
         "search":"SØG",
-        "reset":"Nulstil",
-        "years":"År"
+        "reset":"Ryd søgning og opdater",
+        "years":"År",
+        "noResults":"Ingen profiler fundet"
     },
     "userinfo":{
         "images":"Billeder",

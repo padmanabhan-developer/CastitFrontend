@@ -1,5 +1,5 @@
 import { AdminService } from './../services/admin.service';
-import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation, TemplateRef, SimpleChanges, OnChanges } from '@angular/core';
 import { AppDataService } from '../services/app-data.service';
 import { UserprofileService } from '../services/userprofile.service';
 import { Router, provideRoutes } from '@angular/router';
@@ -12,7 +12,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
   styleUrls: ['./admin-list.component.scss'],
   // encapsulation: ViewEncapsulation.ShadowDom
 })
-export class AdminListComponent implements OnInit {
+export class AdminListComponent implements OnInit, OnChanges {
   listData: any[];
   SelectionType = SelectionType;
   rows = [];
@@ -87,7 +87,7 @@ export class AdminListComponent implements OnInit {
     { prop: 'created', name: 'Created' },
     { prop: 'updated', name: 'Updated' },
     // { prop: 'field_profile_status', name: 'Status' },
-    { prop: 'status', name: 'Status', sortable: false },
+    { prop: 'status', name: 'Status', sortable: false, width: 250 },
     { prop: 'info_link', name: 'View Profile', sortable: false},
     { prop: 'media_link', name: 'View Media', sortable: false}
   ];
@@ -114,6 +114,20 @@ export class AdminListComponent implements OnInit {
     public adminService: AdminService,
     private router: Router
   ) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (typeof changes.userData !== 'undefined') {
+
+      // retrieve the quiz variable change info
+      const change = changes.userData;
+
+      // only perform the task if the value has been changed
+      if (!change.isFirstChange()) {
+          // execute the Http request and retrieve the result
+          this.fetchListData();
+      }
+    }
+  }
 
   ngOnInit() {
     this.fetchListData();
@@ -295,9 +309,11 @@ export class AdminListComponent implements OnInit {
           case 'info':
           default:
             this.adminService.showInfoComponent = true;
+            this.router.navigate(['/admin/info/' + uid]);
             break;
           case 'media':
             this.adminService.showMediaComponent = true;
+            this.router.navigate(['/admin/media/' + uid]);
             break;
         }
       }, 0);
@@ -323,14 +339,15 @@ export class AdminListComponent implements OnInit {
     uid = Number(uid);
     this.userprofileService.adminList(uid).subscribe(res => {
       const response: any = res;
-
       const id = response[0].uid;
       const index = this.rows.findIndex(item => item.uid === id);
-
       // Replace the item by index.
       this.rows.splice(index, 1, response[0]);
-      // To check.
-      // console.log(this.rows);
+      setTimeout(() => {
+        this.rows = [...this.rows] ;
+        }, 0);
+      // this.rows = [...this.rows];
+      // console.log(this.rows[index]);
       this.updated = Date.now().toString();
     });
   }
@@ -365,14 +382,20 @@ export class AdminListComponent implements OnInit {
 
   toggleView(event) {
     const val = event.target.value.toLowerCase();
+    console.log(val);
     let temp = this.temp;
     this.currentView = [];
     this.currentView.push(val);
     this.viewType = val;
     // filter our data
-    if (val !== 'all') {
+    if (val !== 'all' && val !== 'recent') {
       temp = this.temp.filter((d) => {
         return d.field_profile_status.toLowerCase().indexOf(val) !== -1 || !val;
+      });
+    }
+    if (val === 'recent') {
+      temp = this.temp.filter((d) => {
+        return d.field_recently_updated === '1';
       });
     }
     // update the rows

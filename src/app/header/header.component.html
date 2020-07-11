@@ -12,7 +12,7 @@
                         <ul class="navbar-nav ml-auto py-4 py-md-0">
                             <li *ngIf="!userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/login"
                                     class="nav-link">{{ 'menu.login' | translate}}</a> </li>
-                            <li *ngIf="userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/logout"
+                            <li *ngIf="userprofileService.isLoggedIn()" class="nav-item"> <a href="javascript:void(0)" (click)="logout()"
                                     class="nav-link">{{ 'menu.logout' | translate}}</a> </li>
                             <li *ngIf="!userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/login/1"
                                     class="nav-link">{{ 'menu.apply' | translate }}</a> </li>

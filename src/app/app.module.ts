@@ -49,6 +49,7 @@ import { AdminUserInfoComponent } from './admin-user-info/admin-user-info.compon
 import { AdminUserMediaComponent } from './admin-user-media/admin-user-media.component';
 import { MediaModalComponent } from './media-modal/media-modal.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { HomecarouselComponent } from './homecarousel/homecarousel.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -113,7 +114,8 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     AdminListComponent,
     AdminUserInfoComponent,
     AdminUserMediaComponent,
-    MediaModalComponent
+    MediaModalComponent,
+    HomecarouselComponent
   ],
   bootstrap: [
     AppComponent

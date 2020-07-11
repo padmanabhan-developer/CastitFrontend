@@ -14,33 +14,76 @@ export class HompageComponent implements OnInit {
   profileFallback = '/assets/images/profile/profileFallback.jpg';
   myProfileLink = '/login/1';
   searchGender: any = 'all';
-  searchFN = '';
+  searchFN: any = '';
   lightboxMode = false;
   lightboxID = '';
+  ageFrom: any;
+  ageTo: any;
+  emptyResults = false;
+  queryParams: any;
+  dobMin: any;
+  dobMax: any;
+  searchPerformed = false;
+  searchPN: string;
 
   constructor(
     public appService: AppDataService,
     public userprofileService: UserprofileService,
     private router: Router,
-    // private currentRoute: ActivatedRouteSnapshot
+    private currentRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.setMyprofileLink();
     this.defaultImage = this.appService.defaultImage;
     this.profileFallback = this.appService.profileFallback;
-    // this.lightboxID = this.currentRoute.params.
+    // this.lightboxID = this.currentRoute.params
+    this.queryParams = this.currentRoute.queryParams.subscribe(params => {
+      if (params.fn) {
+        this.searchFN = params.fn;
+        this.searchPerformed = true;
+      }
+      if (params.pn) {
+        this.searchFN = params.fn;
+        this.searchPerformed = true;
+      }
+      if (params.gender) {
+        this.searchGender = params.gender;
+        this.searchPerformed = true;
+      }
+      if (params.dobMin) {
+        this.dobMin = params.dobMin;
+        this.searchPerformed = true;
+      }
+      if (params.dobMax) {
+        this.dobMax = params.dobMax;
+        this.searchPerformed = true;
+      }
+    });
+    if (this.searchPerformed) {
+      this.submitSearch();
+    } else {
+      this.loadTiles();
+    }
+  }
 
+  loadTiles() {
     this.appService.getCProfiles().subscribe(res => {
-        this.data = res;
-        this.data = this.shuffle(this.data);
-        this.appService.loadedProfileData = this.data;
+      this.data = res;
+      this.data = this.shuffle(this.data);
+      this.appService.loadedProfileData = this.data;
 
-        this.appService.getYProfiles().subscribe(resp => {
+      this.appService.getYProfiles().subscribe(resp => {
         let yData = resp;
         yData = this.shuffle(yData);
         this.appService.loadedProfileData = this.appService.loadedProfileData.concat(yData);
         this.data = this.appService.loadedProfileData;
+
+        if (this.data.length < 1) {
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
       });
     });
   }
@@ -57,7 +100,7 @@ export class HompageComponent implements OnInit {
   }
 
   toggleMobileMenu() {
-    
+
   }
 
   setMyprofileLink() {
@@ -100,11 +143,26 @@ export class HompageComponent implements OnInit {
   }
 
   resetSearch() {
-    this.appService.getProfiles()
-    .subscribe(res => {
-      this.data = res;
-      this.appService.loadedProfileData = this.data;
-    });
+    this.searchFN = '';
+    this.searchPN = '';
+    this.ageFrom = '';
+    this.ageTo = '';
+    this.emptyResults = false;
+    this.loadTiles();
+  }
+
+  getTimePeriod(ageFrom, ageTo) {
+    const secondsInAMinute = 60;
+    const minutesInAnHour = 60;
+    const hoursInADay = 24;
+    const daysInAYear = 365.25;
+
+    const currentTimestamp = Date.now() / 1000;
+    const startTimestamp = currentTimestamp - ageFrom * secondsInAMinute * minutesInAnHour * hoursInADay * daysInAYear;
+    const EndTimestamp = currentTimestamp - ageTo * secondsInAMinute * minutesInAnHour * hoursInADay * daysInAYear;
+  }
+  getDatePeriod(ageFrom, ageTo) {
+
   }
 
   submitSearch() {
@@ -113,15 +171,80 @@ export class HompageComponent implements OnInit {
       searchCriteria += '&gender=' + this.searchGender;
     }
     if (this.searchFN !== '') {
-      searchCriteria += '&fn=' + this.searchFN;
+      if ((this.searchFN[0].toLowerCase() === 'c' || this.searchFN[0].toLowerCase() === 'y') &&
+          (this.searchFN[1].toLowerCase() === 'm' || this.searchFN[1].toLowerCase() === 'f') &&
+          (!isNaN(this.searchFN[2]))
+        ) {
+          this.searchPN = this.searchFN;
+          searchCriteria += '&pn=' + this.searchPN;
+      } else {
+        searchCriteria += '&fn=' + this.searchFN;
+      }
+    }
+    if (this.ageFrom && this.ageTo && (this.ageFrom !== this.ageTo)) { // both values are provided and are different
+      const currentDateObj = new Date();
+      const currentYear = currentDateObj.getFullYear();
+      const currentDate = currentDateObj.toISOString().substring(0, 10);
+
+      const yearOne = currentYear - this.ageFrom;
+      const yearTwo = currentYear - this.ageTo;
+      const yearMin = (yearOne <= yearTwo) ? yearOne : yearTwo;
+      const yearMax = (yearOne >= yearTwo) ? yearOne : yearTwo;
+
+      this.dobMin = currentDate.replace(currentYear.toString(), yearMin.toString());
+      this.dobMax = currentDate.replace(currentYear.toString(), yearMax.toString());
+      searchCriteria += '&dob_min=' + this.dobMin + '&dob_max=' + this.dobMax;
+
+    } else if (this.ageFrom && this.ageTo && (this.ageFrom === this.ageTo)) { // both values are identical
+      const currentDateObj = new Date();
+      const currentYear = currentDateObj.getFullYear();
+      const currentDate = currentDateObj.toISOString().substring(0, 10);
+
+      const yearMin = currentYear - this.ageFrom;
+      const yearMax = yearMin + 1;
+      this.dobMin = currentDate.replace(currentYear.toString(), yearMin.toString());
+      this.dobMax = currentDate.replace(currentYear.toString(), yearMax.toString());
+      searchCriteria += '&dob_min=' + this.dobMin + '&dob_max=' + this.dobMax;
+
+    } else if (!this.ageFrom && this.ageTo) { // Only TO value provided
+      const currentDateObj = new Date();
+      const currentYear = currentDateObj.getFullYear();
+      const currentDate = currentDateObj.toISOString().substring(0, 10);
+
+      const yearMin = currentYear - this.ageTo;
+      const yearMax = currentYear;
+
+      this.dobMin = currentDate.replace(currentYear.toString(), yearMin.toString());
+      this.dobMax = currentDate.replace(currentYear.toString(), yearMax.toString());
+      searchCriteria += '&dob_min=' + this.dobMin + '&dob_max=' + this.dobMax;
+
+    } else if (this.ageFrom && !this.ageTo) { // Only FROM value provided
+      const currentDateObj = new Date();
+      const currentYear = currentDateObj.getFullYear();
+      const currentDate = currentDateObj.toISOString().substring(0, 10);
+
+      const yearMin = currentYear - 200; // assuming maximum age possible is 200
+      const yearMax = currentYear - this.ageFrom;
+
+      this.dobMin = currentDate.replace(currentYear.toString(), yearMin.toString());
+      this.dobMax = currentDate.replace(currentYear.toString(), yearMax.toString());
+      searchCriteria += '&dob_min=' + this.dobMin + '&dob_max=' + this.dobMax;
     }
     if (searchCriteria === '?dummy=0'){
       searchCriteria = '';
+    }
+    if (!this.searchPerformed) {
+      this.router.navigate(['profiles'], { queryParams: { fn: this.searchFN, pn: this.searchPN, dobMin: this.dobMin, dobMax: this.dobMax, gender: this.searchGender } });
     }
     this.appService.getProfiles(searchCriteria)
       .subscribe(res => {
         this.data = res;
         this.appService.loadedProfileData = this.data;
+        if (this.data.length < 1){
+          this.emptyResults = true;
+        } else {
+          this.emptyResults = false;
+        }
       });
   }
 

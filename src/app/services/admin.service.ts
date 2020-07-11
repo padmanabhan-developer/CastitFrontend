@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserprofileService } from './userprofile.service';
 import { Injectable } from '@angular/core';
 // import dataSet from './jsonData.json';
@@ -316,12 +317,14 @@ export class AdminService {
     showListComponent = true;
     constructor(
         private http: HttpClient,
-        public userProfileService: UserprofileService
+        public userProfileService: UserprofileService,
+        public router: Router
     ) {}
     closePanel() {
         this.showInfoComponent = false;
         this.showMediaComponent = false;
         this.showListComponent = true;
+        this.router.navigate(['/admin']);
     }
     loadProfile(uid, role = 'model') {
         let userProfileEndPoint = '';

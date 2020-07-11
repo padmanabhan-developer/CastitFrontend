@@ -1,5 +1,5 @@
 import { AdminService } from './../services/admin.service';
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, OnChanges } from '@angular/core';
 import { AppDataService } from '../services/app-data.service';
 import { UserprofileService } from '../services/userprofile.service';
 import { Router } from '@angular/router';
