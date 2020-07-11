@@ -3,117 +3,154 @@
     
         <div class="popup-header">
               <div class="container-lg">
-                  <div class="popup-logo"><a href="#"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a href="#" class="download-btn"><span class="download-icon"></span>DOWNLOAD</a>
-                  <a href="#" class="add-btn"><span class="add-icon"></span>ADD TO LIGHTBOX</a>
-                  <a href="#" class="close-icon"></a>
+                  <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
+                  <a download="profileData.field_first_name_export" target="_blank" [href]="loadedAssetUrl" class="download-btn"><span class="download-icon"></span>DOWNLOAD</a>
+                  <a href="javascript:void(0)" (click)="addModelToLightbox(profileData)"  class="add-btn"><span class="add-icon"></span>ADD TO LIGHTBOX</a>
+                  <a  (click)="closeDetails()" class="close-icon"></a>
              </div>
         </div><!--popup-header-->
         
         <div class="popup-content">
              <div class="container-lg">
                  <div class="popup-left">
-                      <div class="popup-side-block">
-                           <h4>Billeder</h4>
-                           <h3>16</h3>
+                      <div class="popup-side-block list-photos">
+                           <h4>{{ 'userinfo.images' | translate }}</h4>
+                           <h3>{{ profileData.field_photos_export.length }}</h3>
                       </div>
-                      <div class="popup-side-block">
-                           <h4>Videoer</h4>
-                           <h3>4</h3>
+                      <div class="popup-side-block list-videos">
+                           <h4>{{ 'userinfo.videos' | translate }}</h4>
+                           <h3>{{ profileData.field_videos_export.length }}</h3>
                       </div>
                  </div>
                  
                  <div class="popup-right">
                         <div class="popup-right-block1">
-                              <ul class="list4"> 
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb2.png" alt=""/></a></li>
+                              <ul class="list4 list-photos" *ngIf="profileData.field_photos_export.length"> 
+                               <li *ngFor="let photo of profileData.field_photos_export; index as i"><a href="javascript:void(0)"><img class="profile-photos" (click)="loadAsset(i, 'image')" [lazyLoad]="photo" [defaultImage]="defaultImage" [errorImage]="profileFallback" alt=""/></a></li>
+                               
                            </ul>
-                           <ul class="list2"> 
-                               <li><a href="#"><img src="assets/images/thumb3.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb3.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb3.png" alt=""/></a></li>
-                               <li><a href="#"><img src="assets/images/thumb3.png" alt=""/></a></li>
+                           <ul class="list2 list-videos" *ngIf="profileData.field_videos_export.length"> 
+                               <li *ngFor="let thumb of profileData.field_video_thumbnails_export; index as i"><a href="javascript:void(0)"><img class="profile-videos" (click)="loadAsset(i, 'video')" [lazyLoad]="thumb" [defaultImage]="defaultImage" [errorImage]="profileFallback" alt=""/></a></li>
                            </ul>
                       </div>
                       
                       <div class="popup-right-block2">
-                           <div class="big-thumb">
-                           <img src="assets/images/thumb4.png" alt=""/>
-                           </div>
-                           <div class="popup-gallery-controlls">
-                                <a href="#" class="prev1"></a>
-                                <a href="#" class="next1"></a>
+                            <div class="big-thumb">
+                            <img *ngIf="!showImage && !showVideo" src="assets/images/thumb4.png">
+                            <img *ngIf="showImage" [src]="loadedAssetUrl" alt=""/>
+                            <video controls *ngIf="showVideo" [src]="loadedAssetUrl" alt=""></video>
+                            </div>
+                            <div class="popup-gallery-controlls" *ngIf="false">
+                                <a href="javascript:void(0)" class="prev1"></a>
+                                <a href="javascript:void(0)" class="next1"></a>
                            </div>
                       </div>
                       
                       <div class="popup-right-block3">
-                              <h2>Totte. <strong>CM3902</strong></h2>
-                           <h3>MODEL</h3>
+                              <h2>{{profileData.field_first_name_export}}. <strong>{{profileData.field_profile_number_export}}</strong></h2>
+                           <h3 class="categories">{{ assignedCategories || ''}}</h3>
                            <table>
                                <tbody>
                                    <tr>
-                                       <td>Alder</td>
-                                       <td>38 år </td>
+                                       <td>{{ 'userinfo.age' | translate }}</td>
+                                       <td>{{ appService.getAge(profileData.field_birthday_export) }}</td>
                                    </tr>
                                    <tr>
-                                       <td>Højde</td>
-                                       <td>183 cm</td>
+                                       <td>{{ 'userinfo.height' | translate }}</td>
+                                       <td>{{ profileData.field_height ? profileData.field_height : '-' }}</td>
                                    </tr>
                                    <tr>
-                                       <td>Vægt</td>
-                                       <td>78 kg</td>
+                                       <td>{{ 'userinfo.weight' | translate }}</td>
+                                       <td>{{ profileData.field_weight ? profileData.field_weight : '-' }}</td>
                                    </tr>
                                    <tr>
-                                       <td>Øjenfarve</td>
-                                       <td>Grønne</td>
+                                       <td>{{ 'userinfo.eyecolor' | translate }}</td>
+                                       <td>{{ getEyeColor(profileData.field_eye_color_export) || '-' }}</td>
                                    </tr>
                                    <tr>
-                                       <td>Hårfarve</td>
-                                       <td>Sort</td>
+                                       <td>{{ 'userinfo.haircolor' | translate }}</td>
+                                       <td>{{ getHairColor(profileData.field_hair_color_export) || '-' }}</td>
                                    </tr>
                                    <tr>
-                                       <td>Bluse</td>
-                                       <td>48 - 36</td>
+                                       <td>{{ 'userinfo.shirt' | translate }}</td>
+                                       <td>{{profileData.field_shirt_size_from_export || ''}} - {{profileData.field_shirt_size_to_export || ''}}</td>
                                    </tr>
                                    <tr>
-                                       <td>Bukser</td>
-                                       <td>30 - 32</td>
+                                       <td>{{ 'userinfo.pant' | translate }}</td>
+                                       <td>{{profileData.field_pant_size_from_export || ''}} - {{profileData.field_pant_size_to_export || ''}}</td>
                                    </tr>
                                    <tr>
-                                       <td>Sko</td>
-                                       <td>43 - 44</td>
+                                       <td>{{ 'userinfo.shoe' | translate }}</td>
+                                       <td>{{profileData.field_shoe_size_from_export || ''}} - {{profileData.field_shoe_size_to_export || ''}}</td>
                                    </tr>
                                </tbody>
                            </table>
-                           <h4>SPORT & HOBBY</h4>
-                           <p>-</p>
+                           <h4>{{ 'userinfo.sporthobby' | translate }}</h4>
+                           <p>{{profileData.field_sports_and_hobby_export || '-'}}</p>
                            
-                           <h4>ERFARING</h4>
-                           <p>Teater. Modeshow. Radio. Foto. Reklamefilm. Musikvideo</p>
+                           <h4>{{ 'userinfo.skill' | translate }}</h4>
+                           <p>{{assignedSkills || '-'}}</p>
                            
-                           <h4>SPROG</h4>
-                           <p>-</p>
                            
-                           <h4>KØREKORT</h4>
-                           <p>Bil</p>
+                            <h4>{{ 'userinfo.language' | translate }}</h4>
+                            <div class="row" *ngIf="profileData.field_language_one">
+                                <p class="col-6">
+                                    {{ getLangName(profileData.field_language_one_export)}}
+                                </p>
+                                <div class="col-6">
+                                    <ngb-rating max="4" [(rate)]="profileData.field_language_one_rating_export">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="profileData.field_language_two">
+                                <p class="col-6">
+                                    {{ getLangName(profileData.field_language_two_export)}}
+                                </p>
+                                <div class="col-6">
+                                    <ngb-rating max="4" [(rate)]="profileData.field_language_two_rating_export">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="profileData.field_language_three">
+                                <p class="col-6">
+                                    {{ getLangName(profileData.field_language_three_export)}}
+                                </p>
+                                <div class="col-6">
+                                    <ngb-rating max="4" [(rate)]="profileData.field_language_three_rating_export">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="profileData.field_language_four">
+                                <p class="col-6">
+                                    {{ getLangName(profileData.field_language_four_export)}}
+                                </p>
+                                <div class="col-6">
+                                    <ngb-rating max="4" [(rate)]="profileData.field_language_four_rating_export">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+
+                            <h4>{{ 'userinfo.license' | translate }}</h4>
+                           <p>{{assignedLicenses || '-'}}</p>
                       </div>
                  </div>
              </div>
         </div><!--popup-content-->
         
    </div><!--popup1-->
+
+   <app-lightboxsidebar></app-lightboxsidebar>
+   <app-addtolightbox *ngIf="userprofileService.showAddToLightboxComponent"></app-addtolightbox>
+   <router-outlet></router-outlet>

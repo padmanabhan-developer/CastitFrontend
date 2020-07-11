@@ -1,0 +1,11 @@
+.big-thumb video {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.popup-right-block1 img {
+	height: 100px;
+	object-fit: cover;
+	object-position: center top;
+}

@@ -1,0 +1,81 @@
+<div class="popup1">
+
+    <div class="popup-header">
+        <div class="container-lg">
+            <div class="popup-logo"><a href="#"><img src="assets/images/logo-white.svg" alt=""></a></div>
+            <a href="#" class="close-icon"></a>
+        </div>
+    </div>
+    <!--popup-header-->
+
+    <div [ngClass]="{'blurred': initiateDeleteLightbox || initiateAddLightbox}" class="popup-content">
+        <div class="container-lg">
+            <div class="cnt">
+                <div class="cnt-block1">
+                    <h3>Min profil</h3>
+                    <div class="form-block">
+                        <div class="form-row">
+                            <label>BRUGERNAVN</label>
+                            <!-- <input type="text" class="input1" placeholder="email"> -->
+                            <input type="email" class="input1" placeholder="Email"
+                                [(ngModel)]="userprofileService.userProfile[0].name_export">
+                        </div>
+                        <div class="form-row">
+                            <label>VIRKSOMHED</label>
+                            <input type="text" class="input1" placeholder="VIRKSOMHED"
+                                [(ngModel)]="userprofileService.userProfile[0].field_organization_export">
+                        </div>
+                        <div class="form-row">
+                            <label>TELEFON</label>
+                            <input [(ngModel)]="userprofileService.userProfile[0].field_telephone_export[0]" type="text"
+                                class="input1" placeholder="Telefon">
+                        </div>
+                        <div class="form-row button-row">
+                            <input type="submit" class="submit1" (click)="saveUser('customer')" value="Opdater">
+                            <a href="javascript:void(0)" (click)="userprofileService.logout()" class="back-btn">Log
+                                ud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cnt-block2">
+                    <h3>Mine Lightbox</h3>
+                    <p class="padding-none">Herunder kan du administrere dine <br>gemte Lighbox.</p>
+                    <div class="form-block">
+                        <div class="cate-buttons">
+                            <ul>
+                                <li *ngFor="let item of lightboxesOfCurrentUser"><span>{{item.name}} <a
+                                            href="javascript:void(0)"
+                                            (click)="removeLightboxInitiate(item.id, item.name)"
+                                            class="cancel"></a></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="form-row button-row">
+                            <input type="submit" class="submit1" value="Opret" (click)="addLightboxInitiate()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--popup-content-->
+    
+    <!-- DELETE LIGHTBOX -->
+    <div *ngIf="initiateDeleteLightbox" class="popup-small">
+        <h2>Slet Lightbox</h2>
+        <h3>{{lightboxToBeDeleted.name}}</h3>
+        <a href="javascript:void(0)" (click)="removeLightbox(lightboxToBeDeleted.id)" class="delete-btn">Slet</a>
+        <a href="javascript:void(0)" (click)="removeLightboxCancel()" class="Anullere-btn">Anullere</a>
+    </div>
+
+    <!-- CREATE LIGHTBOX -->
+    <div *ngIf="initiateAddLightbox" class="popup-small">
+        <h2>Opret Lightbox</h2>
+        <div class="form-row"><input class="new-lightbox" type="text" [(ngModel)]="userprofileService.newLightboxName"></div>
+        <a href="javascript:void(0)" (click)="addLightbox()" class="delete-btn">Opret</a>
+        <a href="javascript:void(0)" (click)="addLightboxCancel()" class="Anullere-btn">Anullere</a>
+    </div>
+</div>
+<!--popup1-->
+<router-outlet></router-outlet>

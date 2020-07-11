@@ -4,7 +4,7 @@
         <div class="popup-header">
               <div class="container-lg">
                   <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a href="#" class="close-icon" routerLink="/profiles" ></a>
+                  <a href="javascript:void(0)" class="close-icon" routerLink="/profiles" ></a>
              </div>
         </div><!--popup-header-->
         
@@ -23,15 +23,15 @@
                                       <h4>GEM DIN PROFIL</h4>
                                         <div class="child-option m-15">
                                              <div class="custom-control custom-checkbox">
-                                                  <input type="checkbox" class="custom-control-input" id="customCheck" name="">
+                                                  <input [(ngModel)]="userprofileService.userProfile[0].field_agreed_to_terms_export" type="checkbox" class="custom-control-input" id="customCheck" name="">
                                                   <label class="custom-control-label" for="customCheck"><em>Bekræft din accept</em></label>
                                              </div>
                                        </div>
                                        <p>Jeg bekræfter, at jeg accepterer Castit juridiske betingelser, som kan tilgås via dette link: </p>
-                                       <p><a href="#">Juridiske betingelser</a></p>
+                                       <p><a href="https://castit.dk/brugerbetingelser.pdf" download="Bruger-Betingelser">Juridiske betingelser</a></p>
                                        
                               
-                                       <input type="submit" class="submit1 m-top-24" value="Gem profil" routerLink="/login/7">
+                                       <input type="button" (click)="saveUser()" class="submit1 m-top-24" value="Gem profil">
                                  </div>
                                 
                             </div>
@@ -45,7 +45,7 @@
                        <div class="bottom-left">
                             <h2><span>06</span>/07</h2>
                        </div>
-                          <div class="bottom-right"><a href="#" class="prev-btn active" routerLink="/login/5">FORRIGE</a></div>
+                          <div class="bottom-right"><a href="javascript:void(0)" class="prev-btn active" routerLink="/login/5">{{ 'profileUpdate.previous' | translate }}</a></div>
                   </div>
              </div>
         </div><!--popup-content-->

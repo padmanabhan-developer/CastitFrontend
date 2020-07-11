@@ -1,0 +1,20 @@
+.popup-small {
+	position: fixed;
+	background: #fff;
+	width: 345px;
+	min-height: 310px;
+	text-align: center;
+	padding: 40px;
+	border-radius: 5px;
+	top: 20vh;
+	left: 50vw;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.new-lightbox {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 30px;
+    padding: 10px;
+}

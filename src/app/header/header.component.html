@@ -1,3 +1,39 @@
-<p>
-header
-</p>
+<div class="page-header">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-2"><a href="javascript:void(0)" routerLink="/profiles"><img src="assets/images/logo-black.svg" alt="" /></a></div>
+            <div class="col-10">
+                <nav class="navbar navbar-expand-md">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span> </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto py-4 py-md-0">
+                            <li *ngIf="!userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/login"
+                                    class="nav-link">{{ 'menu.login' | translate}}</a> </li>
+                            <li *ngIf="userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/logout"
+                                    class="nav-link">{{ 'menu.logout' | translate}}</a> </li>
+                            <li *ngIf="!userprofileService.isLoggedIn()" class="nav-item"> <a routerLink="/login/1"
+                                    class="nav-link">{{ 'menu.apply' | translate }}</a> </li>
+                            <li *ngIf="userprofileService.isLoggedIn()" class="nav-item"> <a
+                                    [routerLink]="myProfileLink" class="nav-link">{{ 'menu.myProfile' | translate }}</a> </li>
+                            <li class="nav-item"> <a routerLink="/about" class="nav-link">{{ 'menu.about' | translate }}</a> </li>
+                            <li class="nav-item"> <a routerLink="/workshop" class="nav-link">{{ 'menu.workshop' | translate }}</a> </li>
+                            <li class="nav-item"> <a class="nav-link">{{ 'menu.contact' | translate }}</a>
+                                <p>+45 21 28 58 25 <br><a>info@castit.dk</a></p>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link">{{ 'menu.address' | translate }}</a>
+                                <p>{{ 'menu.addressLine1' | translate }}<br>{{ 'menu.addressLine2' | translate }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="language"> <span class="cursor-pointer" [ngClass]="{'active': appService.langcode === 'DA'}" (click)="appService.setLanguage('DA')">DA</span> / <span class="cursor-pointer" [ngClass]="{'active': appService.langcode === 'EN'}" (click)="appService.setLanguage('EN')">EN</span></div>
+                <div class="social"><a href="https://www.facebook.com/castitdenmark" target="_blank"
+                        class="facebook"><img src="assets/images/facebook.svg" alt="" /></a></div>
+            </div>
+        </div>
+    </div>
+</div>

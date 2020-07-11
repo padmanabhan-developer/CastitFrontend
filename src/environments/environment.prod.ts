@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendBaseUrl: 'http://new.castit'
+  backendBaseUrl: 'http://backend.castit.dk'
 };

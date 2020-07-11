@@ -1,0 +1,84 @@
+<div class="sidefix" id="lightbox">
+    <div class="side-tool">
+        <a href="javascript:void(0)" (click)="openSidebar()" class="side-plus" [ngClass]="{'rotate-icon': appData.sidebarOpened}"></a>
+        <a href="javascript:void(0)" (click)="openSidebar()" class="side-user"></a>
+    </div>
+    <div class="side-content" *ngIf="appData.sidebarOpened">
+        <h3>MINE Lightbox <span class="pull-right">{{userprofileService.lightboxesOfCurrentUser.length}}</span></h3>
+        <div *ngFor="let item of userprofileService.lightboxesOfCurrentUser; let i = index" class="side-block">
+            <h4>{{item.name}}
+                <span class="pull-right">
+                    <a href="javascript:void(0)" (click)="removeLightboxInitiate(item.id, item.name)">Slet</a> <em> I
+                    </em>
+                    <a href="javascript:void(0)" (click)="shareLightboxInitiate(item)">Send</a> <em> I </em>
+                    <a href="javascript:void(0)"
+                        (click)="toggleProfileViewLightbox(i)">{{ profileThumbView[i] ? 'Luk profile' : 'Vis profiler' }}</a>
+                </span>
+            </h4>
+            <div *ngIf="!profileThumbView[i]" class="form_box">
+                <span *ngFor="let member of lightboxProfilesMap[item.name][0]"
+                    class="button1">{{ member.field_first_name_export }} <strong>{{ member.field_profile_number }}</strong><span
+                        class="plus-icon2"></span></span>
+            </div>
+            <div *ngIf="profileThumbView[i]" class="casting-block">
+                <div *ngFor="let member of lightboxProfilesMap[item.name][0]" class="casting">
+                    <div class="cating-thumb">
+                        <!-- <img [src]="member.field_photo_thumbnails_export[0].url || member.field_photos_export[0].url" alt="" /> -->
+                        <img [src]="thumbnailImage(member.field_photo_thumbnails_export, member.field_photos_export)" alt="" />
+                    </div>
+                    <div class="casting-text">
+                        <h5>{{ member.field_first_name_export }}. {{ appData.getAge(member.field_birthday_export) }} {{ 'profiles.years' | translate }}.</h5>
+                        <textarea (change)="updateMemberNotes(member, item)" [(ngModel)]="member.field_groupnotes" class="textarea2" placeholder="Skriv note..."></textarea>
+                        <h6>{{ member.field_profile_number }} <span class="pull-right"><a href="javascript:void(0)" (click)="removeFromLightbox(member, item)">Slet</a> <em> I </em>
+                                <a href="javascript:void(0)" (click)="openProfileInfo(member.uid)">Åben</a></span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="side-block-bottom">
+                <span class="pull-right">
+                    <a href="javascript:void(0)" (click)="removeLightboxInitiate(item.id, item.name)">Slet</a> <em> I
+                    </em>
+                    <a href="javascript:void(0)">Send</a> <em> I </em>
+                    <a href="javascript:void(0)"
+                        (click)="toggleProfileViewLightbox(i)">{{ profileThumbView[i] ? 'Luk profile' : 'Vis profiler' }}</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE LIGHTBOX -->
+<div *ngIf="initiateDeleteLightbox" class="popup-small">
+    <h2>Slet Lightbox</h2>
+    <h3>{{lightboxToBeDeleted.name}}</h3>
+    <a href="javascript:void(0)" (click)="removeLightbox(lightboxToBeDeleted.id)" class="delete-btn">Slet</a>
+    <a href="javascript:void(0)" (click)="removeLightboxCancel()" class="Anullere-btn">Anullere</a>
+</div>
+
+<!-- Share Lightbox -->
+<div class="popup1 send-lightbox" *ngIf="userprofileService.showSendLightboxForm">
+    <div class="popup-header">
+          <div class="container-lg">
+                <div class="popup-logo"><a href="#"><img src="assets/images/logo-white.svg" alt=""></a></div>
+                <a href="#" class="close-icon"></a>
+           </div>
+      </div>
+      
+      <div class="popup-small popup-small2">
+          <h2>Send Lightbox</h2>
+          <form #fc="ngForm" (ngSubmit)="shareLightbox(userprofileService)">
+           <div class="send-lightbox-form">
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxTO" type="email" class="input2" placeholder="Til email" name="toEmail" required email></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxCC" type="email" class="input2" placeholder="CC email" name="ccEmail" email></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfName" type="text" class="input2" placeholder="Dit navn" name="selfName" required></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfEmail" type="email" class="input2" placeholder="Din email" name="selfEmail" required email></div>
+                <div class="form-row"><textarea [(ngModel)]="userprofileService.shareLightboxComment" class="textarea2" placeholder="Skriv note..." name="comment"></textarea></div>
+           </div>
+           <input [disabled]="!fc.valid" type="submit" class="delete-btn" value="Send"> 
+           <a href="javascript:void(0)" class="Anullere-btn">Anullere</a>
+        </form>
+        </div>
+  </div>
+  <!--  -->
+
+<router-outlet></router-outlet>

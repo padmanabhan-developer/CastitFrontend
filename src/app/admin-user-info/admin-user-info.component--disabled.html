@@ -1,0 +1,570 @@
+<div id="wrapper" class="admin-userinfo">
+
+    <div id="content"> 
+         <div class="page-top page-top2">
+                 <div class="container">
+                   <h2>Anders. CM4455</h2>
+                   <div class="upload-sec"> 
+                         <div class="box1">
+                               <div class="check-area">
+                                  <label class="chek-box">Vis som ny profil
+                                         <input type="checkbox" checked="checked">
+                                         <span class="checkmark"></span>
+                                  </label>
+                             </div>
+                        </div>
+                        
+                        <div class="box2">
+                               <div class="row">
+                                     <div class="col3"><label>Fra:</label></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
+                             </div>
+                             
+                             <div class="row">
+                                     <div class="col3"><label>Til:</label></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
+                                  <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
+                             </div>
+                        </div>
+                        
+                   
+                         <a class="upload-close" href="javascript:void(0)" (click)="adminService.closePanel()"></a>
+                   </div>
+              </div>
+         </div><!--close page-top-->
+         
+         
+         <div class="page-bottom">
+                 <div class="container">
+                   
+                   <div class="form-sec">
+                         <div class="form-header"><h2>Profil informationer</h2></div>
+                   </div><!--close form-sec-->
+                   
+                   <div class="form-area">
+                           <!-- <div class="black-right">
+                           <a href="javascript:void(0)" class="black-edit"></a>
+                          </div> -->
+                        
+                         <div class="form-inner1">
+                               <div class="row">
+                                     <div class="col6">
+                                       <h3>PERSONLIG INFO</h3>
+                                       <div class="form-row">
+                                             <input type="text" [(ngModel)]="adminService.userData.field_first_name[0].value" class="form-input1" placeholder="Anders">
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <input type="text" [(ngModel)]="adminService.userData.field_last_name[0].value" class="form-input1" placeholder="Andersen">
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <input type="password" class="form-input1" [(ngModel)]="password" placeholder="Reset password">
+                                       </div>
+
+                                  </div>
+                                  
+                                  <div class="col6">
+                                       <h3>ADRESSE</h3>
+                                       <div class="form-row">
+                                             <div class="row">
+                                                   <div class="col6"><input type="text" class="form-input1" placeholder="4220" [(ngModel)]="adminService.userData.field_zipcode[0].value"></div>
+                                                 <div class="col6"><input type="text" class="form-input1" placeholder="Korsør" [(ngModel)]="adminService.userData.field_city[0].value"></div>
+                                            </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <input type="text" class="form-input1" placeholder="Skovvejen 11" [(ngModel)]="adminService.userData.field_address[0].value">
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                            <select class=" form-input1 custom-select"
+                                            [(ngModel)]="adminService.userData.field_country[0].value">
+                                                <option>{{ 'profileUpdate.country' | translate }}</option>
+                                                <option *ngFor="let country of listOfCountryNames; let i = index" [selected]="listOfCountryIDs[i] == adminService.userData.field_country[0].value" [(ngValue)]="listOfCountryIDs[i]">{{ country }}</option>
+                                            </select>
+                                       </div>
+                                       
+                                  </div>
+                             </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   <div class="form-area">
+                         <div class="form-inner1">
+                               <div class="row">
+                                     <div class="col6">
+                                       <h3>PERSONLIG INFO</h3>
+                                       <div class="form-row">
+                                             <input type="text" class="form-input1" placeholder="hej@hej.dk" [(ngModel)]="adminService.userData.name[0].value">
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <div class="row">
+                                                   <div class="col6"><input type="text" class="form-input1" placeholder="telephone-1" [(ngModel)]="adminService.userData.field_telephone[0].value"></div>
+                                                   <div class="col6"><input type="text" class="form-input1" placeholder="telephone-2" [(ngModel)]="adminService.userData.field_telephone[1].value"></div>
+                                                   
+                                            </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <div class="row">
+                                                <div class="col6"><input type="text" class="form-input1" placeholder="cellphone" [(ngModel)]="adminService.userData.field_cellphone[0].value"></div>
+                                                <div class="col6">
+                                                <select class="form-input1 custom-select"
+                                                [(ngModel)]="adminService.userData.field_gender[0].value">
+                                                <option disabled value="">{{ 'profileUpdate.gender' | translate }}</option>
+                                                <option value="1"
+                                                     [selected]="adminService.userData.field_gender[0].value == 1">
+                                                     {{ 'profileUpdate.male' | translate }}</option>
+                                                <option value="2"
+                                                     [selected]="adminService.userData.field_gender[0].value == 2">
+                                                     {{ 'profileUpdate.female' | translate }}</option>
+                                           </select>
+                                           </div>
+                                            </div>
+                                       </div>
+                                  </div>
+                                  
+                                  <div class="col6">
+                                       <h3>FØDT</h3>
+                                       <div class="form-row">
+                                             <div class="row">
+                                                <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="day"></div>
+                                                <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="month"></div>
+                                                <div class="col4"><input type="text" class="form-input1" placeholder="1966" [(ngModel)]="year"></div>
+                                            </div>
+                                       </div>
+                                       
+                                       <div class="form-row">
+                                             <input type="text" class="form-input1" placeholder="Etninsk oprindelse"  [(ngModel)]="adminService.userData.field_ethnic_origin[0].value">
+                                       </div>
+                                       
+                                  </div>
+                             </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   <div class="form-area">
+                         <div class="form-inner1 form-inner2">
+                               <div class="row">
+                                     <div class="col12">
+                                       <h3>BETALING</h3>
+                                       <div class="form-row" *ngFor="let item of adminService.userData.field_payments; let i = index; let label = ''">
+                                             <div class="row">
+                                                   <div class="col3"><span class="percent"> {{(i === 0) ? '25 %' : (i === 1) ? '20 %' : '7 %'}}</span></div>
+                                                 <div class="col6"><input type="text" class="form-input1" placeholder="Skriv her.." [(ngModel)]="item.data[3]"></div>
+                                                 <div class="col3">
+                                                         <div class="check-area">
+                                                          <label class="chek-box">Aktiv
+                                                            <input type="checkbox" [checked]="(item.data[1]) ? 'checked' : ''" [(ngModel)]="item.data[1]">
+                                                            <span class="checkmark"></span>
+                                                          </label>
+                                                      </div>
+                                                      
+                                                      <div class="check-area">
+                                                          <label class="chek-box">Betalt
+                                                            <input type="checkbox" [checked]="(item.data[2]) ? 'checked' : ''" [(ngModel)]="item.data[2]">
+                                                            <span class="checkmark"></span>
+                                                          </label>
+                                                      </div>
+                                                 </div>
+                                            </div>
+                                       </div>
+                                  </div>
+                                  
+                                  
+                             </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   
+                   <div class="form-area">
+                         <div class="form-inner1 form-inner3" style="margin-top:30px;">
+                          <div class="step-right">
+                            
+                                <div class="child-option">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck" [(ngModel)]="showChildrenSizes" (change)="childrenSizes()" name="">
+                                    <label class="custom-control-label" for="customCheck">Vis børnestørrelser</label>
+                                  </div>
+                                </div>
+                                <div class="step-block1 w-360">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_shirt_size_from[0].value">
+                                          <option disabled selected value="">Skjorter fra</option>
+                                          <option *ngFor="let item of ShirtSizes" [ngValue]="item" [selected]="item == adminService.userData.field_shirt_size_from[0].value">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_shirt_size_to[0].value">
+                                          <option disabled value="">Skjorter til</option>
+                                          <option *ngFor="let item of ShirtSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_pant_size_from[0].value">
+                                          <option disabled value="">Bukser fra</option>
+                                          <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_pant_size_to[0].value">
+                                          <option disabled value="">Bukser til</option>
+                                          <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_shoe_size_from[0].value">
+                                          <option disabled value="">Sko fra</option>
+                                          <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_shoe_size_to[0].value">
+                                          <option disabled value="">Sko til</option>
+                                          <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div *ngIf="adminService.userData.field_gender[0].value === '1'" class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_suit_size_from[0].value">
+                                          <option disabled value="">Jakkesæt fra</option>
+                                          <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div *ngIf="adminService.userData.field_gender[0].value === '1'" class="col-3">
+                                      <div class="form-row">
+                                        <select class="custom-select form-input1"
+                                          [(ngModel)]="adminService.userData.field_suit_size_to[0].value">
+                                          <option disabled value="">Jakkesæt til</option>
+                                          <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
+                                        </select>
+                                      </div>
+                              </div>
+                              <div *ngIf="adminService.userData.field_gender[0].value === '2'" class="col-3">
+                                      <div class="form-row">
+                                <input [(ngModel)]="adminService.userData.field_bra_size[0].value" type="text" class="form-input1"
+                                          placeholder="BH STR">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                    
+                                <div class="step-block2 w-360">
+                                  <div class="row">
+                                    <div class="col-3">
+                                      <div class="form-row">
+                                        <input [(ngModel)]="adminService.userData.field_height[0].value" type="text" class="form-input1"
+                                          placeholder="Højde">
+                                      </div>
+                                    </div>
+                            
+                                  <div class="col-3">
+                                    <div class="form-row">
+                                      <input [(ngModel)]="adminService.userData.field_weight[0].value" type="text" class="form-input1"
+                                        placeholder="Vægt"></div>
+                                  </div>
+                                </div>
+                    
+                                <div class="row">
+                                  <div class="col-3">
+                                    <div class="form-row">
+                                      <select class="form-input1 custom-select" [(ngModel)]="adminService.userData.field_hair_color[0].value">
+                                        <option disabled value="">Hårfarve</option>
+                                        <option *ngFor="let item of listofHairColors; let i = index" [ngValue]="item+1" [selected]="item == adminService.userData.field_hair_color[0].value">{{item}}</option>
+                                      </select>
+                                    </div>
+                            </div>
+                            
+                                  <div class="col-3">
+                                    <div class="form-row">
+                                      <select class="form-input1 custom-select" [(ngModel)]="adminService.userData.field_eye_color[0].value">
+                                        <option disabled selected value="">Øjenfarve</option>
+                                        <option [selected]="item === adminService.userData.field_eye_color[0].value" *ngFor="let item of listofEyeColors">{{item}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                    
+                              </div>
+                            </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   
+                   <div class="form-area">
+                         <div class="form-inner5">
+                               <div class="row">
+                                     
+                                  <div class="textarea-sec">
+                                               <h3>LIDT OM MIG</h3>
+                                               
+                                               <div class="form_box">
+                                                     <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2"></textarea>
+                                                       <a href="javascript:void(0)" class="edit2"></a>
+                                                    <span class="words">72</span>
+                                               </div>
+                                               <h3>SPORT &amp; HOBBY</h3>
+                                               <div class="form_box">
+                                                     <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2"></textarea>
+                                                       <a href="javascript:void(0)" class="edit2"></a>
+                                                    <span class="words">72</span>
+                                               </div>
+                                  </div>
+                                  
+                                  
+                                  <div class="categories-sec">
+                                               <h3><strong>KATEGORI</strong> <small>/ Vælg én eller flere</small></h3>
+                                               <div class="form_box">
+                                                     <a href="javascript:void(0)" class="button1">Skuespiller <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Musiker <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Amatørskuespiller <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Ny <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Musiker <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button2">Sanger <span class="close-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Intertainer <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Model <span class="plus-icon"></span></a>
+                                               </div>
+                                               
+                                               <h3>ERFARING</h3>
+                                               <div class="form_box">
+                                                     <a href="javascript:void(0)" class="button1">Koncertoptræden <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Teater <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Revy <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Musicals <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Reklamefilm <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Musikvideoer <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Kortfilm <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Spillefilm <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Radio <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Voiceover <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Dubbing <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Foto <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Ingen <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Tv <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Stand-up <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Statist <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Foredrag <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Modeshows <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Impro teater <span class="plus-icon"></span></a>
+                                               </div>
+                                               
+                                               <h3>KØREKORT</h3>
+                                               <div class="form_box">
+                                                     <a href="javascript:void(0)" class="button1">Bil <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">MC <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Lastbil <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Bus <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Trailer <span class="plus-icon"></span></a>
+                                                    <a href="javascript:void(0)" class="button1">Nej <span class="plus-icon"></span></a>
+                                               </div>
+                                          </div>
+                                  
+                                  
+                             </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   
+                   <div class="form-area">
+                         <div class="form-inner5">
+                               <div class="row">
+                                     
+                                  <div class="form-area1">
+                                       <h3>SPROG</h3>
+                                       <div class="fields">
+                                             <div class="form-row">
+                                                    <input type="text" class="form-input1" placeholder="Dansk*">
+                                             </div>
+                                            <div class="form-row">
+                                                   <div class="custom-select">
+                                                    <select>
+                                                      <option value="0">Sprog</option>
+                                                      <option value="1">Skjorte </option>
+                                                      <option value="2">Skjorte </option>
+                                                      <option value="3">Skjorte </option>
+                                                    </select>
+                                                  </div>
+                                            </div>
+                                            
+                                            <div class="form-row">
+                                                   <div class="custom-select">
+                                                    <select>
+                                                      <option value="0">Sprog</option>
+                                                      <option value="1">Skjorte </option>
+                                                      <option value="2">Skjorte </option>
+                                                      <option value="3">Skjorte </option>
+                                                    </select>
+                                                  </div>
+                                            </div>
+                                            
+                                            <div class="form-row">
+                                                   <div class="custom-select">
+                                                    <select>
+                                                      <option value="0">Sprog</option>
+                                                      <option value="1">Skjorte </option>
+                                                      <option value="2">Skjorte </option>
+                                                      <option value="3">Skjorte </option>
+                                                    </select>
+                                                  </div>
+                                            </div>
+                                       </div>
+                                  </div>
+                                  
+                                  
+                                  <div class="form-area2">
+                                       <h3>Vælg niveau</h3>
+                                       <div class="form_box">
+                                                     <span class="ratings">
+                                                            <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box">
+                                                     <span class="ratings">
+                                                            <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-black.png">
+                                                          <img src="images/star-black.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box">
+                                                     <span class="ratings">
+                                                            <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box">
+                                                     <span class="ratings">
+                                                            <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                    </span>
+                                               </div>
+                                  </div>
+                                  
+                                  
+                                  <div class="form-area3">
+                                       <h3>&nbsp;</h3>
+                                       <div class="form_box4">
+                                                     Begynder
+                                                    <span class="ratings2">
+                                                            <img src="images/star-white.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box4">
+                                                     Mellem
+                                                    <span class="ratings2">
+                                                            <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-gray.png">
+                                                          <img src="images/star-gray.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box4">
+                                                     Flydende
+                                                    <span class="ratings2">
+                                                            <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-gray.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <div class="form_box4">
+                                                     Perfekt
+                                                    <span class="ratings2">
+                                                            <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                          <img src="images/star-white.png">
+                                                    </span>
+                                               </div>
+                                               
+                                               <h3 style="margin-top:30px;">Dealekter</h3>
+                                               <div class="form_box">
+                                                     <input name="" type="text" class="form-input1" placeholder="Skriv her">
+                                               </div>
+                                               
+                                               <div class="form_box">
+                                                     <input name="" type="text" class="form-input1" placeholder="Skriv her">
+                                               </div>
+                                               
+                                               <div class="form_box">
+                                                     <input name="" type="text" class="form-input1" placeholder="Skriv her">
+                                               </div>
+                                  </div>
+                                  
+                             </div>
+                        </div>
+                   </div><!--close form-area-->
+                   
+                   
+                   
+                   <div class="button-area">
+                        <a class="btn_1" href="javascript:void(0)">Afvis</a>
+                       <a class="btn_2" href="javascript:void(0)">Godkend</a>
+                   </div>
+                   
+                   <div class="toolbar-bottom">
+                        <div class="tool-left">
+                             <a class="back-btn" href="javascript:void(0)">Tilbage</a>
+                        </div>
+                        <div class="tool-right">
+                                <ul>
+                                  <!-- <li><a href="javascript:void(0)">Castingsheet</a></li>
+                                  <li><a href="javascript:void(0)">KALENDER</a></li>
+                                  <li><a href="javascript:void(0)">FOTO/VIDEO</a></li> -->
+                              </ul>
+                        </div>
+                   </div>
+              </div>
+         </div><!--close page-bottom-->
+        
+    </div><!--close content-->
+   
+  </div><!--close wrapper--> 

@@ -1,0 +1,49 @@
+<div class="popup1">
+
+    <div class="popup-header">
+        <div class="container-lg">
+            <div class="popup-logo"><a href="javascript:void(0)"><img src="assets/images/logo-white.svg" alt=""></a>
+            </div>
+            <a href="javascript:void(0)" (click)="userprofileService.showAddToLightboxComponent = false"
+                class="close-icon"></a>
+        </div>
+    </div>
+    <!--popup-header-->
+
+
+    <div class="popup-big">
+        <div class="popup-big-left">
+            <img src="{{ appService.addToLightboxImage ? appService.addToLightboxImage : 'assets/images/profile_image.png'  }}" 
+            [lazyLoad]="appService.addToLightboxImage ? appService.addToLightboxImage : 'assets/images/profile_image.png'" [defaultImage]="appService.defaultImage" [errorImage]="appService.profileFallback"
+            alt="">
+        </div>
+        <div class="popup-big-center">
+            <textarea [(ngModel)]="userprofileService.commentForModelInLightbox" class="textarea2" placeholder="{{ 'lightbox.notesPlaceholder' | translate }}"></textarea>
+        </div>
+        <div class="popup-big-right">
+            <h4>{{ 'lightbox.createNewLightbox' | translate }}</h4>
+            <div class="form-row">
+                <input name="newLightbox" [(ngModel)]="userprofileService.newLightboxName" type="text" class="input1"
+                    placeholder="{{ 'lightbox.createNewLightboxPlaceholder' | translate }}">
+            </div>
+            <div class="form-row">
+                <input type="submit" (click)="addLightbox()" class="delete-btn" value="{{ 'lightbox.create' | translate }}">
+            </div>
+            <h2>{{ 'lightbox.chooseExistingLightbox' | translate }}</h2>
+            <div class="select-btns">
+                <span *ngFor="let item of userprofileService.lightboxesOfCurrentUser"
+                    [ngClass]="{'selected-button': selectedLightboxes.includes(item.id)}"
+                    (click)="toggleLightboxSelection(item.id)" class="select-button">{{item.name}}</span>
+            </div>
+            <input (click)="userprofileService.addToLightbox(selectedLightboxes)" type="submit" class="delete-btn"
+                value="{{ 'lightbox.addProfile' | translate }}">
+            <a href="javascript:void(0)" class="Anullere-btn"
+                (click)="userprofileService.showAddToLightboxComponent = false">{{ 'lightbox.cancel' | translate }}</a>
+        </div>
+    </div>
+
+
+
+</div>
+<!--popup1-->
+<router-outlet></router-outlet>

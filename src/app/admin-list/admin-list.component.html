@@ -1,0 +1,76 @@
+<div class="admin-list-wrapper" >
+  <div class="page-header">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-2">
+          <a href="javascript:void(0)" routerLink="/profiles">
+            <img src="assets/images/logo-black.svg" alt="" />
+          </a> <strong>ADMIN</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="admin-list-content">
+    <input name="field_first_name" type="text" placeholder="by First name" (keyup)="updateFilter($event)"
+      class="searchBox" />
+    <input name="field_last_name" type="text" placeholder="by Last name" (keyup)="updateFilter($event)"
+      class="searchBox" />
+    <input name="field_profile_number" type="text" placeholder="by Profile Number" (keyup)="updateFilter($event)"
+      class="searchBox" />
+    <br>
+
+    <button [ngClass]="{'view-selected': currentView[0] === 'online'}" name="button_online" type="button" value="online"
+      (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Online</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'offline'}" name="button_offline" type="button"
+      value="offline" (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Offline</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'pending'}" name="button_pending" type="button"
+      value="pending" (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Pending</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'deleted'}" name="button_deleted" type="button"
+      value="deleted" (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Deleted</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'bureau'}" name="button_bureau" type="button" value="bureau"
+      (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Bureau</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'recent'}" name="button_recent" type="button" value="recent"
+      (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">Recently Updated</button>
+    <button [ngClass]="{'view-selected': currentView[0] === 'all'}" name="button_recent" type="button" value="all"
+      (click)="toggleView($event)" class="cursor-pointer viewType-button filterStatus">All Profiles</button>
+
+    <ngx-datatable [hidden]="!adminService.showListComponent" #table class="material fixed-header" [columnMode]="ColumnMode.force" [headerHeight]="50"
+      [footerHeight]="50" rowHeight="auto" [limit]="15" [rows]="rows" [reorderable]="false" [selected]="selected"
+      [displayCheck]="displayCheck" [selectionType]="SelectionType.checkbox" [selectAllRowsOnPage]="false"
+      (activate)="onActivate($event)" (select)="onSelect($event)" [loadingIndicator]="loadingIndicator"
+      [messages]="messages" [trackByProp]="updated">
+
+      <ngx-datatable-column *ngFor="let column of columns; let i = index;" name="{{column.name}}" prop="{{column.prop}}"
+        headerCheckboxable="{{column.headerCheckboxable}}" checkboxable="{{column.checkboxable}}">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <!-- READ ONLY VALUES -->
+          <div *ngIf="(column.prop !== 'status' && column.prop !== 'info_link' && column.prop !== 'media_link')">
+            {{value}}
+          </div>
+
+          <!-- STATUS ACTIONS -->
+          <div *ngIf="column.prop === 'status'">
+            <span class="cursor-pointer" (click)="setStatus(row.uid, '1')" [ngClass]="{'green': row.field_profile_status.toLowerCase() === 'online'}">Online</span> /
+            <span class="cursor-pointer" (click)="setStatus(row.uid, '2')" [ngClass]="{'pink': row.field_profile_status.toLowerCase() === 'offline'}">Offline</span> /
+            <span class="cursor-pointer" (click)="setStatus(row.uid, '3')" [ngClass]="{'orange': row.field_profile_status.toLowerCase() === 'pending'}">Pending</span> /
+            <span class="cursor-pointer" (click)="setStatus(row.uid, '4')" [ngClass]="{'navy': row.field_profile_status.toLowerCase() === 'deleted'}">Deleted</span> /
+            <span class="cursor-pointer" (click)="setStatus(row.uid, '5')" [ngClass]="{'brown': row.field_profile_status.toLowerCase() === 'bureau'}">Bureau</span>
+          </div>
+          <!-- INFO LINKS -->
+          <div *ngIf="column.prop === 'info_link'">
+            <a class="info-links" href="javascript:void(0)" (click)="openUserInfo(row.uid, 'info')">Info</a>
+          </div>
+          <!-- MEDIA LINKS -->
+          <div *ngIf="column.prop === 'media_link'">
+            <a class="info-links" href="javascript:void(0)" (click)="openUserInfo(row.uid, 'media')">Media</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+</div>
+<app-admin-user-info *ngIf="adminService.showInfoComponent" [userData]="userData"></app-admin-user-info>
+<app-admin-user-media *ngIf="adminService.showMediaComponent"></app-admin-user-media>

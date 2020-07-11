@@ -1,57 +1,34 @@
-<div class="page-header">
-  <div class="container-lg">
-    <div class="row">
-      <div class="col-2"><a href="#"><img src="assets/images/logo-black.svg" alt="" /></a></div>
-      <div class="col-10">
-        <nav class="navbar navbar-expand-md">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span
-              class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto py-4 py-md-0">
-              <li class="nav-item"> <a routerLink="/login" class="nav-link" >Login</a> </li>
-              <li class="nav-item"> <a routerLink="/login/1" class="nav-link" >Ansøgning</a> </li>
-              <li class="nav-item"> <a routerLink="/about" class="nav-link" >Om Castit</a> </li>
-              <li class="nav-item"> <a routerLink="/workshop" class="nav-link" >Castit Workshop</a> </li>
-              <li class="nav-item"> <a class="nav-link">Kontakt</a>
-                <p>+45 21 28 58 25 <br><a >info@castit.dk</a></p>
-              </li>
-              <li class="nav-item"> <a class="nav-link">Adresse</a>
-                <p>Rosenvængets Allé 11, 1. sal <br>2100 København Ø</p>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <div class="language"> <span class="active">DA</span> / <span>EN</span></div>
-        <div class="social"><a href="#" class="facebook"><img src="assets/images/facebook.svg" alt="" /></a></div>
-      </div>
-    </div>
-  </div>
-</div>
-
+<castit-header></castit-header>
 
 <div class="home-section">
   <div class="container-lg">
     <div id="content" class="main_content">
       <div class="row">
-        <div class="leftbar">
+        <div class="mobileOptions col-12">
+          <button class="btn searchIcon" type="button" data-toggle="collapse" data-target="#searchBox" aria-expanded="false" aria-controls="collapseExample">
+            <img src="/assets/images/search.svg" alt=""  title="Search">
+          </button>
+          <!-- <button class="btn lightboxIcon" type="button" data-toggle="collapse" data-target="#lightbox" aria-expanded="false" aria-controls="collapseExample">
+            <img src="/assets/images/lightbox.svg" alt=""  title="Search">
+          </button> -->
+        </div>
+        <div id="searchBox" class="leftbar">
           <div class="leftbox">
-            <h2>Navn/Nr</h2>
+            <h2>{{ 'profiles.searchName' | translate }}</h2>
             <span class="side-searchbox">
-              <input type="text" class="side-input ng-pristine ng-untouched ng-valid">
+              <input [(ngModel)]="searchFN" type="text" class="side-input ng-pristine ng-untouched ng-valid">
               <input type="button" class="side-search">
             </span>
           </div>
           <div class="leftbox">
-            <h2>Køn</h2>
+            <h2>{{ 'profiles.searchGender' | translate }}</h2>
             <ul class="ul-style1">
-              <li><a class="gender_select"> Mand</a></li>
-              <li><a class="gender_select">Kvinde</a></li>
+              <li><a [ngClass]="{'gender_select': searchGender === 1}" (click)="setGender(1)" > {{ 'profiles.male' | translate }}</a></li>
+              <li><a [ngClass]="{'gender_select': searchGender === 2}" (click)="setGender(2)" >{{ 'profiles.female' | translate }}</a></li>
             </ul>
           </div>
           <div class="leftbox2">
-            <h2 class="ng-binding">Alder</h2>
+            <h2 class="ng-binding">{{ 'profiles.age' | translate }}</h2>
             <div class="side-form">
               <span class="form-span">
                 <input value="" type="text" class="side-input2" placeholder="Fra">
@@ -61,7 +38,8 @@
             </div>
           </div>
           <div class="side-bottom">
-            <input type="submit" class="side-submit" value="SØG">
+            <input (click)="submitSearch()" type="submit" class="side-submit" value="{{ 'profiles.search' | translate }}">
+            <input (click)="resetSearch()" type="submit" class="side-submit" value="{{ 'profiles.reset' | translate }}">
           </div>
         </div>
         <!--leftbar-->
@@ -73,19 +51,19 @@
                 <!-- <li>
                   <div class="galler-thumb">
                     <img [src]="defaultImage" alt="" />
-                    <a href="#" class="plus-icon"></a>
+                    <a href="javascript:void(0)" class="plus-icon"></a>
                     <div class="gallery-hover">
                       <p>Venkatesh CM8090<br><strong>35 år</strong></p>
                     </div>
                   </div>
                 </li> -->
 
-                <li *ngFor="let item of data['profiles'] | slice:0:500">
+                <li *ngFor="let item of data">
                   <div class="galler-thumb">
-                    <img (click)="loadProfile(item.id)" alt="" [lazyLoad]="item.profile_image" [defaultImage]="defaultImage" [errorImage]="profileFallback" />
-                    <a href="#" class="plus-icon"></a>
+                    <img (click)="loadProfile(item.uid_export)" alt="" [lazyLoad]="item.field_photo_thumbnails_export[0] || item.field_photos_export[0]" [defaultImage]="defaultImage" [errorImage]="profileFallback" />
+                    <a href="javascript:void(0)" class="plus-icon" (click)="addModelToLightbox(item)"></a>
                     <div class="gallery-hover">
-                      <p>{{ item['first_name'] }} {{ item['profile_number'] }}<br><strong>{{ item['age'] }} år</strong></p>
+                      <p>{{ item.field_first_name_export }} {{ item.field_profile_number_export }}<br><strong>{{ appService.getAge(item.field_birthday) }} {{ 'profiles.years' | translate }}</strong></p>
                     </div>
                   </div>
                 </li>
@@ -94,8 +72,8 @@
           </div>
 
           <div class="gallery-controlls">
-            <a href="#" class="controll-top"></a>
-            <a href="#" class="controll-down"></a>
+            <a href="javascript:void(0)" class="controll-top"></a>
+            <a href="javascript:void(0)" class="controll-down"></a>
           </div>
         </div>
         <!--rightbar-->
@@ -105,3 +83,7 @@
     </div>
   </div>
 </div>
+
+<app-lightboxsidebar ></app-lightboxsidebar>
+<app-addtolightbox *ngIf="userprofileService.showAddToLightboxComponent"></app-addtolightbox>
+<router-outlet></router-outlet>

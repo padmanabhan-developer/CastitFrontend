@@ -1,56 +1,91 @@
+<div class="wrapper-black">
 
-    <div class="wrapper-black">
-    
-        <div class="popup-header">
-              <div class="container-lg">
-                  <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a  class="close-icon" routerLink="/profiles" ></a>
-             </div>
-        </div><!--popup-header-->
-        
-        <div class="popup-content">
-             <div class="container-lg">
-                  <div class="cnt">
-                          <div class="step-left">
-                            <h3>Ansøgningsskema</h3>
-                            <p>For at ansøge om en profil, bedes du udfylde felterne og klikke videre til næste side.</p>
-                       </div>
-                       
-                       <div class="step-right">
-                            <h4>PERSONLIG INFO </h4>
-                            <div class="step-block1">
-                                  <div class="form-row"><input type="text" class="input1" placeholder="Fornavn"></div>
-                                 <div class="form-row"><input type="text" class="input1" placeholder="Efternavn"></div>
-                                 <div class="form-row"><input type="text" class="input1" placeholder="Vælg kodeord"></div>
-                                 <div class="form-row"><input type="text" class="input1" placeholder="Gentag kodeord"></div>
-                            </div>
-                            
-                            <div class="step-block2">
-                                  <div class="form-row"><input type="text" class="input1" placeholder="Adresse"></div>
-                                 <div class="row">
-                                      <div class="col-6"><div class="form-row"><input type="text" class="input1" placeholder="Postnr"></div></div>
-                                      <div class="col-6"><div class="form-row"><input type="text" class="input1" placeholder="By"></div></div>
-                                 </div>
-                                 <div class="form-row">
-                                        <select class="custom-select">
-                                         <option>Land</option>
-                                         <option>Land 1</option>
-                                         <option>Land 2</option>
-                                      </select>
+     <div *ngIf="showHeader" class="popup-header">
+          <div class="container-lg">
+               <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a>
+               </div>
+               <a class="close-icon" routerLink="/profiles"></a>
+          </div>
+     </div>
+     <!--popup-header-->
 
-                                 </div>
-                            </div>
-                       </div>
-                       
-                  </div>
-                  
-                  <div class="step-bottom">
-                       <div class="bottom-left">
-                            <h2><span>01</span>/07</h2>
-                       </div>
-                          <div class="bottom-right"><a  class="next-btn" routerLink="/login/2">NÆSTE</a></div>
-                  </div>
-             </div>
-        </div><!--popup-content-->
-        
-   </div><!--popup1-->
+     <div class="popup-content">
+          <div class="container-lg">
+               <div class="cnt">
+                    <div *ngIf="showHeader" class="step-left">
+                         <h3 *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationForm' | translate }}
+                         </h3>
+                         <h3 *ngIf="userprofileService.isLoggedIn()">
+                              {{ userprofileService.userProfile[0].field_first_name_export }}
+                              {{userprofileService.userProfile[0].field_last_name_export}} -
+                              {{userprofileService.userProfile[0].field_profile_number_export}}</h3>
+                         <p *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationNote' | translate }}
+                         </p>
+                         <p *ngIf="userprofileService.isLoggedIn()">{{ 'profileUpdate.updateNote' | translate }}</p>
+                    </div>
+
+                    <div class="step-right">
+                         <h4>{{ 'profileUpdate.caption' | translate }} </h4>
+                         <div class="step-block1">
+                              <div class="form-row"><input 
+                                        [(ngModel)]="userprofileService.userProfile[0].field_first_name_export"
+                                        type="text" class="input1"
+                                        placeholder="{{ 'profileUpdate.firstname' | translate }}">
+                                   <span *ngIf="noFirstName" class="alert">{{ 'profileUpdate.firstnameMandatory' | translate }}</span>
+                                   </div>
+                              <div class="form-row"><input
+                                        [(ngModel)]="userprofileService.userProfile[0].field_last_name_export"
+                                        type="text" class="input1"
+                                        placeholder="{{ 'profileUpdate.lastname' | translate }}"></div>
+                              <div class="form-row"><input [(ngModel)]="password.first" type="password" class="input1"
+                                        placeholder="{{ 'profileUpdate.password1' | translate }}"></div>
+                              <div class="form-row"><input [(ngModel)]="password.confirm" type="password" class="input1"
+                                        placeholder="{{ 'profileUpdate.password2' | translate }}"></div>
+                                        <span *ngIf="passwordsMismatch" class="alert">{{ 'profileUpdate.passwordsMismatch' | translate }}</span>
+                         </div>
+
+                         <div class="step-block2">
+                              <div class="form-row"><input
+                                        [(ngModel)]="userprofileService.userProfile[0].field_address_export" type="text"
+                                        class="input1" placeholder="{{ 'profileUpdate.address' | translate }}"></div>
+                              <div class="row">
+                                   <div class="col-6">
+                                        <div class="form-row"><input
+                                                  [(ngModel)]="userprofileService.userProfile[0].field_zipcode_export"
+                                                  type="text" class="input1"
+                                                  placeholder="{{ 'profileUpdate.post' | translate }}"></div>
+                                   </div>
+                                   <div class="col-6">
+                                        <div class="form-row"><input
+                                                  [(ngModel)]="userprofileService.userProfile[0].field_city_export"
+                                                  type="text" class="input1"
+                                                  placeholder="{{ 'profileUpdate.city' | translate }}"></div>
+                                   </div>
+                              </div>
+                              <div class="form-row">
+                                   <select class="custom-select"
+                                        [(ngModel)]="userprofileService.userProfile[0].field_country_export">
+                                        <option>{{ 'profileUpdate.country' | translate }}</option>
+                                        <option *ngFor="let country of listOfCountryNames; let i = index"
+                                             [selected]="listOfCountryIDs[i] == userprofileService.userProfile[0].field_country_export"
+                                             [(ngValue)]="listOfCountryIDs[i]">{{ country }}</option>
+                                   </select>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+
+               <div class="step-bottom">
+                    <div class="bottom-left">
+                         <h2><span>01</span>/07</h2>
+                    </div>
+                    <div class="bottom-right"><a (click)="validate()" class="next-btn cursor-pointer">{{ 'profileUpdate.next' | translate }}</a></div>
+               </div>
+          </div>
+     </div>
+     <!--popup-content-->
+
+</div>
+<!--popup1-->

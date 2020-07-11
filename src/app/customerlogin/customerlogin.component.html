@@ -1,0 +1,46 @@
+
+    <div class="popup1">
+    
+        <div class="popup-header">
+              <div class="container-lg">
+                  <div class="popup-logo"><a href="javascript:void(0)"><img src="assets/images/logo-white.svg" alt=""></a></div>
+                  <a href="javascript:void(0)" class="close-icon" [routerLink]="['/profiles']" ></a>
+             </div>
+        </div><!--popup-header-->
+        
+        <div class="popup-content">
+             <div class="container-lg">
+                  <div class="cnt">
+                          <div class="cnt-block1">
+                            <h3>Kunde login</h3>
+                            <p>Hvis du  har en kundeprofil, <br>kan du loggeind nedenfor.</p>
+                            <div class="form-block">
+                              <form action="" #fc="ngForm" (ngSubmit)="loginCustomer(user)">
+                                  <div class="form-row">
+                                        <label>BRUGERNAVN</label>
+                                        <input name="email" type="text" class="input1" placeholder="Email" [(ngModel)]="user.name" required>
+                                 </div>
+                                 <div class="form-row">
+                                        <label>KODE</label>
+                                        <input name="password" type="password" class="input1" placeholder="*****" [(ngModel)]="user.pass" required>
+                                      <p class="forgot-password"><a href="javascript:void(0)">Glemt adgangskode</a></p>
+                                 </div>
+                                 <div class="form-row">
+                                   <input [disabled]="!fc.valid" type="submit" class="submit1" value="Login" routerLink_diss="/profiles">
+                                 </div>
+                              </form>
+                            </div>
+                       </div>
+                       
+                       <div class="cnt-block2">
+                            <h3>Opret kundeprofil</h3>
+                            <p>For at kunne oprette og gemme dine <br>Lightbox skal du lave en kundeprofil.</p>
+                            <input (click)="navigateToCreateCustomer()" type="button" class="submit1" value="Opret profil">
+                       </div>
+                  </div>
+             </div>
+        </div><!--popup-content-->
+        
+   </div><!--popup1-->
+
+   <router-outlet></router-outlet>

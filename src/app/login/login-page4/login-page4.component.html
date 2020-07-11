@@ -4,68 +4,50 @@
         <div class="popup-header">
               <div class="container-lg">
                   <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a href="#" class="close-icon" routerLink="/profiles" ></a>
+                  <a href="javascript:void(0)" class="close-icon" routerLink="/profiles" ></a>
              </div>
         </div><!--popup-header-->
         
         <div class="popup-content">
              <div class="container-lg">
                   <div class="cnt">
-                          <div class="step-left">
-                            <h3>Ansøgningsskema</h3>
-                            <p>For at ansøge om en profil, bedes du udfylde felterne og klikke videre til næste side.</p>
-                       </div>
+                    <div class="step-left">
+                         <h3 *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationForm' | translate }}
+                         </h3>
+                         <h3 *ngIf="userprofileService.isLoggedIn()">
+                              {{ userprofileService.userProfile[0].field_first_name_export }}
+                              {{userprofileService.userProfile[0].field_last_name_export}} -
+                              {{userprofileService.userProfile[0].field_profile_number_export}}</h3>
+                         <p *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationNote' | translate }}
+                         </p>
+                         <p *ngIf="userprofileService.isLoggedIn()">{{ 'profileUpdate.updateNote' | translate }}</p>
+                    </div>
                        
                        <div class="step-right">
                             <div class="step-block9">
                                   <h4>LIDT OM MIG</h4>
-                                 <div class="form-row"><textarea class="textarea2" placeholder="Skriv note..."></textarea></div>
+                                 <div class="form-row"><textarea class="textarea2" placeholder="Skriv note..." [(ngModel)]="userprofileService.userProfile[0].field_about_me_export"></textarea></div>
                                  <h4>SPORT & HOBBY</h4>
-                                 <div class="form-row"><textarea class="textarea2" placeholder="Skriv note..."></textarea></div>
+                                 <div class="form-row"><textarea class="textarea2" placeholder="Skriv note..." [(ngModel)]="userprofileService.userProfile[0].field_sports_and_hobby_export"></textarea></div>
                             </div>
                             
                             <div class="step-block10">
                                  <h4>KATEGORI<strong>/ Vælg én eller flere</strong></h4>
                                  <div class="form_box">
-                                     <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Amatørskuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Danser<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Amatørskuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Danser<span class="plus-icon2"></span></span>
+                                   <input type="hidden" id="category" name="category" [(ngModel)]="userprofileService.userProfile[0].field_category_export"/>
+                                   <span [ngClass]="checkPresence('category', i) ? 'button2' : 'button1' " *ngFor="let item of listOfCategoryNames; let i = index" (click)="setValue('category', i)">{{item}}<span class="" [ngClass]="checkPresence('category', i) ? 'close-icon-skills' : 'plus-icon2' "></span></span>
                                  </div>
                                  
                                  <h4>ERFARING</h4>
                                  <div class="form_box">
-                                     <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Amatørskuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Danser<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Amatørskuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Danser<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Amatørskuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Danser<span class="plus-icon2"></span></span>
-                                   <span class="button1">Ny<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
+                                   <input type="hidden" id="skill" name="skill" [(ngModel)]="userprofileService.userProfile[0].field_skills_export"/>
+                                   <span [ngClass]="checkPresence('skill', i) ? 'button2' : 'button1' " *ngFor="let item of listOfSkillNames; let i = index" (click)="setValue('skill', i)">{{item}}<span [ngClass]="checkPresence('skill', i) ? 'close-icon-skills' : 'plus-icon2' "></span></span>
                                  </div>
                                  
                                  <h4>KØREKORT</h4>
                                  <div class="form_box">
-                                     <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Skuespiller<span class="plus-icon2"></span></span>
-                                   <span class="button1">Model<span class="plus-icon2"></span></span>
-                                   <span class="button1">Ny<span class="plus-icon2"></span></span>
+                                   <input type="hidden" id="license" name="license" [(ngModel)]="userprofileService.userProfile[0].field_licenses_export"/>
+                                   <span [ngClass]="checkPresence('license', i) ? 'button2' : 'button1'"  *ngFor="let item of listOfLicenseNames; let i = index" (click)="setValue('license', i)">{{item}}<span [ngClass]="checkPresence('license', i) ? 'close-icon-skills' : 'plus-icon2' "></span></span>
                                  </div>
                                  
                             </div>
@@ -77,7 +59,7 @@
                        <div class="bottom-left">
                             <h2><span>04</span>/07</h2>
                        </div>
-                          <div class="bottom-right"><a class="prev-btn" routerLink="/login/3">FORRIGE</a><a class="prev-btn" routerLink="/login/5">NÆSTE</a></div>
+                          <div class="bottom-right"><a class="prev-btn" routerLink="/login/3">{{ 'profileUpdate.previous' | translate }}</a><a class="next-btn" routerLink="/login/5">{{ 'profileUpdate.next' | translate }}</a></div>
                   </div>
              </div>
         </div><!--popup-content-->

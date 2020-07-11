@@ -1,0 +1,42 @@
+<div class="wrapper-black">
+
+    <div class="popup-header">
+        <div class="container-lg">
+            <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
+            <a class="close-icon" routerLink="/profiles"></a>
+        </div>
+    </div>
+    <!--popup-header-->
+
+    <div class="popup-content">
+        <div class="container-lg">
+            <div class="cnt">
+                <div class="step-right">
+                    <h4>Profil </h4>
+                    <div class="step-block1">
+                        <div class="form-row"><input type="text" class="input1" placeholder="Email"
+                                [(ngModel)]="userprofileService.userProfile[0].name_export"></div>
+                        <div class="form-row"><input
+                                [(ngModel)]="userprofileService.userProfile[0].field_organization_export" type="text"
+                                class="input1" placeholder="Virksomhed"></div>
+                        <div class="form-row"><input
+                                [(ngModel)]="userprofileService.userProfile[0].field_telephone_export[0]" type="text"
+                                class="input1" placeholder="Telefon"></div>
+                        <div class="form-row"><input type="password" class="input1"
+                                placeholder="Vælg kodeord"></div>
+                        <div class="form-row"><input type="password" class="input1"
+                                placeholder="Gentag kodeord"></div>
+                        <div class="form-row"><input type="button" (click)="saveUser('customer')"
+                                class="submit1 m-top-24" value="Gem profil">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--popup-content-->
+
+</div>
+<!--popup1-->
+<router-outlet></router-outlet>

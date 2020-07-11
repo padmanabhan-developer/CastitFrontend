@@ -1,0 +1,12 @@
+.side-tool{
+    width: 4.5vw;
+}
+.rotate-icon{
+    transform: rotate(45deg);
+}
+.place-above{
+    z-index: 1;
+}
+a.side-plus, a.side-user{
+    color: transparent;
+}

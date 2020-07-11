@@ -1,83 +1,112 @@
+<div class="wrapper-black">
 
-    <div class="wrapper-black">
-    
-        <div class="popup-header">
-              <div class="container-lg">
-                  <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a href="#" class="close-icon" routerLink="/profiles" ></a>
-             </div>
-        </div><!--popup-header-->
-        
-        <div class="popup-content">
-             <div class="container-lg">
-                  <div class="cnt">
-                          <div class="step-left">
-                            <h3>Ansøgningsskema</h3>
-                            <p>For at ansøge om en profil, bedes du udfylde felterne og klikke videre til næste side.</p>
-                       </div>
-                       
-                       <div class="step-right">
-                            <h4>PERSONLIG INFO </h4>
-                            <div class="step-block1">
-                                  <div class="form-row"><input type="text" class="input1" placeholder="Email"></div>
-                                 <div class="row">
-                                      <div class="col-6"><div class="form-row"><input type="text" class="input1" placeholder="Mobil"></div></div>
-                                      <div class="col-6"><div class="form-row"><input type="text" class="input1" placeholder="Telefon"></div></div>
-                                 </div>
-                                 <div class="form-row"><input type="text" class="input1" placeholder="Beskæftigelse"></div>
-                            </div>
-                            
-                            <div class="step-block2">
-                                 <div class="row">
-                                      <div class="col-4">
-                                          <div class="form-row">
-                                               <select class="custom-select">
-                                                 <option>Dag</option>
-                                                 <option>Dag 1</option>
-                                                 <option>Dag 2</option>
-                                              </select>
-                                          </div>
-                                       </div>
-                                       <div class="col-4">
-                                          <div class="form-row">
-                                               <select class="custom-select">
-                                                 <option>Måned</option>
-                                                 <option>Måned 1</option>
-                                                 <option>Måned 2</option>
-                                              </select>
-                                          </div>
-                                       </div>
-                                       <div class="col-4">
-                                          <div class="form-row">
-                                               <select class="custom-select">
-                                                 <option>År</option>
-                                                 <option>År 1</option>
-                                                 <option>År 2</option>
-                                              </select>
-                                          </div>
-                                       </div>
-                                 </div>
-                                 <div class="form-row"><input type="text" class="input1" placeholder="Etnisk oprindelse"></div>
-                                 <div class="form-row">
-                                        <select class="custom-select">
-                                         <option>Køn</option>
-                                         <option>Køn 1</option>
-                                         <option>Køn 2</option>
-                                      </select>
+     <div class="popup-header">
+          <div class="container-lg">
+               <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a>
+               </div>
+               <a href="javascript:void(0)" class="close-icon" routerLink="/profiles"></a>
+          </div>
+     </div>
+     <!--popup-header-->
 
-                                 </div>
-                            </div>
-                       </div>
-                       
-                  </div>
-                  
-                  <div class="step-bottom">
-                       <div class="bottom-left">
-                            <h2><span>02</span>/07</h2>
-                       </div>
-                          <div class="bottom-right"><a class="prev-btn" routerLink="/login/1">FORRIGE</a><a class="prev-btn" routerLink="/login/3">NÆSTE</a></div>
-                  </div>
-             </div>
-        </div><!--popup-content-->
-        
-   </div><!--popup1-->
+     <div class="popup-content">
+          <div class="container-lg">
+               <div class="cnt">
+                    <div class="step-left">
+                         <h3 *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationForm' | translate }}
+                         </h3>
+                         <h3 *ngIf="userprofileService.isLoggedIn()">
+                              {{ userprofileService.userProfile[0].field_first_name_export }}
+                              {{userprofileService.userProfile[0].field_last_name_export}} -
+                              {{userprofileService.userProfile[0].field_profile_number_export}}</h3>
+                         <p *ngIf="!userprofileService.isLoggedIn()">{{ 'profileUpdate.applicationNote' | translate }}
+                         </p>
+                         <p *ngIf="userprofileService.isLoggedIn()">{{ 'profileUpdate.updateNote' | translate }}</p>
+                    </div>
+
+                    <div class="step-right">
+                         <h4>{{ 'profileUpdate.caption' | translate }} </h4>
+                         <div class="step-block1">
+                              <div class="form-row"><input (change)="checkEmail()" type="text" class="input1" placeholder="Email"
+                                        [(ngModel)]="userprofileService.userProfile[0].name_export">
+                                   <span class="alert" *ngIf="inValidEmail">{{ 'profileUpdate.inValidEmail' | translate }}</span>
+                                   <span class="alert" *ngIf="emailExists">{{ 'profileUpdate.emailExists' | translate }}</span>
+                                   </div>
+                              <div class="row">
+                                   <div class="col-6">
+                                        <div class="form-row"><input
+                                                  [(ngModel)]="userprofileService.userProfile[0].field_cellphone_export"
+                                                  type="text" class="input1" placeholder="{{ 'profileUpdate.mobile' | translate }}"></div>
+                                   </div>
+                                   <div class="col-6">
+                                        <div class="form-row"><input
+                                                  [(ngModel)]="userprofileService.userProfile[0].field_telephone_export[0]"
+                                                  type="text" class="input1" placeholder="{{ 'profileUpdate.telephone' | translate }}"></div>
+                                   </div>
+                              </div>
+                              <div class="form-row"><input
+                                        [(ngModel)]="userprofileService.userProfile[0].field_occupation_export"
+                                        type="text" class="input1" placeholder="{{ 'profileUpdate.occupation' | translate }}"></div>
+                         </div>
+
+                         <div class="step-block2">
+                              <div class="row">
+                                   <div class="col-4">
+                                        <div class="">
+                                             <select [(ngModel)]="day" class="custom-select">
+                                                  <option value="">{{'profileUpdate.day' | translate }}</option>
+                                                  <option [value]="i+1" *ngFor="let item of [].constructor(31); let i = index">{{i+1}}</option>
+                                             </select>
+                                        </div>
+                                   </div>
+                                   <div class="col-4">
+                                        <div class="">
+                                             <select [(ngModel)]="month" class="custom-select">
+                                                  <option>{{'profileUpdate.month' | translate }}</option>
+                                                  <option [value]="i+1" *ngFor="let item of [].constructor(12); let i = index">{{i+1}}</option>
+                                             </select>
+                                        </div>
+                                   </div>
+                                   <div class="col-4">
+                                        <div class="">
+                                             <select [(ngModel)]="year" class="custom-select">
+                                                  <option>{{'profileUpdate.year' | translate }}</option>
+                                                  <option [value]="item" *ngFor="let item of years(); let i = index">{{item}}</option>
+                                             </select>
+                                        </div>
+                                   </div>
+                              </div> -->
+                              <div class="form-row"><input
+                                        [(ngModel)]="userprofileService.userProfile[0].field_ethnic_origin_export"
+                                        type="text" class="input1" placeholder="{{ 'profileUpdate.ethnic' | translate }}"></div>
+                              <div class="form-row">
+                                   <select class="custom-select"
+                                        [(ngModel)]="userprofileService.userProfile[0].field_gender_export">
+                                        <option disabled selected value="">{{ 'profileUpdate.gender' | translate }}</option>
+                                        <option value="1"
+                                             [selected]="userprofileService.userProfile[0].field_gender_export == 1">
+                                             {{ 'profileUpdate.male' | translate }}</option>
+                                        <option value="2"
+                                             [selected]="userprofileService.userProfile[0].field_gender_export == 2">
+                                             {{ 'profileUpdate.female' | translate }}</option>
+                                   </select>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+
+               <div class="step-bottom">
+                    <div class="bottom-left">
+                         <h2><span>02</span>/07</h2>
+                    </div>
+                    <div class="bottom-right"><a class="prev-btn" routerLink="/login/1">{{ 'profileUpdate.previous' | translate }}</a><a class="next-btn cursor-pointer"
+                              (click)="validate()">{{ 'profileUpdate.next' | translate }}</a></div>
+               </div>
+          </div>
+     </div>
+     <!--popup-content-->
+
+</div>
+<!--popup1-->
