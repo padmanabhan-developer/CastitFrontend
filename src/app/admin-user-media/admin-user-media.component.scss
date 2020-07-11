@@ -869,6 +869,7 @@ opacity: 0.8;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none !important;
+    margin-right: 10px;
 }
 .upload-btn:hover {
     background: #000;
@@ -1629,7 +1630,7 @@ opacity: 0.8;
 .box2 {
     float: left;
     margin: 0 0 0 30px;
-    width: 250px;
+    width: 320px;
 }
 .box2 .row {
     margin: 0 -5px;
@@ -2707,4 +2708,7 @@ input[id="update_media_pending"] {
   }
   .sr-only {
       display: none;
+  }
+  .upload-block{
+      height: 50px;
   }

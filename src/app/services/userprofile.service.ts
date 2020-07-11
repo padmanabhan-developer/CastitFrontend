@@ -98,7 +98,9 @@ export class UserprofileService {
     field_weight_export: '',
     field_weight: '',
     field_organization_export: '',
-    password: ''
+    password: '',
+    field_photos: '-',
+    field_videos: '-'
   }];
   userProfile = localStorage.getItem('currentUserProfile') ? JSON.parse(localStorage.getItem('currentUserProfile')) : this.userProfileEmpty;
   newLightboxName: any;

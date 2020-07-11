@@ -48,6 +48,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AdminUserInfoComponent } from './admin-user-info/admin-user-info.component';
 import { AdminUserMediaComponent } from './admin-user-media/admin-user-media.component';
 import { MediaModalComponent } from './media-modal/media-modal.component';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 @NgModule({
   imports: [
     BrowserModule,
@@ -57,6 +58,7 @@ import { MediaModalComponent } from './media-modal/media-modal.component';
     AppRoutingModule,
     LazyLoadImageModule,
     HttpClientModule,
+    UiSwitchModule,
     NgxDatatableModule.forRoot({
       messages: {
         emptyMessage: 'Trying to fetch data ... ', // Message to show when array is presented, but contains no values

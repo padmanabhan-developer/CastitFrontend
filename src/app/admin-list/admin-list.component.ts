@@ -289,18 +289,19 @@ export class AdminListComponent implements OnInit {
     this.userprofileService.loadProfile(uid).subscribe(res => {
       const response: any = res;
       this.adminService.userData = response;
-      this.adminService.showListComponent = false;
+      setTimeout(() => {
+        this.adminService.showListComponent = false;
+        switch (type) {
+          case 'info':
+          default:
+            this.adminService.showInfoComponent = true;
+            break;
+          case 'media':
+            this.adminService.showMediaComponent = true;
+            break;
+        }
+      }, 0);
     });
-    switch (type) {
-      case 'info':
-      default:
-        this.adminService.showInfoComponent = true;
-        break;
-
-      case 'media':
-        this.adminService.showMediaComponent = true;
-        break;
-    }
   }
   onSelect({ selected }) {
     this.selected.splice(0, this.selected.length);

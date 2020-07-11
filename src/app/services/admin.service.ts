@@ -344,5 +344,15 @@ export class AdminService {
         };
         const saveUserEndPoint = environment.backendBaseUrl + '/en' + '/api/user-update';
         return this.http.post(saveUserEndPoint, userData, options);
-      }
+    }
+    updateMediaStatus(uid, type, index, status) {
+        const updateMediaStatusUrl = environment.backendBaseUrl + '/en' + '/api/set-media-status';
+        const data = {uid, type, index, status};
+        return this.http.post(updateMediaStatusUrl, data);
+    }
+    updateProfileNewStatus(value, uid) {
+        const updateProfileNewStatusUrl = environment.backendBaseUrl + '/en' + '/api/set-profile-new-status';
+        const data = {value, uid};
+        return this.http.post(updateProfileNewStatusUrl, data);
+    }
 }

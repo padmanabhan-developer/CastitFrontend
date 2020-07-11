@@ -11,7 +11,12 @@
           </div>
 
           <div class="box2">
-            <a class="upload-btn cursor-pointer" (click)="openUploadModal()">Upload</a>
+            <div class="upload-block">
+              <input class="upload-block cursor-pointer" type="file" name="usermedia" id="usermedia" (change)="handleFileInput($event.target.files)">
+              <h5 class="cursor-pointer" >Upload Photo or Video</h5>
+            </div>
+            <!-- <a class="upload-btn cursor-pointer" (click)="openUploadModal()">Upload Photo</a> -->
+            <!-- <a class="upload-btn cursor-pointer" (click)="openUploadModal()">Upload Video</a> -->
           </div>
           <a class="upload-close" href="javascript:void(0)" (click)="adminService.closePanel()"></a>
         </div>
@@ -25,12 +30,12 @@
           <input class="input" name="tabs" type="radio" id="tab-1" checked="checked" />
           <label class="label" for="tab-1">Billeder</label>
           <div class="panel">
-            <h1>Code refactoring in progress</h1>
+            <h1 *ngIf="!photoStatusFromAPI.length">No images present for this profile {{photoStatusFromAPI[0]}} </h1>
             <!-- <h1>Billeder</h1> -->
             <!-- <p>hhh</p> -->
             <!--  -->
             <div *ngFor="let photoUrl of adminService.userData[0].field_photos_export; let i = index" class="product-box" id="media_id">
-              <div class="product-box-inner">
+              <div *ngIf="photoStatusFromAPI[i].trim() != 'deleted'" class="product-box-inner">
                 <div class="img-box">
                   <img class="profileimg" [lazyLoad]="photoUrl" [defaultImage]="defaultImage" [errorImage]="profileFallback" alt="">
                   <img onclick="openModal();currentSlide(gallery_id)" class="overlay" src="assets/images/admin/image.png" alt="">
@@ -38,12 +43,11 @@
                 <div class="btn-sec">
                   <div class="btnleft">
                     <div class="example">
-                      <input id="chkToggle" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" [checked]="true" mediatype="image"
-                        mediaid="media_id">
+                      <ui-switch checkedLabel="'showphoto'" uncheckedLabel="'Disabled'" switchColor="#fcfcfc" [(ngModel)]="photoStatus[i]" (change)="changeMediaStatus($event, 'photo', i)"> </ui-switch>
                     </div>
                   </div>
                   <div class="btnright">
-                    <a class="slet-btn" mediaid="media_id" mediatype="mediatype" href="#">Slet</a>
+                    <a class="slet-btn"  mediaid="media_id" mediatype="mediatype" (click)="changeMediaStatus('deleted', 'photo', i)" href="javascript:void()">Slet</a>
                   </div>
                 </div>
               </div>
@@ -63,8 +67,8 @@
                 <div class="btn-sec">
                   <div class="btnleft">
                     <div class="example">
-                      <input id="chkToggle" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" [checked]="true" mediatype="image"
-                        mediaid="media_id">
+                      <!-- <input id="chkToggle" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" [checked]="true" mediatype="image" mediaid="media_id"> -->
+                        <ui-switch [(ngModel)]="videoStatus[i]" (change)="changeMediaStatus($event, 'video', i)"></ui-switch>
                     </div>
                   </div>
                   <div class="btnright">
@@ -88,8 +92,7 @@
                 <div class="btn-sec">
                   <div class="btnleft">
                     <div class="example">
-                      <input id="chkToggle" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" [checked]="true" mediatype="image"
-                        mediaid="media_id">
+                      <ui-switch [(ngModel)]="photoStatus[i]" (change)="changeMediaStatus($event, 'photo', i)"></ui-switch>
                     </div>
                   </div>
                   <div class="btnright">
@@ -108,8 +111,7 @@
                 <div class="btn-sec">
                   <div class="btnleft">
                     <div class="example">
-                      <input id="chkToggle" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" [checked]="true" mediatype="image"
-                        mediaid="media_id">
+                      <ui-switch [(ngModel)]="videoStatus[i]" (change)="changeMediaStatus($event, 'video', i)"></ui-switch>
                     </div>
                   </div>
                   <div class="btnright">
@@ -123,10 +125,5 @@
       </div>
     </div>
   </div>
-  </div>
 </div>
-<script>
-  $(function(){
-    $('#chkToggle').bootstrapToggle();
-  });
-</script>
+<app-loader *ngIf="loadSpinner"></app-loader>

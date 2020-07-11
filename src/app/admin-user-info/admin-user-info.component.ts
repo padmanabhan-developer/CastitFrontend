@@ -358,4 +358,12 @@ export class AdminUserInfoComponent implements OnInit {
     */
   }
 
+  changeProfileNewStatus(value) {
+    const uid = this.adminService.userData[0].uid_export;
+    this.adminService.updateProfileNewStatus(value, uid).subscribe(res => {
+      const response: any = res;
+      // this.adminService.userData[0].field_new_profile_export = response.profile_new_status;
+    });
+  }
+
 }
