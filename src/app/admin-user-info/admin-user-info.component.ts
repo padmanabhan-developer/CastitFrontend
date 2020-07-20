@@ -244,6 +244,10 @@ export class AdminUserInfoComponent implements OnInit {
     }
   }
 
+  changeSelect(event) {
+    console.log(event);
+  }
+
   prepareBirthday() {
     const birthday = this.adminService.userData[0].field_birthday_export;
     const date = (birthday) ? new Date(birthday) : new Date();

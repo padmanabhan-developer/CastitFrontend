@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
     name: '',
     pass: ''
   };
+  loadSpinner = false;
+  wrongCredentials = false;
+  wrongCredentialsCustomer = false;
   constructor(
     public userprofileService: UserprofileService,
     public appService: AppDataService,
@@ -28,13 +31,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login(userInfo) {
+    this.loadSpinner = true;
+    this.wrongCredentials = false;
+    this.wrongCredentialsCustomer = false;
     if (!userInfo.role) {
       userInfo.role = 'model';
     }
     this.userprofileService.login(userInfo).subscribe(
       (res) => {
         const response: any = res;
-        console.log(response);
         if (response.current_user && response.current_user.uid) {
           this.cookie.set('x-csrf-token', res['csrf_token']);
           localStorage.setItem('userLoginResponse', JSON.stringify(res));
@@ -43,13 +48,23 @@ export class LoginComponent implements OnInit {
               if (res) {
                 this.userprofileService.userProfile = res;
                 localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
-                const navigateTo = (userInfo.role === 'model') ? '/login/1' : '/profiles'; 
+                const navigateTo = (userInfo.role === 'model') ? '/login/1' : '/profiles';
+                this.loadSpinner = false;
                 this.router.navigate([navigateTo]);
               }
             }
           );
         }
+      },
+      (err) => {
+        this.loadSpinner = false;
+        if (userInfo.role === 'model') {
+          this.wrongCredentials = true;
+        } else {
+          this.wrongCredentialsCustomer = true;
+        }
       }
+
     );
   }
 

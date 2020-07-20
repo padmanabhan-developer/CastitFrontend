@@ -14,7 +14,9 @@ export class NewpasswordComponent implements OnInit {
   queryParams: any;
   email: any;
   pass: any;
-  allowNewPass = true;
+  allowNewPass = false;
+  profileChecked = false;
+  showPopup = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,7 +24,7 @@ export class NewpasswordComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.queryParams = {...params};
       this.email = this.queryParams.email;
       this.pass = atob(this.queryParams.resethash);
@@ -31,11 +33,17 @@ export class NewpasswordComponent implements OnInit {
         const response: any = res;
         if (response.current_user && response.current_user.uid) {
           this.allowNewPass = true;
-        }
-        else {
+          this.profileChecked = true;
+        } else {
           this.allowNewPass = false;
+          this.profileChecked = true;
         }
-      });
+      },
+      (err) => {
+        this.allowNewPass = false;
+        this.profileChecked = true;
+      }
+      );
 
     });
   }
@@ -49,7 +57,8 @@ export class NewpasswordComponent implements OnInit {
 
     if (!this.mismatch) {
       this.userprofileService.updatePassword(this.email, this.passOne).subscribe(res => {
-        this.router.navigate(['/login']);
+        this.showPopup = true;
+        // this.router.navigate(['/login']);
       });
     }
   }

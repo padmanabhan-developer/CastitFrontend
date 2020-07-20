@@ -56,7 +56,13 @@
         "username":"USERNAME",
         "password":"PASSWORD",
         "createnew":"Create new profile",
-        "forgotPassword":"Forgot password?"
+        "forgotPassword":"Forgot password?",
+        "wrongCredentials":"Username or password is not recognized",
+        "resetMessage":"Instructions are sent to your email",
+        "newPasswordMessage":"Please try login with new password",
+        "newPasswordSuccess":"New password is updated",
+        "resetPassword":"Reset your password",
+        "resetInstruction":"Enter your registered email and we will send you a link, from which, you can create a new password."
     },
     "profileUpdate":{
         "applicationForm":"Application Form",

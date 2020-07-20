@@ -9,6 +9,7 @@ import { UserprofileService } from '../services/userprofile.service';
 })
 export class ResetpasswordComponent implements OnInit {
   isLoading = false;
+  showPopup = false;
   user = {
     name: ''
   };
@@ -24,7 +25,8 @@ export class ResetpasswordComponent implements OnInit {
     this.isLoading = true;
     this.userprofileService.resetPassword(user).subscribe(res => {
       this.isLoading = false;
-      this.router.navigate(['/profiles']);
+      this.showPopup = true;
+      // this.router.navigate(['/profiles']);
     });
   }
 }

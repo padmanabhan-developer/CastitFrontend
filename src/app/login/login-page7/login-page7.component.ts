@@ -31,8 +31,8 @@ export class LoginPage7Component implements OnInit {
     const filetype = this.fileToUpload.type;
     const filesize = this.fileToUpload.size;
     this.appService.getCloudTempUrl(filename).subscribe( res => {
-      const respose: any = res;
-      this.appService.cloudFilesTempUrl = respose.tempUrl;
+      const response: any = res;
+      this.appService.cloudFilesTempUrl = response.tempUrl;
       this.uploadFileToActivity(filename);
     });
 
@@ -62,8 +62,8 @@ export class LoginPage7Component implements OnInit {
 
   saveMedia() {
     this.userprofileService.saveProfile().subscribe((res) => {
-      const respose: any = res;
-      if (respose && respose.message && respose.message === 'update success') {
+      const response: any = res;
+      if (response && response.message && response.message === 'update success') {
         this.router.navigate(['/profiles']);
       }
     });

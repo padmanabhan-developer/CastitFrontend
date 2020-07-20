@@ -25,8 +25,8 @@ export class LoginPage5Component implements OnInit {
   ngOnInit() {
     localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
     this.appData.getFieldAvailableOptions('field_language_one').subscribe(res => {
-      const respose: any = res;
-      this.listOfLanguages = respose.settings.allowed_values;
+      const response: any = res;
+      this.listOfLanguages = response.settings.allowed_values;
       this.listOfLanguageIDs = Object.keys(this.listOfLanguages);
       this.listOfLanguageNames = Object.values(this.listOfLanguages);
     });

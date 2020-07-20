@@ -56,7 +56,13 @@
         "username":"BRUGERNAVN",
         "password":"INDTASTET KODE",
         "createnew":"Opret ny profil",
-        "forgotPassword":"Glemt adgangskode"
+        "forgotPassword":"Glemt adgangskode",
+        "wrongCredentials":"Brugernavn og/eller adgangskode kan ikke genkendes",
+        "resetMessage":"Instruktioner sendes til din e-mail",
+        "newPasswordMessage":"Prøv at logge ind med nyt kodeord",
+        "newPasswordSuccess":"Ny adgangskode opdateres",
+        "resetPassword":"Nulstil dit kodeord",
+        "resetInstruction":"Indtast din registrerede mail, så fremsender vi et link, hvorfra du kan oprette et nyt kodeord."
     },
     "profileUpdate":{
         "applicationForm":"Ansøgningsskema",

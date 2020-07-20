@@ -27,14 +27,14 @@ export class LoginPage4Component implements OnInit {
   ngOnInit() {
     localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
     this.appData.getFieldAvailableOptions('field_skills').subscribe(res => {
-      const respose: any = res;
-      this.listOfSkills = respose.settings.allowed_values;
+      const response: any = res;
+      this.listOfSkills = response.settings.allowed_values;
       this.listOfSkillIDs = Object.keys(this.listOfSkills);
       this.listOfSkillNames = Object.values(this.listOfSkills);
     });
     this.appData.getFieldAvailableOptions('field_category').subscribe(res => {
-      const respose: any = res;
-      this.listOfCategories = respose.settings.allowed_values;
+      const response: any = res;
+      this.listOfCategories = response.settings.allowed_values;
       this.listOfCategoryIDs = Object.keys(this.listOfCategories);
       this.listOfCategoryNames = Object.values(this.listOfCategories);
       console.log('cat',this.listOfCategories);
@@ -42,8 +42,8 @@ export class LoginPage4Component implements OnInit {
       console.log('cat',this.listOfCategoryNames);
     });
     this.appData.getFieldAvailableOptions('field_licenses').subscribe(res => {
-      const respose: any = res;
-      this.listOfLicenses = respose.settings.allowed_values;
+      const response: any = res;
+      this.listOfLicenses = response.settings.allowed_values;
       this.listOfLicenseIDs = Object.keys(this.listOfLicenses);
       this.listOfLicenseNames = Object.values(this.listOfLicenses);
     });

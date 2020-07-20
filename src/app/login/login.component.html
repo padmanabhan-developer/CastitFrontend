@@ -1,62 +1,83 @@
+<div class="popup1">
 
-    
-    <div class="popup1">
-    
-        <div class="popup-header">
-              <div class="container-lg">
-                  <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a href="javascript:void(0)" class="close-icon" routerLink="/profiles" ></a>
-             </div>
-        </div><!--popup-header-->
-        
-        <div class="popup-content">
-             <div class="container-lg">
-                  <div class="cnt">
-                          <div class="cnt-block1">
-                            <h3>{{ 'login.profileLogin' | translate }}</h3>
-                            <p>{{ 'login.profileLoginDesc1' | translate }} <br>{{ 'login.profileLoginDesc2' | translate }} </p>
-                            <div class="form-block">
-                                 <form action="" #f="ngForm" (ngSubmit)="login(user)">
-                                  <div class="form-row">
+     <div class="popup-header">
+          <div class="container-lg">
+               <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a>
+               </div>
+               <a href="javascript:void(0)" class="close-icon" routerLink="/profiles"></a>
+          </div>
+     </div>
+     <!--popup-header-->
+
+     <div class="popup-content">
+          <div class="container-lg">
+               <div class="cnt">
+                    <div class="cnt-block1">
+                         <h3>{{ 'login.profileLogin' | translate }}</h3>
+                         <p>{{ 'login.profileLoginDesc1' | translate }} <br>{{ 'login.profileLoginDesc2' | translate }}
+                         </p>
+                         <div class="form-block">
+                              <form action="" #f="ngForm" (ngSubmit)="login(user)">
+                                   <div class="form-row">
                                         <label>{{ 'login.username' | translate }}</label>
-                                      <input name="email" type="text" class="input1" placeholder="Email" [(ngModel)]="user.name" required>
-                                 </div>
-                                 <div class="form-row">
+                                        <input name="email" type="text" class="input1" placeholder="Email"
+                                             [(ngModel)]="user.name" required>
+                                   </div>
+                                   <div class="form-row">
                                         <label>{{ 'login.password' | translate }}</label>
-                                      <input name="password" type="password" class="input1" placeholder="*****" [(ngModel)]="user.pass" required>
-                                      <p class="forgot-password"><a href="javascript:void(0)" routerLink="/login/1">{{ 'login.createnew' | translate }}</a> &nbsp;  I  &nbsp; <a href="javascript:void(0)">{{ 'login.forgotPassword' | translate }}</a></p>
-                                 </div>
-                                 <div class="form-row">
-                                      <input [disabled]="!f.valid" type="submit" class="submit1" value="Login" routerLink_diss="/login/1">
-                                 </div>
+                                        <input name="password" type="password" class="input1" placeholder="*****"
+                                             [(ngModel)]="user.pass" required>
+                                        <p class="forgot-password"><a href="javascript:void(0)"
+                                                  routerLink="/login/1">{{ 'login.createnew' | translate }}</a> &nbsp; I
+                                             &nbsp; <a
+                                                  href="javascript:void(0)" routerLink="/reset-password">{{ 'login.forgotPassword' | translate }}</a>
+                                        </p>
+                                   </div>
+                                   <div class="form-row">
+                                        <input [disabled]="!f.valid" type="submit" class="submit1" value="Login"
+                                             routerLink_diss="/login/1">
+                                   </div>
+                                   <span *ngIf="wrongCredentials" class="alert">{{ 'login.wrongCredentials' | translate }}</span>
                               </form>
-                            </div>
-                       </div>
-                       
-                       <div class="cnt-block2">
-                            <h3>{{ 'login.customerLogin' | translate }}</h3>
-                            <p class="padding-none">{{ 'login.customerLoginDesc1' | translate }} <br>{{ 'login.customerLoginDesc2' | translate }}</p>
-                            <div class="form-block">
-                              <form action="" #fc="ngForm" (ngSubmit)="loginCustomer(customer)">
-                                  <div class="form-row">
-                                        <label>{{ 'login.username' | translate }}</label>
-                                        <input name="email" type="email" class="input1" placeholder="Email" [(ngModel)]="customer.name" required>
-                                 </div>
-                                 <div class="form-row">
-                                        <label>{{ 'login.password' | translate }}</label>
-                                        <input name="password" type="password" class="input1" placeholder="*****" [(ngModel)]="customer.pass" required>
-                                      <p class="forgot-password"><a href="javascript:void(0)" routerLink="/customer-create" routerLinkActive="router-link-active" >{{ 'login.createnew' | translate }}</a> &nbsp;  I  &nbsp; <a href="javascript:void(0)">{{ 'login.forgotPassword' | translate }}</a></p>
-                                 </div>
-                                 <div class="form-row">
-                                   <input [disabled]="!fc.valid" type="submit" class="submit1" value="Login" routerLink_diss="/profiles">
-                                 </div>
-                                 </form>
-                            </div>
-                       </div>
-                  </div>
-             </div>
-        </div><!--popup-content-->
-        
-   </div><!--popup1-->
+                         </div>
+                    </div>
 
-   <router-outlet></router-outlet>
+                    <div class="cnt-block2">
+                         <h3>{{ 'login.customerLogin' | translate }}</h3>
+                         <p class="padding-none">{{ 'login.customerLoginDesc1' | translate }}
+                              <br>{{ 'login.customerLoginDesc2' | translate }}</p>
+                         <div class="form-block">
+                              <form action="" #fc="ngForm" (ngSubmit)="loginCustomer(customer)">
+                                   <div class="form-row">
+                                        <label>{{ 'login.username' | translate }}</label>
+                                        <input name="email" type="email" class="input1" placeholder="Email"
+                                             [(ngModel)]="customer.name" required>
+                                   </div>
+                                   <div class="form-row">
+                                        <label>{{ 'login.password' | translate }}</label>
+                                        <input name="password" type="password" class="input1" placeholder="*****"
+                                             [(ngModel)]="customer.pass" required>
+                                        <p class="forgot-password"><a href="javascript:void(0)"
+                                                  routerLink="/customer-create"
+                                                  routerLinkActive="router-link-active">{{ 'login.createnew' | translate }}</a>
+                                             &nbsp; I &nbsp; <a
+                                                  href="javascript:void(0)" routerLink="/reset-password">{{ 'login.forgotPassword' | translate }}</a>
+                                        </p>
+                                   </div>
+                                   <div class="form-row">
+                                        <input [disabled]="!fc.valid" type="submit" class="submit1" value="Login"
+                                             routerLink_diss="/profiles">
+                                   </div>
+                                   <span *ngIf="wrongCredentialsCustomer" class="alert">{{ 'login.wrongCredentials' | translate }}</span>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!--popup-content-->
+
+</div>
+<!--popup1-->
+<app-loader *ngIf="loadSpinner"></app-loader>
+<router-outlet></router-outlet>

@@ -40,6 +40,10 @@ export class LoginPage3Component implements OnInit {
   PantSizes: any;
   ShirtSizes: any;
   ShoeSizes: any;
+  listOfHairColorNames: unknown[];
+  listOfHairColorIDs: string[];
+  listOfEyeColorNames: unknown[];
+  listOfEyeColorIDs: string[];
 
   constructor(
     public userprofileService: UserprofileService,
@@ -49,33 +53,45 @@ export class LoginPage3Component implements OnInit {
   ngOnInit() {
     localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
     this.appData.getFieldAvailableOptions('field_shirt_size_from').subscribe(res => {
-      const respose: any = res;
-      this.listofShirtSizes = Object.keys(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofShirtSizes = Object.keys(response.settings.allowed_values);
       this.toggleOptions();
     });
     this.appData.getFieldAvailableOptions('field_pant_size_from').subscribe(res => {
-      const respose: any = res;
-      this.listofPantSizes = Object.keys(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofPantSizes = Object.keys(response.settings.allowed_values);
       this.toggleOptions();
     });
     this.appData.getFieldAvailableOptions('field_suit_size_from').subscribe(res => {
-      const respose: any = res;
-      this.listofSuitSizes = Object.keys(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofSuitSizes = Object.keys(response.settings.allowed_values);
       this.toggleOptions();
     });
     this.appData.getFieldAvailableOptions('field_shoe_size_from').subscribe(res => {
-      const respose: any = res;
-      this.listofShoeSizes = Object.keys(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofShoeSizes = Object.keys(response.settings.allowed_values);
       this.toggleOptions();
     });
     this.appData.getFieldAvailableOptions('field_hair_color').subscribe(res => {
-      const respose: any = res;
-      this.listofHairColors = Object.values(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofHairColors = response.settings.allowed_values;
+      this.listOfHairColorNames = Object.values(response.settings.allowed_values);
+      this.listOfHairColorIDs = Object.keys(this.listofHairColors);
+
+      localStorage.setItem('listOfHairColorNames', JSON.stringify(this.listOfHairColorNames));
+      localStorage.setItem('listOfHairColorIDs', JSON.stringify(this.listOfHairColorIDs));
+      localStorage.setItem('listofHairColors', JSON.stringify(this.listofHairColors));
       this.toggleOptions();
     });
     this.appData.getFieldAvailableOptions('field_eye_color').subscribe(res => {
-      const respose: any = res;
-      this.listofEyeColors = Object.values(respose.settings.allowed_values);
+      const response: any = res;
+      this.listofEyeColors = response.settings.allowed_values;
+      this.listOfEyeColorNames = Object.values(response.settings.allowed_values);
+      this.listOfEyeColorIDs = Object.keys(this.listofEyeColors);
+
+      localStorage.setItem('listOfEyeColorNames', JSON.stringify(this.listOfEyeColorNames));
+      localStorage.setItem('listOfEyeColorIDs', JSON.stringify(this.listOfEyeColorIDs));
+      localStorage.setItem('listofEyeColors', JSON.stringify(this.listofEyeColors));
       this.toggleOptions();
     });
   }

@@ -2,7 +2,7 @@ import { UserprofileService } from 'src/app/services/userprofile.service';
 import { Component, OnInit } from '@angular/core';
 import { AppDataService } from '../services/app-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-userinfo',
   templateUrl: './userinfo.component.html',
@@ -23,7 +23,8 @@ export class UserinfoComponent implements OnInit {
     public appService: AppDataService,
     public userprofileService: UserprofileService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
     ) { }
 
   ngOnInit() {
@@ -74,7 +75,8 @@ export class UserinfoComponent implements OnInit {
       this.appService.profileOpened = false;
       this.appService.sidebarOpened = true;
     } else {
-      this.router.navigate(['/profiles']);
+      // this.router.navigate(['/profiles']);
+      this.location.back();
     }
   }
   loadAsset(index, assetType) {

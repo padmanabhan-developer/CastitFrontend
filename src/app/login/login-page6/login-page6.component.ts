@@ -23,10 +23,11 @@ export class LoginPage6Component implements OnInit {
 
   saveUser() {
     this.userprofileService.saveProfile().subscribe((res) => {
-      const respose: any = res;
-      if (respose && respose.message && respose.message === 'create success' ||
-          respose && respose.message && respose.message === 'update success') {
-        this.userprofileService.userProfile[0].uid_export = respose.uid;
+      const response: any = res;
+      if (response && response.message && response.message === 'create success' ||
+          response && response.message && response.message === 'update success') {
+        this.userprofileService.userProfile[0].uid_export = response.uid;
+        this.userprofileService.userProfile[0].field_profile_number_export = response.profile_number;
         localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
         this.router.navigate(['/login/7']);
       }
@@ -34,15 +35,15 @@ export class LoginPage6Component implements OnInit {
     /*
     if ( this.userprofileService.isLoggedIn() ) {
       this.userprofileService.saveProfile().subscribe((res) => {
-        const respose: any = res;
-        if (respose && respose.message && respose.message === 'success') {
+        const response: any = res;
+        if (response && response.message && response.message === 'success') {
           this.router.navigate(['/login/7']);
         }
       });
     } else {
       this.userprofileService.registerUser(this.userprofileService.userProfile[0]).subscribe((res) => {
-        const respose: any = res;
-        if (respose && respose.message && respose.message === 'success') {
+        const response: any = res;
+        if (response && response.message && response.message === 'success') {
           this.router.navigate(['/login/7']);
         }
       });

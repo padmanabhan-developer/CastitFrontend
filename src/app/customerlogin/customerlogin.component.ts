@@ -14,6 +14,9 @@ export class CustomerloginComponent implements OnInit {
     name: '',
     pass: ''
   };
+  loadSpinner = false;
+  wrongCredentials = false;
+  wrongCredentialsCustomer = false;
   constructor(
     public userprofileService: UserprofileService,
     private appData: AppDataService,
@@ -27,6 +30,9 @@ export class CustomerloginComponent implements OnInit {
     this.router.navigate(['/customer-create']);
   }
   login(userInfo) {
+    this.loadSpinner = true;
+    this.wrongCredentials = false;
+    this.wrongCredentialsCustomer = false;
     if (!userInfo.role) {
       userInfo.role = 'model';
     }
@@ -47,6 +53,14 @@ export class CustomerloginComponent implements OnInit {
               }
             }
           );
+        }
+      },
+      (err) => {
+        this.loadSpinner = false;
+        if (userInfo.role === 'model') {
+          this.wrongCredentials = true;
+        } else {
+          this.wrongCredentialsCustomer = true;
         }
       }
     );

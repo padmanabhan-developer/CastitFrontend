@@ -23,8 +23,8 @@
           <div class="leftbox">
             <h2>{{ 'profiles.searchGender' | translate }}</h2>
             <ul class="ul-style1">
-              <li><a [ngClass]="{'gender_select': searchGender === 1}" (click)="setGender(1)" > {{ 'profiles.male' | translate }}</a></li>
-              <li><a [ngClass]="{'gender_select': searchGender === 2}" (click)="setGender(2)" >{{ 'profiles.female' | translate }}</a></li>
+              <li><a [ngClass]="{'gender_select': searchGender == 1}" (click)="setGender(1)" > {{ 'profiles.male' | translate }} </a></li>
+              <li><a [ngClass]="{'gender_select': searchGender == 2}" (click)="setGender(2)" > {{ 'profiles.female' | translate }} </a></li>
             </ul>
           </div>
           <div class="leftbox2">
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="side-bottom">
-            <input (click)="submitSearch()" type="submit" class="side-submit" value="{{ 'profiles.search' | translate }}">
+            <input (click)="submitSearch('manual')" type="submit" class="side-submit" value="{{ 'profiles.search' | translate }}">
             <input (click)="resetSearch()" type="submit" class="side-submit" value="{{ 'profiles.reset' | translate }}">
           </div>
         </div>

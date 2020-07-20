@@ -267,7 +267,7 @@
                                   <div class="col3">
                                     <div class="form-row">
                                       <label class="ansog_select_label">Hårfarve</label>
-                                      <select class=" form-input1 custom-select" [(ngModel)]="adminService.userData[0].field_hair_color_export">
+                                      <select (change)="changeSelect($event)" class=" form-input1 custom-select" [(ngModel)]="adminService.userData[0].field_hair_color_export">
                                         <option disabled value="">Hårfarve</option>
                                         <option *ngFor="let hairColor of listOfHairColorNames; let i = index" [selected]="listOfHairColorIDs[i] == adminService.userData[0].field_hair_color_export">{{ hairColor }}</option>
                                       </select>

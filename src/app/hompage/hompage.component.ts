@@ -139,7 +139,11 @@ export class HompageComponent implements OnInit {
     // this.router.navigate(['/details']);
   }
   setGender(id) {
-    this.searchGender = id;
+    if (this.searchGender === id && 0) {
+      this.searchGender = 'all';
+    } else {
+      this.searchGender = id;
+    }
   }
 
   resetSearch() {
@@ -147,7 +151,9 @@ export class HompageComponent implements OnInit {
     this.searchPN = '';
     this.ageFrom = '';
     this.ageTo = '';
+    this.searchGender = 'all';
     this.emptyResults = false;
+    this.router.navigate(['profiles']);
     this.loadTiles();
   }
 
@@ -165,7 +171,8 @@ export class HompageComponent implements OnInit {
 
   }
 
-  submitSearch() {
+  submitSearch(trigger = 'auto') {
+    this.searchPerformed = (trigger === 'manual') ? false : true;
     let searchCriteria = '?dummy=0';
     if (this.searchGender !== 'all') {
       searchCriteria += '&gender=' + this.searchGender;

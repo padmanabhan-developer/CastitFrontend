@@ -116,71 +116,71 @@
 //     this.toggleOptions();
 
 //     this.appService.getFieldAvailableOptions('field_country').subscribe(res => {
-//       const respose: any = res;
-//       this.listOfCountries = respose.settings.allowed_values;
+//       const response: any = res;
+//       this.listOfCountries = response.settings.allowed_values;
 //       this.listOfCountryIDs = Object.keys(this.listOfCountries);
 //       this.listOfCountryNames = Object.values(this.listOfCountries);
 //       localStorage.setItem('listOfCountryIDs', JSON.stringify(this.listOfCountryIDs));
 //       localStorage.setItem('listOfCountryNames', JSON.stringify(this.listOfCountryNames));
 //     }); 
 //     this.appService.getFieldAvailableOptions('field_shirt_size_from').subscribe(res => {
-//       const respose: any = res;
-//       this.listofShirtSizes = Object.keys(respose.settings.allowed_values);
+//       const response: any = res;
+//       this.listofShirtSizes = Object.keys(response.settings.allowed_values);
 //       localStorage.setItem('listofShirtSizes', JSON.stringify(this.listofShirtSizes));
 //     }); 
 //     this.appService.getFieldAvailableOptions('field_pant_size_from').subscribe(res => {
-//       const respose: any = res;
-//       this.listofPantSizes = Object.keys(respose.settings.allowed_values);
+//       const response: any = res;
+//       this.listofPantSizes = Object.keys(response.settings.allowed_values);
 //       localStorage.setItem('listofPantSizes', JSON.stringify(this.listofPantSizes));
 //     }); 
 //     this.appService.getFieldAvailableOptions('field_suit_size_from').subscribe(res => {
-//       const respose: any = res;
-//       this.listofSuitSizes = Object.keys(respose.settings.allowed_values);
+//       const response: any = res;
+//       this.listofSuitSizes = Object.keys(response.settings.allowed_values);
 //       localStorage.setItem('listofSuitSizes', JSON.stringify(this.listofSuitSizes));
 //     }); 
 //     this.appService.getFieldAvailableOptions('field_shoe_size_from').subscribe(res => {
-//       const respose: any = res;
-//       this.listofShoeSizes = Object.keys(respose.settings.allowed_values);
+//       const response: any = res;
+//       this.listofShoeSizes = Object.keys(response.settings.allowed_values);
 //       localStorage.setItem('listofShoeSizes', JSON.stringify(this.listofShoeSizes));
 //     });
 //     this.appService.getFieldAvailableOptions('field_hair_color').subscribe(res => {
-//       const respose: any = res;
-//       this.listofHairColors = Object.values(respose.settings.allowed_values);
+//       const response: any = res;
+//       this.listofHairColors = Object.values(response.settings.allowed_values);
 //       localStorage.setItem('listofHairColors', JSON.stringify(this.listofHairColors));
 //     });
 //     this.appService.getFieldAvailableOptions('field_eye_color').subscribe(res => {
-//       const respose: any = res;
+//       const response: any = res;
 //       console.log(res);
-//       this.listofEyeColors = Object.values(respose.settings.allowed_values);
+//       this.listofEyeColors = Object.values(response.settings.allowed_values);
 //       localStorage.setItem('listofEyeColors', JSON.stringify(this.listofEyeColors));
 //     });
 //     this.appService.getFieldAvailableOptions('field_skills').subscribe(res => {
-//       const respose: any = res;
-//       this.listOfSkills = respose.settings.allowed_values;
+//       const response: any = res;
+//       this.listOfSkills = response.settings.allowed_values;
 //       this.listOfSkillIDs = Object.keys(this.listOfSkills);
 //       this.listOfSkillNames = Object.values(this.listOfSkills);
 //       localStorage.setItem('listOfSkillIDs', JSON.stringify(this.listOfSkillIDs));
 //       localStorage.setItem('listOfSkillNames', JSON.stringify(this.listOfSkillNames));
 //     });
 //     this.appService.getFieldAvailableOptions('field_category').subscribe(res => {
-//       const respose: any = res;
-//       this.listOfCategories = respose.settings.allowed_values;
+//       const response: any = res;
+//       this.listOfCategories = response.settings.allowed_values;
 //       this.listOfCategoryIDs = Object.keys(this.listOfCategories);
 //       this.listOfCategoryNames = Object.values(this.listOfCategories);
 //       localStorage.setItem('listOfCategoryIDs', JSON.stringify(this.listOfCategoryIDs));
 //       localStorage.setItem('listOfCategoryNames', JSON.stringify(this.listOfCategoryNames));
 //     });
 //     this.appService.getFieldAvailableOptions('field_licenses').subscribe(res => {
-//       const respose: any = res;
-//       this.listOfLicenses = respose.settings.allowed_values;
+//       const response: any = res;
+//       this.listOfLicenses = response.settings.allowed_values;
 //       this.listOfLicenseIDs = Object.keys(this.listOfLicenses);
 //       this.listOfLicenseNames = Object.values(this.listOfLicenses);
 //       localStorage.setItem('listOfLicenseIDs', JSON.stringify(this.listOfLicenseIDs));
 //       localStorage.setItem('listOfLicenseNames', JSON.stringify(this.listOfLicenseNames));
 //     });
 //     this.appService.getFieldAvailableOptions('field_language_one').subscribe(res => {
-//       const respose: any = res;
-//       this.listOfLanguages = respose.settings.allowed_values;
+//       const response: any = res;
+//       this.listOfLanguages = response.settings.allowed_values;
 //       this.listOfLanguageIDs = Object.keys(this.listOfLanguages);
 //       this.listOfLanguageNames = Object.values(this.listOfLanguages);
 //       localStorage.setItem('listOfLanguageIDs', JSON.stringify(this.listOfLanguageIDs));

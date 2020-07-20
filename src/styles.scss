@@ -217,6 +217,21 @@ body {
   line-height: 20px;
   margin: 0 0 20px 0;
 }
+.alert {
+  display: inline-block;
+  color: #cc0000;
+  padding: 0;
+}
+.white-text {
+  color: white;
+}
+.black-text {
+  color: black;
+}
+.clickable {
+  color: inherit;
+  text-decoration: underline;
+}
 
 .workshop-section p strong {
   font-weight: 700;
@@ -417,13 +432,13 @@ app-loader {
 
 .side-input2 {
   border: none;
-  color: #A9A9A9;
+  color: #000000;
   width: 72px;
   padding: 0 10px;
   height: 30px;
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;

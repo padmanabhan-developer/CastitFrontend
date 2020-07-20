@@ -30,8 +30,8 @@ export class LoginPage1Component implements OnInit {
   ngOnInit() {
     localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
     this.appData.getFieldAvailableOptions('field_country').subscribe(res => {
-      const respose: any = res;
-      this.listOfCountries = respose.settings.allowed_values;
+      const response: any = res;
+      this.listOfCountries = response.settings.allowed_values;
       this.listOfCountryIDs = Object.keys(this.listOfCountries);
       this.listOfCountryNames = Object.values(this.listOfCountries);
     });

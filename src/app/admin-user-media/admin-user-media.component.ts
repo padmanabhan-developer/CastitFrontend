@@ -103,8 +103,8 @@ export class AdminUserMediaComponent implements OnInit, OnDestroy {
     const filetype = this.fileToUpload.type;
     const filesize = this.fileToUpload.size;
     this.appService.getCloudTempUrl(filename).subscribe( res => {
-      const respose: any = res;
-      this.appService.cloudFilesTempUrl = respose.tempUrl;
+      const response: any = res;
+      this.appService.cloudFilesTempUrl = response.tempUrl;
       this.uploadFileToActivity(filename);
     });
   }
