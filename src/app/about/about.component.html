@@ -1,22 +1,52 @@
 <castit-header></castit-header>
 
 <div class="workshop-section">
-    <div class="container-lg about-container">
-         <div class="row">
-              <div class="col-12"><h2>Om Castit</h2></div>
-              <div class="col-6">
-                     <p>Castit er et bureau som har specialiseret sig i at finde personer til medvirken på fotos og i reklamefilm. Karakterer som man husker og som har den helt rigtige personlighed og udseende. Vi finder både skuespillere, amatører og street caster. Vi har altid et bredt udvalg og kan levere karakterer til alle typer roller og behov.</p>
-                   <p>Hvis du som kunde, har travlt og ved hvad du præcis vil have, er du altid velkommen til at starte med at søge i vores store online kartotek og vælge dem ud, som du kan lide. Vi opdaterer hyppigt dette kartotek og hjælper hele vejen. Vi har også et stort offline kartotek, som vi meget gerne sender forslag fra.</p>
-                   <p>Hvis du ønsker at være en del af vores kartotek, enten som skuespiller, model eller blot en god karakter, er du altid meget velkommen til at kontakte os eller ansøge med foto her på sitet.</p>
-              </div>
-              <div class="col-6">
-                   <div class="om-castit-right">
-                     <p>Hos Castit gør vi altid vores bedste. Vores priser er altid fair og lette at forstå.</p>
-                   <p>Vi er meget fokuseret på at hjælpe dem vi caster til at yde deres absolut bedste til vores castinger. Vi er altid to personer i studiet når vi caster til større film. Dette skaber en tryghed for spillerne og det bedste resultat.</p>
-                   <p><strong>Cathrine Hovmand<br>Castit</strong></p>
-                   <p>*Castit er stiftet af Cathrine Hovmand i år 2000 i København. Bureauet har kunder over det meste af verden og har leveret medvirkende til flere tusinde reklamer. Både film og foto. Castit var det første online and offline casting bureau i Skandinavien, og er stadig blandt er de største og mest efterspurgte.</p>
-                   </div>
-              </div>
-         </div>
+  <div class="container-lg about-container">
+    <div *ngIf="appService.langcode === 'DA'" class="row">
+      <div class="col-12">
+        <h2>Om Castit</h2>
+      </div>
+      <div class="col-6">
+        <p>Castit er et bureau som har specialiseret sig i at finde personer til medvirken på fotos og i reklamefilm.
+          Karakterer som man husker og som har den helt rigtige personlighed og udseende. Vi finder både skuespillere,
+          amatører og street caster. Vi har altid et bredt udvalg og kan levere karakterer til alle typer roller og
+          behov.</p>
+        <p>Hvis du som kunde, har travlt og ved hvad du præcis vil have, er du altid velkommen til at starte med at søge
+          i vores store online kartotek og vælge dem ud, som du kan lide. Vi opdaterer hyppigt dette kartotek og hjælper
+          hele vejen. Vi har også et stort offline kartotek, som vi meget gerne sender forslag fra.</p>
+        <p>Hvis du ønsker at være en del af vores kartotek, enten som skuespiller, model eller blot en god karakter, er
+          du altid meget velkommen til at kontakte os eller ansøge med foto her på sitet.</p>
+      </div>
+      <div class="col-6">
+        <div class="om-castit-right">
+          <p>Hos Castit gør vi altid vores bedste. Vores priser er altid fair og lette at forstå.</p>
+          <p>Vi er meget fokuseret på at hjælpe dem vi caster til at yde deres absolut bedste til vores castinger. Vi er
+            altid to personer i studiet når vi caster til større film. Dette skaber en tryghed for spillerne og det
+            bedste resultat.</p>
+          <p><strong>Cathrine Hovmand<br>Castit</strong></p>
+          <p>*Castit er stiftet af Cathrine Hovmand i år 2000 i København. Bureauet har kunder over det meste af verden
+            og har leveret medvirkende til flere tusinde reklamer. Både film og foto. Castit var det første online and
+            offline casting bureau i Skandinavien, og er stadig blandt er de største og mest efterspurgte.</p>
+        </div>
+      </div>
     </div>
+    <div *ngIf="appService.langcode === 'EN'" class="row">
+      <div class="col-12">
+        <h2>About Castit</h2>
+      </div>
+      <div class="col-6">
+        <p>Castit is an agency that specializes in finding people for photo shoots and commercials. Characters that you remember and that have the exact right personality and appearance. We find both actors, amateurs and do street casting. We always have a wide selection and can deliver characters to all types of roles and needs.</p>
+        <p>If you as a customer, are busy and know what you want, you are always welcome to start searching in our large online database and select the characters that you like. We frequently update our directory and will help you all the way. We also have a large offline database, which we gladly send suggestions from, if you want to see more.</p>
+        <p>We are very focused on helping the people we cast to preform their absolute best to our castings. We are always two people in the studio when we cast for larger films. This creates a sense of security for the players and the best result.</p>
+      </div>
+      <div class="col-6">
+        <div class="om-castit-right">
+          <p>At Castit we always do our best. Our prices are always fair and easy to understand.</p>
+          <p>If you would like to be a part of our database as an actor, model or just a good character, you are more than welcome to contact us or apply with your photos here on the site.</p>
+          <p><strong>Cathrine Hovmand<br>Castit</strong></p>
+          <p>* Castit was founded by Cathrine Hovmand in 2000 in Copenhagen. The agency has customers throughout most of the world and has contributed to thousands of advertisements. Both commercials and photos shoots. Castit was the first online and offline casting agency in Scandinavia, and is still among the largest and most sought after.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  inValidEmail = false;
+  emailExists = false;
+
 
   constructor(
     public userprofileService: UserprofileService,
@@ -25,5 +28,30 @@ export class CustomerComponent implements OnInit {
         this.router.navigate(['/profiles']);
       }
     });
+  }
+
+  emailValidation(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail)) {
+      return (true);
+    }
+    return (false);
+  }
+
+  checkEmail() {
+    if (!this.emailValidation(this.userprofileService.userProfile[0].name_export)) {
+      this.inValidEmail = true;
+    } else {
+      this.inValidEmail = false;
+    }
+    if (this.userprofileService.userProfile[0].name_export && !this.userprofileService.isLoggedIn()) {
+      this.userprofileService.checkEmail(this.userprofileService.userProfile[0].name_export).subscribe(res => {
+        const response: any = res;
+        if (response.message === 'exists') {
+          this.emailExists = true;
+        } else {
+          this.emailExists = false;
+        }
+      });
+    }
   }
 }

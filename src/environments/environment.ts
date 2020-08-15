@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendBaseUrl: 'http://new.castit'
+  backendBaseUrl: 'http://docker/web'
   // backendBaseUrl: 'http://backend.castit.dk'
 };
 
