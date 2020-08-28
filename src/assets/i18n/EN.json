@@ -62,7 +62,8 @@
         "newPasswordMessage":"Please try login with new password",
         "newPasswordSuccess":"New password is updated",
         "resetPassword":"Reset your password",
-        "resetInstruction":"Enter your registered email and we will send you a link, from which, you can create a new password."
+        "resetInstruction":"Enter your registered email and we will send you a link, from which, you can create a new password.",
+        "userSaveMessage":"Your profile is saved"
     },
     "profileUpdate":{
         "applicationForm":"Application Form",
@@ -147,8 +148,11 @@
         "create":"Create",
         "addProfile":"Add Profile",
         "cancel":"Cancel",
-        "notesPlaceholder":"Add notes..."
-
+        "notesPlaceholder":"Add notes...",
+        "caption":"Lightbox",
+        "createdBy":"Created by",
+        "instructionOne":"You can delete profiles and correct text by clicking the group symbol in the right side menu. Use the arrow keys to navigatethe groups.",
+        "instructionTwo":"When you have finished editing, click on send"
     },
     "customer":{},
     "messages":{},

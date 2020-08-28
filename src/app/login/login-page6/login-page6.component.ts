@@ -11,6 +11,8 @@ import { LoginComponent } from '../login.component';
 })
 export class LoginPage6Component implements OnInit {
   @Input() showHeader = true;
+  showPopup = false;
+  showLoader = false;
   constructor(
     public userprofileService: UserprofileService,
     private appData: AppDataService,
@@ -22,6 +24,7 @@ export class LoginPage6Component implements OnInit {
   }
 
   saveUser() {
+    this.showLoader = true;
     this.userprofileService.saveProfile().subscribe((res) => {
       const response: any = res;
       if (response && response.message && response.message === 'create success' ||
@@ -29,8 +32,17 @@ export class LoginPage6Component implements OnInit {
         this.userprofileService.userProfile[0].uid_export = response.uid;
         this.userprofileService.userProfile[0].field_profile_number_export = response.profile_number;
         localStorage.setItem('currentUserProfile', JSON.stringify(this.userprofileService.userProfile));
-        this.router.navigate(['/login/7']);
+        this.showLoader = false;
+        this.showPopup = true;
+        setTimeout(() => {
+          this.showPopup = false;
+          this.router.navigate(['/login/7']);
+        }, 4000);
       }
+    },
+    (err) => {
+      console.error(err);
+      this.showLoader = false;
     });
     /*
     if ( this.userprofileService.isLoggedIn() ) {

@@ -8,12 +8,17 @@
         <p class="popup-title"></p>
         <p class="popup-message"> {{ 'login.resetMessage' | translate }} </p>
     </div>
-    
+
+    <div *ngIf="popupType === 'userSave'">
+      <p class="popup-title"></p>
+      <p class="popup-message"> {{ 'login.userSaveMessage' | translate }} </p>
+  </div>
+
     <div *ngIf="popupType === 'newPassword'">
         <p class="popup-title"> {{'login.newPasswordSuccess' | translate }} </p>
         <p class="popup-message"> {{ 'login.newPasswordMessage' | translate }} </p>
     </div>
-    
+
 </div>
 <a href="javascript:void(0)" class="close-icon" (click)="closeToRedirect()"></a>
 </div>

@@ -1134,11 +1134,21 @@ app-loader {
   text-decoration: none !important;
   border: none;
   text-align: center;
-}
 
-.delete-btn:hover {
-  background: #F3F3F3;
-  color: #25262A;
+  &:hover{
+    background: #F3F3F3;
+    color: #25262A;
+  }
+
+  &.disabled {
+    background: #25262A;
+    color: #fff;
+
+    &:hover {
+      background: #25262A;
+      color: #fff;
+    }
+  }
 }
 
 .Anullere-btn {
@@ -3809,11 +3819,11 @@ app-loader {
     margin-left: 6px;
   }
 }
-img.ng-lazyloaded { 
+img.ng-lazyloaded {
   animation: fadein .5s;
 }@keyframes fadein {
   from { opacity: 0; }
-  to { opacity: 1; } 
+  to { opacity: 1; }
 }
 .blurred {
   filter: blur(3px);

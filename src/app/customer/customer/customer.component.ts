@@ -38,6 +38,7 @@ export class CustomerComponent implements OnInit {
   }
 
   checkEmail() {
+    console.log(this.userprofileService);
     if (!this.emailValidation(this.userprofileService.userProfile[0].name_export)) {
       this.inValidEmail = true;
     } else {

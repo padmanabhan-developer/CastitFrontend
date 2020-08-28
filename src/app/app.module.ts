@@ -51,6 +51,7 @@ import { MediaModalComponent } from './media-modal/media-modal.component';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { HomecarouselComponent } from './homecarousel/homecarousel.component';
 import { PopupComponent } from './popup/popup.component';
+import { ResetpasswordInfoComponent } from './resetpassword-info/resetpassword-info.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -117,7 +118,8 @@ import { PopupComponent } from './popup/popup.component';
     AdminUserMediaComponent,
     MediaModalComponent,
     HomecarouselComponent,
-    PopupComponent
+    PopupComponent,
+    ResetpasswordInfoComponent
   ],
   bootstrap: [
     AppComponent

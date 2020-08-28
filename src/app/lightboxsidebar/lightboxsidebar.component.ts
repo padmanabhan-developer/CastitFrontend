@@ -16,7 +16,9 @@ export class LightboxsidebarComponent implements OnInit {
   profileThumbView = [];
   lightboxToBeShared: any;
   profileFallback = '/assets/images/profile/profileFallback.jpg';
+  loadSpinner = false;
   @Input() lightboxID: any;
+  @Input() groupName: any;
   constructor(
     public userprofileService: UserprofileService,
     public appData: AppDataService,
@@ -26,9 +28,13 @@ export class LightboxsidebarComponent implements OnInit {
   ngOnInit() {
   }
   shareLightboxInitiate(group) {
+    // console.log(group);
     this.closeSidebar();
     this.userprofileService.showSendLightboxForm = true;
     this.lightboxToBeShared = group;
+  }
+  closeLightboxInitiate() {
+    this.userprofileService.showSendLightboxForm = false;
   }
   updateMemberNotes(member, group) {
     this.userprofileService.addToLightbox([group.id], member, member.field_groupnotes)
@@ -48,11 +54,12 @@ export class LightboxsidebarComponent implements OnInit {
     }
   }
   shareLightbox(userprofileService) {
+    this.loadSpinner = true;
     const group = this.lightboxToBeShared;
-    this.userprofileService.showSendLightboxForm = false;
-    const groupInfo = {profiles: '', groupName: '', emailInfo: {}};
+    const groupInfo = {profiles: '', groupName: '', emailInfo: {}, groupID: ''};
     groupInfo.profiles = this.lightboxProfilesMap[group.name];
     groupInfo.groupName = group.name;
+    groupInfo.groupID = group.id;
     groupInfo.emailInfo = {
       to: this.userprofileService.shareLightboxTO,
       cc: this.userprofileService.shareLightboxCC,
@@ -60,8 +67,11 @@ export class LightboxsidebarComponent implements OnInit {
       selfName: this.userprofileService.shareLightboxSelfName,
       selfEmail: this.userprofileService.shareLightboxSelfEmail,
     };
+    console.log(groupInfo);
     this.userprofileService.shareLightboxEmail(groupInfo).subscribe(res => {
       console.log(res);
+      this.loadSpinner = false;
+      this.userprofileService.showSendLightboxForm = false;
     });
   }
   toggleProfileViewLightbox(i) {
@@ -119,6 +129,7 @@ export class LightboxsidebarComponent implements OnInit {
     this.userprofileService.loadGroupsOfCustomer().subscribe(res => {
       const response = res;
       this.lightboxesOfCurrentUser = response;
+      // console.log(this.lightboxesOfCurrentUser);
       this.userprofileService.lightboxesOfCurrentUser = this.lightboxesOfCurrentUser;
       for (let index = 0; index < this.userprofileService.lightboxesOfCurrentUser.length; index++) {
         this.loadProfilesOfLightbox(this.userprofileService.lightboxesOfCurrentUser[index]);
@@ -126,12 +137,15 @@ export class LightboxsidebarComponent implements OnInit {
     });
   }
   loadProfilesOfLightbox(item) {
+    if (!this.lightboxesOfCurrentUser && this.lightboxID && this.groupName) {
+      this.lightboxesOfCurrentUser = [{name: this.groupName, id: this.lightboxID}];
+    }
     this.userprofileService.loadProfilesOfLightbox(item.id).subscribe(res => {
       // const name = item.name.toLowerCase().replace(' ', '');
-      const name = item.name;
+      const name = (item.name) ? item.name.toString() : this.groupName;
       this.lightboxProfilesMap[name] = [];
       this.lightboxProfilesMap[name].push(res);
-      console.log(this.lightboxProfilesMap);
+      // console.log(this.lightboxProfilesMap);
     });
   }
 }

@@ -59,26 +59,25 @@
 <div class="popup1 send-lightbox" *ngIf="userprofileService.showSendLightboxForm">
     <div class="popup-header">
           <div class="container-lg">
-                <div class="popup-logo"><a href="#"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                <a href="#" class="close-icon"></a>
+                <div class="popup-logo"><a href="javascript:void(0)"><img src="assets/images/logo-white.svg" alt=""></a></div>
+                <a href="javascript:void(0)" (click)="closeLightboxInitiate()" class="close-icon"></a>
            </div>
       </div>
-      
+
       <div class="popup-small popup-small2">
           <h2>Send Lightbox</h2>
           <form #fc="ngForm" (ngSubmit)="shareLightbox(userprofileService)">
            <div class="send-lightbox-form">
-                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxTO" type="email" class="input2" placeholder="Til email" name="toEmail" required email></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxTO" type="email" class="input2" [ngClass]="{'required-field': !userprofileService.shareLightboxTO}" placeholder="Til email" name="toEmail" required email></div>
                 <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxCC" type="email" class="input2" placeholder="CC email" name="ccEmail" email></div>
-                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfName" type="text" class="input2" placeholder="Dit navn" name="selfName" required></div>
-                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfEmail" type="email" class="input2" placeholder="Din email" name="selfEmail" required email></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfName" type="text" class="input2" [ngClass]="{'required-field': !userprofileService.shareLightboxSelfName}" placeholder="Dit navn" name="selfName" required></div>
+                <div class="form-row"><input [(ngModel)]="userprofileService.shareLightboxSelfEmail" type="email" class="input2" [ngClass]="{'required-field': !userprofileService.shareLightboxSelfEmail}" placeholder="Din email" name="selfEmail" required email></div>
                 <div class="form-row"><textarea [(ngModel)]="userprofileService.shareLightboxComment" class="textarea2" placeholder="Skriv note..." name="comment"></textarea></div>
            </div>
-           <input [disabled]="!fc.valid" type="submit" class="delete-btn" value="Send"> 
-           <a href="javascript:void(0)" class="Anullere-btn">Anullere</a>
+           <input [disabled]="!fc.valid" [ngClass]="{'disabled': !fc.valid}" type="submit" class="delete-btn" value="Send">
+           <a href="javascript:void(0)" class="Anullere-btn" (click)="closeLightboxInitiate()">Anullere</a>
         </form>
         </div>
   </div>
-  <!--  -->
-
+  <app-loader *ngIf="loadSpinner"></app-loader>
 <router-outlet></router-outlet>

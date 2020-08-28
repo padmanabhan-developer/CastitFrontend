@@ -1,15 +1,26 @@
+p{
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
 .profiles_loader{
     background: url('/assets/images/loader/PolygonLoader.svg');
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
 }
-.gender_select{
-    border: 2px solid gray;
-    background-color:#fff;
-    color:black !important;
-    font-weight: bold;
+.side-icon3 {
+	background: url('/assets/images/side-user.svg') no-repeat center top;
+	display: inline-block;
+	width: 22px;
+	height: 25px;
+  // padding: 0 0 10px 0;
+  margin: 10px;
+  box-sizing: content-box;
+  border: none;
+  padding: 0 0 10px 20px
 }
-.side-submit{
-    margin-bottom: 10px;
+.leftbar{
+  color: #FFF;
 }

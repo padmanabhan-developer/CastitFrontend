@@ -12,37 +12,19 @@
             <img src="/assets/images/lightbox.svg" alt=""  title="Search">
           </button> -->
         </div>
-<!--         
-        <div id="searchBox" class="leftbar">
-          <div class="leftbox">
-            <h2>{{ 'profiles.searchName' | translate }}</h2>
-            <span class="side-searchbox">
-              <input [(ngModel)]="searchFN" type="text" class="side-input ng-pristine ng-untouched ng-valid">
-              <input type="button" class="side-search">
-            </span>
-          </div>
-          <div class="leftbox">
-            <h2>{{ 'profiles.searchGender' | translate }}</h2>
-            <ul class="ul-style1">
-              <li><a [ngClass]="{'gender_select': searchGender === 1}" (click)="setGender(1)" > {{ 'profiles.male' | translate }}</a></li>
-              <li><a [ngClass]="{'gender_select': searchGender === 2}" (click)="setGender(2)" >{{ 'profiles.female' | translate }}</a></li>
-            </ul>
-          </div>
-          <div class="leftbox2">
-            <h2 class="ng-binding">{{ 'profiles.age' | translate }}</h2>
-            <div class="side-form">
-              <span class="form-span">
-                <input value="" type="text" class="side-input2" placeholder="Fra">
-              </span> <span class="form-devider"></span> <span class="form-span">
-                <input type="text" value="" class="side-input2" placeholder="Til">
-              </span>
-            </div>
-          </div>
-          <div class="side-bottom">
-            <input (click)="submitSearch()" type="submit" class="side-submit" value="{{ 'profiles.search' | translate }}">
-            <input (click)="resetSearch()" type="submit" class="side-submit" value="{{ 'profiles.reset' | translate }}">
-          </div>
-        </div> -->
+
+        <div id="searchBox" class="leftbar full-screen-xs">
+            <p>LIGHTBOX: </p>
+            <p>{{groupName}}</p>
+            <br />
+            <p>{{ 'lightbox.createdBy' | translate }}: </p>
+            <p>{{sharedBy}}</p>
+            <br />
+            <p>{{ 'lightbox.instructionOne' | translate }}</p>
+            <span class="side-icon3" id="tab_group1"></span>
+            <br />
+            <p>{{ 'lightbox.instructionTwo' | translate }}</p>
+        </div>
         <!--leftbar-->
 
         <div class="rightbar">
@@ -61,7 +43,7 @@
 
                 <li *ngFor="let item of data">
                   <div class="galler-thumb">
-                    <img (click)="loadProfile(item.uid_export)" alt="" [lazyLoad]="item.field_photo_thumbnails_export[0].url || item.field_photos_export[0].url" [defaultImage]="defaultImage" [errorImage]="profileFallback" />
+                    <img (click)="loadProfile(item.uid)" alt="" [lazyLoad]="(item.field_photo_thumbnails_export[0]) ? item.field_photo_thumbnails_export[0].url : item.field_photos_export[0].url" [defaultImage]="defaultImage" [errorImage]="profileFallback" />
                     <!-- <a href="javascript:void(0)" class="plus-icon" (click)="addModelToLightbox(item)"></a> -->
                     <div class="gallery-hover">
                       <p>{{ item.field_first_name_export }} {{ item.field_profile_number_export }}<br><strong>{{ appService.getAge(item.field_birthday_export) }} {{ 'profiles.years' | translate }}</strong></p>
@@ -85,6 +67,6 @@
   </div>
 </div>
 
-<app-lightboxsidebar [lightboxID]="lbid" ></app-lightboxsidebar>
+<app-lightboxsidebar [lightboxID]="lbid" [groupName]="groupName"></app-lightboxsidebar>
 <app-addtolightbox *ngIf="userprofileService.showAddToLightboxComponent"></app-addtolightbox>
 <router-outlet></router-outlet>

@@ -62,7 +62,8 @@
         "newPasswordMessage":"Prøv at logge ind med nyt kodeord",
         "newPasswordSuccess":"Ny adgangskode opdateres",
         "resetPassword":"Nulstil dit kodeord",
-        "resetInstruction":"Indtast din registrerede mail, så fremsender vi et link, hvorfra du kan oprette et nyt kodeord."
+        "resetInstruction":"Indtast din registrerede mail, så fremsender vi et link, hvorfra du kan oprette et nyt kodeord.",
+        "userSaveMessage":"Din profil er gemt"
     },
     "profileUpdate":{
         "applicationForm":"Ansøgningsskema",
@@ -147,11 +148,17 @@
         "create":"Opret",
         "addProfile":"Tilføj profil",
         "cancel":"Anullere",
-        "notesPlaceholder":"Skriv notes..."
-
+        "notesPlaceholder":"Skriv notes...",
+        "caption":"Lightbox",
+        "createdBy":"Oprettet af",
+        "instructionOne":"Du kan slette profiler og rette i tekst ved at klikke på gruppe symbolet til højre. Brug piletasterne til at navigerer i grupperne.",
+        "instructionTwo":"Når du er færdig med at redigere, klik send"
     },
     "customer":{},
     "messages":{},
-    "password":{},
+    "resetPassword":{
+      "infoTitle":"",
+      "infoText":""
+    },
     "popup":{}
 }

@@ -15,12 +15,19 @@ export class PopupComponent implements OnInit {
 
   ngOnInit() {
     switch (this.popupType) {
+      case 'mediaUpdated':
       case 'reset':
+      case 'lightboxSent':
         this.redirectRoute = '/profiles';
         break;
       case 'newPassword':
         this.redirectRoute = '/login';
         break;
+      case 'profileUpdated':
+      case 'userSave':
+        this.redirectRoute = '/login/7';
+        break;
+
       default:
         break;
     }

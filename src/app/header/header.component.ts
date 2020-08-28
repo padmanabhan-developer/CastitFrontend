@@ -26,9 +26,9 @@ export class HeaderComponent implements OnInit {
       this.userprofileService.userProfile[0].roles_target_id &&
       this.userprofileService.userProfile[0].roles_target_id.toLowerCase() === 'customer') {
         this.myProfileLink = '/customer-profile';
-        console.log('here');
+        // console.log('here');
       }
-    console.log(this.myProfileLink);
+    // console.log(this.myProfileLink);
   }
 
   logout(){

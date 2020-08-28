@@ -70,12 +70,12 @@ export class HompageComponent implements OnInit {
   loadTiles() {
     this.appService.getCProfiles().subscribe(res => {
       this.data = res;
-      this.data = this.shuffle(this.data);
+      // this.data = this.shuffle(this.data);
       this.appService.loadedProfileData = this.data;
 
       this.appService.getYProfiles().subscribe(resp => {
         let yData = resp;
-        yData = this.shuffle(yData);
+        // yData = this.shuffle(yData);
         this.appService.loadedProfileData = this.appService.loadedProfileData.concat(yData);
         this.data = this.appService.loadedProfileData;
 
@@ -111,9 +111,9 @@ export class HompageComponent implements OnInit {
       this.userprofileService.userProfile[0].roles_target_id &&
       this.userprofileService.userProfile[0].roles_target_id.toLowerCase() === 'customer') {
         this.myProfileLink = '/customer-profile';
-        console.log('here');
+        // console.log('here');
       }
-    console.log(this.myProfileLink);
+    // console.log(this.myProfileLink);
   }
 
   shuffle(arra1) {

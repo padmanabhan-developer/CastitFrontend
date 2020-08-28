@@ -26,7 +26,7 @@ export class ResetpasswordComponent implements OnInit {
     this.userprofileService.resetPassword(user).subscribe(res => {
       this.isLoading = false;
       this.showPopup = true;
-      // this.router.navigate(['/profiles']);
+      this.router.navigate(['/reset-password-info']);
     });
   }
 }
