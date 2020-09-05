@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class CustomerComponent implements OnInit {
   inValidEmail = false;
   emailExists = false;
-
+  loadSpinner = false;
 
   constructor(
     public userprofileService: UserprofileService,
@@ -22,12 +22,21 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
   }
   saveUser(role) {
-    this.userprofileService.saveProfile(role).subscribe((res) => {
-      const response: any = res;
-      if (response && response.message && response.message === 'create success') {
-        this.router.navigate(['/profiles']);
-      }
-    });
+    this.loadSpinner = true;
+    // this.checkEmail();
+    if (!this.emailExists) {
+      this.userprofileService.saveProfile(role).subscribe((res) => {
+        const response: any = res;
+        if (response && response.message && response.message === 'create success') {
+          this.loadSpinner = false;
+          this.router.navigate(['/profiles']);
+        }
+      }, (err)=> {
+        this.loadSpinner = false;
+      });
+    } else {
+      this.loadSpinner = false;
+    }
   }
 
   emailValidation(mail) {

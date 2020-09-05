@@ -8,7 +8,7 @@
     </div>
     <!--popup-header-->
 
-    <div [ngClass]="{'blurred': initiateDeleteLightbox || initiateAddLightbox}" class="popup-content">
+    <div [ngClass]="{'blurred-dummy': initiateDeleteLightbox || initiateAddLightbox}" class="popup-content">
         <div class="container-lg">
             <div class="cnt">
                 <div class="cnt-block1">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-row button-row">
                             <input type="submit" class="submit1" (click)="saveUser('customer')" value="Opdater">
-                            <a href="javascript:void(0)" (click)="userprofileService.logout()" class="back-btn">Log
+                            <a href="javascript:void(0)" (click)="userprofileService.logout()" routerLink="/profiles" class="back-btn">Log
                                 ud</a>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
 
                 <div class="cnt-block2">
                     <h3>Mine Lightbox</h3>
-                    <p class="padding-none">Herunder kan du administrere dine <br>gemte Lighbox.</p>
+                    <p class="padding-none">{{ 'customer.mineLightboxInfo' | translate }}</p>
                     <div class="form-block">
                         <div class="cate-buttons">
                             <ul>
@@ -76,6 +76,10 @@
         <a href="javascript:void(0)" (click)="addLightbox()" class="delete-btn">Opret</a>
         <a href="javascript:void(0)" (click)="addLightboxCancel()" class="Anullere-btn">Anullere</a>
     </div>
+    <!-- overlay -->
+    <div *ngIf="initiateDeleteLightbox || initiateAddLightbox" class="blur-overlay"></div>
 </div>
 <!--popup1-->
+<app-loader *ngIf="loadSpinner"></app-loader>
+<app-popup *ngIf="showPopup" [popupType]="'customerSave'"></app-popup>
 <router-outlet></router-outlet>

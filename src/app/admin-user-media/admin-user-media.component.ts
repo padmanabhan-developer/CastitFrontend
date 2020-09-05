@@ -41,7 +41,7 @@ export class AdminUserMediaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (!this.adminService.userData[0].uid_export) {
-      
+
     } else {
       this.loadMediaData();
     }
@@ -73,8 +73,8 @@ export class AdminUserMediaComponent implements OnInit, OnDestroy {
     }
   }
 
-  openModal() {
-    alert('Code refactoring in progress');
+  openModal(url) {
+    window.open(url, '_blank');
   }
   currentSlide(gid) {
     alert('Code refactoring in progress');

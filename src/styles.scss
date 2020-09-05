@@ -183,7 +183,9 @@ body {
   display: inline-block;
   vertical-align: top;
 }
-
+.home-section, .page-header{
+  width: calc(100% - 4.5vw);
+}
 .workshop-section {
   float: left;
   width: 100%;
@@ -1354,7 +1356,9 @@ app-loader {
   letter-spacing: 0.5px;
   margin-bottom: 18px;
 }
-
+.ethnic-margin-top{
+  margin-top: 15px;
+}
 .step-block2 {
   float: right;
   width: 320px;
@@ -2892,6 +2896,7 @@ app-loader {
     min-height: 60vh;
     height: 66vh;
     position: relative;
+    margin-top: 30px;
   }
 
   .page-header {

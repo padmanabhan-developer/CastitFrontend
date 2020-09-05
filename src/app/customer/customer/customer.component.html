@@ -24,12 +24,12 @@
                         <div class="form-row"><input name="telephone"
                                 [(ngModel)]="userprofileService.userProfile[0].field_telephone_export[0]" type="text"
                                 class="input1" placeholder="Telefon"></div>
-                        <div class="form-row"><input name="pass" type="password" class="input1"
+                        <div class="form-row"><input name="pass" [(ngModel)]="userprofileService.userProfile[0].password" type="password" class="input1"
                                 placeholder="Vælg kodeord"></div>
                         <div class="form-row"><input name="cpass" type="password" class="input1"
                                 placeholder="Gentag kodeord"></div>
                         <div class="form-row"><input name="submitbutton" type="button" (click)="checkEmail();saveUser('customer')"
-                                disabled="inValidEmail || emailExists" class="submit1 m-top-24 cursor-pointer" value="Gem profil">
+                                [disabled]="inValidEmail || emailExists" class="submit1 m-top-24 cursor-pointer" value="Gem profil">
                         </div>
                     </div>
                 </div>
@@ -41,4 +41,5 @@
 
 </div>
 <!--popup1-->
+<app-loader *ngIf="loadSpinner"></app-loader>
 <router-outlet></router-outlet>

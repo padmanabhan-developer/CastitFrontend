@@ -1,5 +1,5 @@
 import { UserprofileService } from 'src/app/services/userprofile.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppDataService } from '../services/app-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./userinfo.component.scss']
 })
 export class UserinfoComponent implements OnInit {
+  @Input() profileId = '';
   profileData: any;
   userId: any;
   defaultImage: string;
@@ -31,6 +32,9 @@ export class UserinfoComponent implements OnInit {
     this.defaultImage = this.appService.defaultImage;
     this.profileFallback = this.appService.profileFallback;
     this.userId = this.route.snapshot.paramMap.get('id');
+    if (!this.userId) {
+      this.userId = this.profileId;
+    }
     this.appService.getSingleProfile(this.userId).subscribe((res) => {
       this.profileData = res[0];
       for (const item of this.profileData.field_category_export) {
@@ -39,7 +43,10 @@ export class UserinfoComponent implements OnInit {
       this.assignedCategories = this.assignedCategories.substr(0, this.assignedCategories.length - 2);
 
       for (const item of this.profileData.field_skills_export) {
-        this.assignedSkills += JSON.parse(localStorage.getItem(this.appService.langcode + '-' + 'field_skills'))[item] + ', ';
+        const skillItem = JSON.parse(localStorage.getItem(this.appService.langcode + '-' + 'field_skills'))[item];
+        if (skillItem) {
+          this.assignedSkills += skillItem + ', ';
+        }
       }
       this.assignedSkills = this.assignedSkills.substr(0, this.assignedSkills.length - 2);
 
@@ -71,12 +78,14 @@ export class UserinfoComponent implements OnInit {
     return languages[id];
   }
   closeDetails() {
+    this.appService.showProfile = false;
+    this.appService.profileId = '';
     if (this.appService.profileOpened && false) {
       this.appService.profileOpened = false;
       this.appService.sidebarOpened = true;
     } else {
-      // this.router.navigate(['/profiles']);
-      this.location.back();
+      this.router.navigate(['/profiles']);
+      // this.location.back();
     }
   }
   loadAsset(index, assetType) {

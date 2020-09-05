@@ -63,7 +63,12 @@
         "newPasswordSuccess":"New password is updated",
         "resetPassword":"Reset your password",
         "resetInstruction":"Enter your registered email and we will send you a link, from which, you can create a new password.",
-        "userSaveMessage":"Your profile is saved"
+        "userSaveMessage":"Your profile is saved",
+        "resetPasswordSuccessCaption": "Your password has been saved",
+        "resetPasswordSuccess1": "Thank you, we have now updated your password.",
+        "resetPasswordSuccess2": "Click Login to go to the Login page.",
+        "resetPasswordWrongEmail":"There is no data for this email in our database. Please check the email provided.",
+        "mediaUpdated": "Your profile has been updated"
     },
     "profileUpdate":{
         "applicationForm":"Application Form",
@@ -116,7 +121,8 @@
         "category":"Category",
         "skill":"Experience",
         "license":"Drivers license",
-        "language":"Language",
+        "language":"LANGUAGE",
+        "languageCapitalCase":"Language",
         "mothertongue":"Mother tongue",
         "rating":"Choose level",
         "dialects":"Dialects",
@@ -154,7 +160,9 @@
         "instructionOne":"You can delete profiles and correct text by clicking the group symbol in the right side menu. Use the arrow keys to navigatethe groups.",
         "instructionTwo":"When you have finished editing, click on send"
     },
-    "customer":{},
+    "customer":{
+      "mineLightboxInfo":"Here you can manage your saved Lightbox"
+    },
     "messages":{},
     "password":{},
     "popup":{}

@@ -9,7 +9,8 @@
 	top: 20vh;
 	left: 50vw;
 	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 3;
 }
 
 .new-lightbox {
@@ -17,4 +18,13 @@
     border-radius: 10px;
     height: 30px;
     padding: 10px;
+}
+
+.blur-overlay{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #222222;
+  opacity: 0.95;
+  z-index: 2;
 }

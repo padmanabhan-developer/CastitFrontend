@@ -1,13 +1,13 @@
-    
+
     <div class="wrapper-black">
-    
+
         <div class="popup-header">
               <div class="container-lg">
                   <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
                   <a href="javascript:void(0)" class="close-icon" routerLink="/profiles"></a>
              </div>
         </div><!--popup-header-->
-        
+
         <div class="popup-content">
              <div class="container-lg">
                   <div class="cnt">
@@ -16,9 +16,9 @@
                             <p>For at færdiggøre din ansøgning bedes du uploaded minimum tre billeder og klikke på Ansøg.</p>
                             <p>Billederne skal være af filtyperne <br>.jpg, .jpeg eller .png.</p>
                        </div>
-                       
+
                        <div class="step-right">
-                            
+
                             <div class="step-block7">
                                  <h4>UPLOAD</h4>
                                  <div class="upload-block">
@@ -26,10 +26,10 @@
                                    <h5>Placer billeder <br>og videoer her</h5>
                                        <h6>Upload min. tre fotos af dig selv<br> Videomateriale er valgfrit</h6>
                                  </div>
-                                 
+
                                  <input type="button" (click)="saveMedia()" class="submit1 pull-right" value="Gem profil">
                             </div>
-                            
+
                             <div class="step-block8">
                               <div style="float: left; width: 100%;">
                                    <h4>FOTO</h4>
@@ -41,7 +41,7 @@
                                         </li>
                                    </ul>
                               </div>
-                              
+
                               <div style="float: left; width: 100%;">
                                    <h4>VIDEO</h4>
                                    <ul>
@@ -50,12 +50,12 @@
                                    </ul>
                               </div>
                          </div>
-                            
-                            
+
+
                        </div>
-                       
+
                   </div>
-                  
+
                   <div class="step-bottom">
                        <div class="bottom-left">
                             <h2><span>07</span>/07</h2>
@@ -63,9 +63,10 @@
                   </div>
              </div>
         </div><!--popup-content-->
-        
+
    </div><!--popup1-->
 <!-- <ngx-spinner *ngIf="true" bdOpacity = 0.9bdColor = "#333"size = "medium"color = "#fff"type = "line-scale"[fullScreen] = "true">
 <p style="color: white" > Processing... </p>
 </ngx-spinner> -->
 <app-loader *ngIf="loadSpinner"></app-loader>
+<app-popup *ngIf="showPopup" [popupType]="'mediaUpdated'"></app-popup>

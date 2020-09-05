@@ -26,6 +26,9 @@ export class LightboxsidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.appData.sidebarOpened) {
+      this.loadLightboxes();
+    }
   }
   shareLightboxInitiate(group) {
     // console.log(group);

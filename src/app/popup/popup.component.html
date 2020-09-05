@@ -9,14 +9,19 @@
         <p class="popup-message"> {{ 'login.resetMessage' | translate }} </p>
     </div>
 
-    <div *ngIf="popupType === 'userSave'">
+    <div *ngIf="popupType === 'userSave' || popupType === 'customerSave'">
       <p class="popup-title"></p>
       <p class="popup-message"> {{ 'login.userSaveMessage' | translate }} </p>
-  </div>
+    </div>
 
     <div *ngIf="popupType === 'newPassword'">
         <p class="popup-title"> {{'login.newPasswordSuccess' | translate }} </p>
         <p class="popup-message"> {{ 'login.newPasswordMessage' | translate }} </p>
+    </div>
+
+    <div *ngIf="popupType === 'mediaUpdated'">
+        <!-- <p class="popup-title"> {{'login.newPasswordSuccess' | translate }} </p> -->
+        <p class="popup-message"> {{ 'login.mediaUpdated' | translate }} </p>
     </div>
 
 </div>

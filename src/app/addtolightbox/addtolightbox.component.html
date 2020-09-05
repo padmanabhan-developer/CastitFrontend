@@ -13,7 +13,7 @@
 
     <div class="popup-big">
         <div class="popup-big-left">
-            <img src="{{ appService.addToLightboxImage ? appService.addToLightboxImage : 'assets/images/profile_image.png'  }}" 
+            <img src="{{ appService.addToLightboxImage ? appService.addToLightboxImage : 'assets/images/profile_image.png'  }}"
             [lazyLoad]="appService.addToLightboxImage ? appService.addToLightboxImage : 'assets/images/profile_image.png'" [defaultImage]="appService.defaultImage" [errorImage]="appService.profileFallback"
             alt="">
         </div>
@@ -29,7 +29,7 @@
             <div class="form-row">
                 <input type="submit" (click)="addLightbox()" class="delete-btn" value="{{ 'lightbox.create' | translate }}">
             </div>
-            <h2>{{ 'lightbox.chooseExistingLightbox' | translate }}</h2>
+            <h4>{{ 'lightbox.chooseExistingLightbox' | translate }}</h4>
             <div class="select-btns">
                 <span *ngFor="let item of userprofileService.lightboxesOfCurrentUser"
                     [ngClass]="{'selected-button': selectedLightboxes.includes(item.id)}"

@@ -34,10 +34,10 @@ export class LoginPage2Component implements OnInit {
 
   prepareBirthday() {
     const birthday = this.userprofileService.userProfile[0].field_birthday_export;
-    const date = (birthday) ? new Date(birthday) : new Date();
-    this.day = date.getDate();
-    this.month = date.getMonth();
-    this.year = date.getFullYear();
+    const date = (birthday) ? new Date(birthday) : '';
+    this.day = date ? date.getDate() : '';
+    this.month = date ? date.getMonth() : '';
+    this.year = date ? date.getFullYear() : '';
   }
 
   years() {

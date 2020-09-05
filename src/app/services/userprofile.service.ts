@@ -104,7 +104,7 @@ export class UserprofileService {
   }];
   userProfile = localStorage.getItem('currentUserProfile') ? JSON.parse(localStorage.getItem('currentUserProfile')) : this.userProfileEmpty;
   newLightboxName: any;
-  lightboxesOfCurrentUser = [];
+  lightboxesOfCurrentUser: any;
   modelToBeAddedToLightbox: any;
   urlLang = (this.appService.langcode === 'DA') ? '/da' : '/en';
   constructor(

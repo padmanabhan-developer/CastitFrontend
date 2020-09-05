@@ -23,6 +23,8 @@ export class AppDataService {
   loginUrl = '/user/login?_format=json';
   registerUrl = '/user/register?_format=json';
   profileData = {};
+  showProfile = false;
+  profileId = '';
   loadedProfileData = [];
   cloudFilesTempUrl: any;
   profileOpened = false;
@@ -30,6 +32,7 @@ export class AppDataService {
   apiUserDA = 'Basic YXBpdXNlcjphcGkuY2FzdGl0LmRrQG1haWxpbmF0b3IuY29t';
   apiUserEN = 'Basic ZW4uYXBpdXNlcjphcGkuY2FzdGl0LmRrQG1haWxpbmF0b3IuY29t';
   addToLightboxImage = '';
+  lightboxesOfCurrentUser: any;
   translatableFields = [
     'field_category',
     'field_country',

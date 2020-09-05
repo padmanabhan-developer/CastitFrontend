@@ -15,6 +15,7 @@ export class LoginPage7Component implements OnInit {
   timeinstant: number;
   loaderImage = '/assets/images/loader/PolygonLoader.svg';
   loadSpinner = false;
+  showPopup = false;
   constructor(
     private appService: AppDataService,
     public userprofileService: UserprofileService,
@@ -61,11 +62,15 @@ export class LoginPage7Component implements OnInit {
   }
 
   saveMedia() {
+    this.loadSpinner = true;
     this.userprofileService.saveProfile().subscribe((res) => {
       const response: any = res;
       if (response && response.message && response.message === 'update success') {
-        this.router.navigate(['/profiles']);
+        this.loadSpinner = false;
+        this.showPopup = true;
       }
+    }, (err)=>{
+      this.loadSpinner = false;
     });
   }
 

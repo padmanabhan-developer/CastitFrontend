@@ -22,10 +22,10 @@
         "searchGender":"KØN",
         "male":"Mand",
         "female":"Kvinde",
-        "age":"ALDER",
+        "age":"Alder",
         "from":"Fra",
         "to":"til",
-        "search":"SØG",
+        "search":"Søg",
         "reset":"Ryd søgning og opdater",
         "years":"År",
         "noResults":"Ingen profiler fundet"
@@ -36,8 +36,8 @@
         "sporthobby":"SPORT & HOBBY",
         "skill":"ERFARING",
         "language":"SPROG",
-        "license":"Kørekort",
-        "age":"ALDER",
+        "license":"KØREKORT",
+        "age":"Alder",
         "height":"Højde",
         "weight":"Vægt",
         "eyecolor":"Øjenfarve",
@@ -63,7 +63,12 @@
         "newPasswordSuccess":"Ny adgangskode opdateres",
         "resetPassword":"Nulstil dit kodeord",
         "resetInstruction":"Indtast din registrerede mail, så fremsender vi et link, hvorfra du kan oprette et nyt kodeord.",
-        "userSaveMessage":"Din profil er gemt"
+        "userSaveMessage":"Din profil er gemt",
+        "resetPasswordSuccessCaption":"Dit kodeord er gemt",
+        "resetPasswordSuccess1":"Tak, vi har nu opdateret dit kodeord.",
+        "resetPasswordSuccess2":"Klik Login for at gå til Login siden.",
+        "resetPasswordWrongEmail":"Der er ingen data for denne e-mail i vores database. Indtast venligst en gyldig e-mail.",
+        "mediaUpdated":"Din profil er opdateret"
     },
     "profileUpdate":{
         "applicationForm":"Ansøgningsskema",
@@ -115,8 +120,9 @@
         "select":"Vælg én eller flere",
         "category":"KATEGORI",
         "skill":"ERFARING",
-        "license":"Kørekort",
+        "license":"KØREKORT",
         "language":"SPROG",
+        "languageCapitalCase":"Sprog",
         "mothertongue":"Modersmål",
         "rating":"DIT NIVEAU",
         "dialects":"DIALEKTER",
@@ -154,7 +160,9 @@
         "instructionOne":"Du kan slette profiler og rette i tekst ved at klikke på gruppe symbolet til højre. Brug piletasterne til at navigerer i grupperne.",
         "instructionTwo":"Når du er færdig med at redigere, klik send"
     },
-    "customer":{},
+    "customer":{
+      "mineLightboxInfo":"Herunder kan du administrere dine gemte Lightbox"
+    },
     "messages":{},
     "resetPassword":{
       "infoTitle":"",

@@ -1,156 +1,203 @@
 <div id="wrapper" class="admin-userinfo">
-<!-- {{ adminService.userData | json }} Padmanabhann -->
-  <div id="content"> 
-       <div class="page-top page-top2">
-               <div class="container">
-                 <h2>{{ adminService.userData[0].field_first_name_export }} . {{ adminService.userData[0].field_profile_number_export }}</h2>
-                 <div class="upload-sec"> 
-                       <div class="box1">
-                             <div class="check-area">
-                                <label class="chek-box">Ny profil
-                                       <!-- <input type="checkbox" [(ngModel)]="adminService.userData[0].field_new_from_export"> -->
-                                       <!-- <span class="checkmark"></span> -->
-                                       
-                                </label>
-                                <ui-switch switchColor="#fcfcfc" [(ngModel)]="adminService.userData[0].field_new_profile_export" (change)="changeProfileNewStatus($event)">Vis som ny profil</ui-switch>
-                           </div>
-                      </div>
-                      
-                      <div class="box2">
-                             <div class="row">
-                                   <div class="col3"><label>Fra:</label></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
-                           </div>
-                           
-                           <div class="row">
-                                   <div class="col3"><label>Til:</label></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
-                                <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
-                           </div>
-                      </div>
-                      
-                 
-                       <a class="upload-close" href="javascript:void(0)" (click)="adminService.closePanel()"></a>
-                 </div>
+  <!-- {{ adminService.userData | json }} Padmanabhann -->
+  <div id="content">
+    <div class="page-top page-top2">
+      <div class="container">
+        <h2>{{ adminService.userData[0].field_first_name_export }} .
+          {{ adminService.userData[0].field_profile_number_export }}</h2>
+        <div class="upload-sec">
+          <div class="box0">
+            <div class="check-area">
+              <label class="profile-number-type-label">Profile Type: </label>
+              <select class="profile-number-type form-input1 custom-select"
+                [(ngModel)]="adminService.userData[0].field_profile_type_export" (change)="setNewProfileNumber()">
+                <option [ngValue]="'C'" [selected]="adminService.userData[0].field_profile_type_export == 'C'">C
+                </option>
+                <option [ngValue]="'Y'" [selected]="adminService.userData[0].field_profile_type_export == 'Y'">Y
+                </option>
+                <option [ngValue]="'B'" [selected]="adminService.userData[0].field_profile_type_export == 'B'">B
+                </option>
+              </select>
+              <label *ngIf="adminService.userData[0].field_profile_type_export == 'B'"
+                class="profile-number-type-label">Bureau: </label>
+              <input *ngIf="adminService.userData[0].field_profile_type_export == 'B'" class="form-input1"
+                [(ngModel)]="adminService.userData[0].field_bureau_export">
             </div>
-       </div><!--close page-top-->
-       
-       
-       <div class="page-bottom">
-               <div class="container">
-                 
-                 <div class="form-sec">
-                       <div class="form-header"><h2>Profil informationer</h2></div>
-                 </div><!--close form-sec-->
-                 
-                 <div class="form-area">
-                         <!-- <div class="black-right">
+
+            <div class="check-area">
+              <label class="profile-number-type-label">Status: </label>
+              <select class=" form-input1 custom-select"
+              [(ngModel)]="adminService.userData[0].field_profile_status_export">
+                <option *ngFor="let status of listOfStatus; let i = index"
+                      [selected]="listOfStatusID[i] == adminService.userData[0].field_profile_status_export"
+                      [(ngValue)]="listOfStatusID[i]">{{ status }}</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="box1">
+            <div class="check-area">
+              <label class="chek-box">Ny profil
+                <!-- <input type="checkbox" [(ngModel)]="adminService.userData[0].field_new_from_export"> -->
+                <!-- <span class="checkmark"></span> -->
+              </label>
+              <ui-switch switchColor="#fcfcfc" [(ngModel)]="adminService.userData[0].field_new_profile_export"
+                (change)="changeProfileNewStatus($event)">Vis som ny profil</ui-switch>
+            </div>
+          </div>
+
+          <div class="box2">
+            <div class="row">
+              <div class="col3"><label>Fra:</label></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
+            </div>
+
+            <div class="row">
+              <div class="col3"><label>Til:</label></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="DD"></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="MM"></div>
+              <div class="col3"><input type="text" class="form-input1" placeholder="YEAR"></div>
+            </div>
+          </div>
+
+
+          <a class="upload-close" href="javascript:void(0)" (click)="adminService.closePanel()"></a>
+        </div>
+      </div>
+    </div>
+    <!--close page-top-->
+
+
+    <div class="page-bottom">
+      <div class="container">
+
+        <div class="form-sec">
+          <div class="form-header">
+            <h2>Profil informationer</h2>
+          </div>
+        </div>
+        <!--close form-sec-->
+
+        <div class="form-area">
+          <!-- <div class="black-right">
                          <a href="javascript:void(0)" class="black-edit"></a>
                         </div> -->
-                      
-                       <div class="form-inner1">
-                             <div class="row">
-                                   <div class="col6">
-                                     <h3>PERSONLIG INFO</h3>
-                                     <div class="form-row">
-                                           <input type="text" [(ngModel)]="adminService.userData[0].field_first_name_export" class="form-input1" placeholder="Anders">
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <input type="text" [(ngModel)]="adminService.userData[0].field_last_name_export" class="form-input1" placeholder="Andersen">
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <input type="password" class="form-input1" [(ngModel)]="password" placeholder="Reset password">
-                                     </div>
 
-                                </div>
-                                
-                                <div class="col6">
-                                     <h3>ADRESSE</h3>
-                                     <div class="form-row">
-                                           <div class="row">
-                                                 <div class="col6"><input type="text" class="form-input1" placeholder="4220" [(ngModel)]="adminService.userData[0].field_zipcode_export"></div>
-                                               <div class="col6"><input type="text" class="form-input1" placeholder="Korsør" [(ngModel)]="adminService.userData[0].field_city_export"></div>
-                                          </div>
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <input type="text" class="form-input1" placeholder="Skovvejen 11" [(ngModel)]="adminService.userData[0].field_address_export">
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                          <select class=" form-input1 custom-select"
-                                          [(ngModel)]="adminService.userData[0].field_country_export">
-                                              <option>{{ 'profileUpdate.country' | translate }}</option>
-                                              <option *ngFor="let country of listOfCountryNames; let i = index" [selected]="listOfCountryIDs[i] == adminService.userData[0].field_country_export" [(ngValue)]="listOfCountryIDs[i]">{{ country }}</option>
-                                          </select>
-                                     </div>
-                                     
-                                </div>
-                           </div>
-                      </div>
-                 </div><!--close form-area-->
-                 
-                 <div class="form-area">
-                       <div class="form-inner1">
-                             <div class="row">
-                                   <div class="col6">
-                                     <h3>PERSONLIG INFO</h3>
-                                     <div class="form-row">
-                                           <input type="text" class="form-input1" placeholder="hej@hej.dk" [(ngModel)]="adminService.userData[0].name_export">
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <div class="row">
-                                                 <div class="col6"><input type="text" class="form-input1" placeholder="telephone-1" [(ngModel)]="adminService.userData[0].field_telephone_export[0]"></div>
-                                                 <div class="col6"><input type="text" class="form-input1" placeholder="telephone-2" [(ngModel)]="adminService.userData[0].field_telephone_export[1]"></div>
-                                                 
-                                          </div>
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <div class="row">
-                                              <div class="col6"><input type="text" class="form-input1" placeholder="cellphone" [(ngModel)]="adminService.userData[0].field_cellphone_export"></div>
-                                              <div class="col6">
-                                              <select class="form-input1 custom-select"
-                                              [(ngModel)]="adminService.userData[0].field_gender_export">
-                                              <option disabled value="">{{ 'profileUpdate.gender' | translate }}</option>
-                                              <option value="1"
-                                                   [selected]="adminService.userData[0].field_gender_export == '1'">
-                                                   {{ 'profileUpdate.male' | translate }}</option>
-                                              <option value="2"
-                                                   [selected]="adminService.userData[0].field_gender_export == '2'">
-                                                   {{ 'profileUpdate.female' | translate }}</option>
-                                         </select>
-                                         </div>
-                                          </div>
-                                     </div>
-                                </div>
-                                
-                                <div class="col6">
-                                     <h3>FØDT</h3>
-                                     <div class="form-row">
-                                           <div class="row">
-                                              <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="day"></div>
-                                              <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="month"></div>
-                                              <div class="col4"><input type="text" class="form-input1" placeholder="1966" [(ngModel)]="year"></div>
-                                          </div>
-                                     </div>
-                                     
-                                     <div class="form-row">
-                                           <input type="text" class="form-input1" placeholder="Etninsk oprindelse"  [(ngModel)]="adminService.userData[0].field_ethnic_origin_export">
-                                     </div>
-                                     
-                                </div>
-                           </div>
-                      </div>
-                 </div><!--close form-area-->
-                 
-                 <!-- <div class="form-area">
+          <div class="form-inner1">
+            <div class="row">
+              <div class="col6">
+                <h3>PERSONLIG INFO</h3>
+                <div class="form-row">
+                  <input type="text" [(ngModel)]="adminService.userData[0].field_first_name_export" class="form-input1"
+                    placeholder="Anders">
+                </div>
+
+                <div class="form-row">
+                  <input type="text" [(ngModel)]="adminService.userData[0].field_last_name_export" class="form-input1"
+                    placeholder="Andersen">
+                </div>
+
+                <div class="form-row">
+                  <input type="password" class="form-input1" [(ngModel)]="password" placeholder="Reset password">
+                </div>
+
+              </div>
+
+              <div class="col6">
+                <h3>ADRESSE</h3>
+                <div class="form-row">
+                  <div class="row">
+                    <div class="col6"><input type="text" class="form-input1" placeholder="4220"
+                        [(ngModel)]="adminService.userData[0].field_zipcode_export"></div>
+                    <div class="col6"><input type="text" class="form-input1" placeholder="Korsør"
+                        [(ngModel)]="adminService.userData[0].field_city_export"></div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <input type="text" class="form-input1" placeholder="Skovvejen 11"
+                    [(ngModel)]="adminService.userData[0].field_address_export">
+                </div>
+
+                <div class="form-row">
+                  <select class=" form-input1 custom-select"
+                    [(ngModel)]="adminService.userData[0].field_country_export">
+                    <option>{{ 'profileUpdate.country' | translate }}</option>
+                    <option *ngFor="let country of listOfCountryNames; let i = index"
+                      [selected]="listOfCountryIDs[i] == adminService.userData[0].field_country_export"
+                      [(ngValue)]="listOfCountryIDs[i]">{{ country }}</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--close form-area-->
+
+        <div class="form-area">
+          <div class="form-inner1">
+            <div class="row">
+              <div class="col6">
+                <h3>PERSONLIG INFO</h3>
+                <div class="form-row">
+                  <input type="text" class="form-input1" placeholder="hej@hej.dk"
+                    [(ngModel)]="adminService.userData[0].name_export">
+                </div>
+
+                <div class="form-row">
+                  <div class="row">
+                    <div class="col6"><input type="text" class="form-input1" placeholder="telephone-1"
+                        [(ngModel)]="adminService.userData[0].field_telephone_export[0]"></div>
+                    <div class="col6"><input type="text" class="form-input1" placeholder="telephone-2"
+                        [(ngModel)]="adminService.userData[0].field_telephone_export[1]"></div>
+
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="row">
+                    <div class="col6"><input type="text" class="form-input1" placeholder="cellphone"
+                        [(ngModel)]="adminService.userData[0].field_cellphone_export"></div>
+                    <div class="col6">
+                      <select class="form-input1 custom-select"
+                        [(ngModel)]="adminService.userData[0].field_gender_export">
+                        <option disabled value="">{{ 'profileUpdate.gender' | translate }}</option>
+                        <option value="1" [selected]="adminService.userData[0].field_gender_export == '1'">
+                          {{ 'profileUpdate.male' | translate }}</option>
+                        <option value="2" [selected]="adminService.userData[0].field_gender_export == '2'">
+                          {{ 'profileUpdate.female' | translate }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col6">
+                <h3>FØDT</h3>
+                <div class="form-row">
+                  <div class="row">
+                    <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="day"></div>
+                    <div class="col4"><input type="text" class="form-input1" placeholder="11" [(ngModel)]="month"></div>
+                    <div class="col4"><input type="text" class="form-input1" placeholder="1966" [(ngModel)]="year">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <input type="text" class="form-input1" placeholder="Etninsk oprindelse"
+                    [(ngModel)]="adminService.userData[0].field_ethnic_origin_export">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--close form-area-->
+
+        <!-- <div class="form-area">
                        <div class="form-inner1 form-inner2">
                              <div class="row">
                                     <div class="col12">
@@ -166,7 +213,7 @@
                                                           <span class="checkmark"></span>
                                                         </label>
                                                     </div>
-                                                    
+
                                                     <div class="check-area">
                                                         <label class="chek-box">Betalt
                                                           <input type="checkbox" [checked]="(item.data[2]) ? 'checked' : ''" [(ngModel)]="item.data[2]">
@@ -175,372 +222,414 @@
                                                     </div>
                                                </div>
                                           </div>
-                                     </div> 
+                                     </div>
                                 </div>
-                                
-                                
+
+
                            </div>
                       </div>
                  </div> -->
-                 <!--close form-area Payments -->
-                 
-                 
-                 <div class="form-area">
-                       <div class="form-inner1 form-inner3" style="margin-top:30px;">
-                        <div class="step-right">
-                          
-                              <div class="child-option">
-                                <!-- <div class="custom-control custom-checkbox">
+        <!--close form-area Payments -->
+
+
+        <div class="form-area">
+          <div class="form-inner1 form-inner3" style="margin-top:30px;">
+            <div class="step-right">
+
+              <div class="child-option">
+                <!-- <div class="custom-control custom-checkbox">
                                   <input type="checkbox" class="custom-control-input" id="customCheck" [(ngModel)]="showChildrenSizes" (change)="childrenSizes()" name="">
                                   <label class="custom-control-label" for="customCheck">Vis børnestørrelser</label>
                                 </div> -->
-                              </div>
-                              <div class="step-block1 w-360">
-                                <div class="row">
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">SKJORTE STR.</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_shirt_size_from_export">
-                                        <option disabled selected value="">Skjorter fra</option>
-                                        <option *ngFor="let item of ShirtSizes" [ngValue]="item" [selected]="item == adminService.userData[0].field_shirt_size_from_export">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">--</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_shirt_size_to_export">
-                                        <option disabled value="">Skjorter til</option>
-                                        <option *ngFor="let item of ShirtSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Bukser STR.</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_pant_size_from_export">
-                                        <option disabled value="">Bukser fra</option>
-                                        <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">--</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_pant_size_to_export">
-                                        <option disabled value="">Bukser til</option>
-                                        <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Sko STR.</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_shoe_size_from_export">
-                                        <option disabled value="">Sko fra</option>
-                                        <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">--</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_shoe_size_to_export">
-                                        <option disabled value="">Sko til</option>
-                                        <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
+              </div>
+              <div class="step-block1 w-360">
+                <div class="row">
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">SKJORTE STR.</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_shirt_size_from_export">
+                        <option disabled selected value="">Skjorter fra</option>
+                        <option *ngFor="let item of ShirtSizes" [ngValue]="item"
+                          [selected]="item == adminService.userData[0].field_shirt_size_from_export">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">--</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_shirt_size_to_export">
+                        <option disabled value="">Skjorter til</option>
+                        <option *ngFor="let item of ShirtSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">Bukser STR.</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_pant_size_from_export">
+                        <option disabled value="">Bukser fra</option>
+                        <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">--</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_pant_size_to_export">
+                        <option disabled value="">Bukser til</option>
+                        <option *ngFor="let item of PantSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">Sko STR.</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_shoe_size_from_export">
+                        <option disabled value="">Sko fra</option>
+                        <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">--</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_shoe_size_to_export">
+                        <option disabled value="">Sko til</option>
+                        <option *ngFor="let item of ShoeSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
 
-                                <div class="row">
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Hårfarve</label>
-                                      <select (change)="changeSelect($event)" class=" form-input1 custom-select" [(ngModel)]="adminService.userData[0].field_hair_color_export">
-                                        <option disabled value="">Hårfarve</option>
-                                        <option *ngFor="let hairColor of listOfHairColorNames; let i = index" [selected]="listOfHairColorIDs[i] == adminService.userData[0].field_hair_color_export">{{ hairColor }}</option>
-                                      </select>
-                                    </div>
-                            </div>
-                            
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Øjenfarve</label>
-                                      <select class=" form-input1 custom-select" [(ngModel)]="adminService.userData[0].field_eye_color_export">
-                                        <option disabled value="">Øjenfarve</option>
-                                        <option *ngFor="let eyeColor of listOfEyeColorNames; let i = index" [selected]="listOfEyeColorIDs[i] == adminService.userData[0].field_eye_color_export">{{ eyeColor }}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="step-block2 w-360">
-                                  <div class="row">
-                                    <div class="col3">
-                                      <div class="form-row">
-                                        <label class="ansog_select_label">Højde</label>
-                                        <input [(ngModel)]="adminService.userData[0].field_height" type="text" class="form-input1"
-                                          placeholder="Højde">
-                                      </div>
-                                    </div>
-                            
-                                  <div class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Vægt</label>
-                                      <input [(ngModel)]="adminService.userData[0].field_weight" type="text" class="form-input1"
-                                        placeholder="Vægt"></div>
-                                  </div>
-                                </div>                  
-                              </div>
-                                <div class="row">
-                                  <div *ngIf="adminService.userData[0].field_gender_export === '1'" class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">Jakkesæt STR.</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_suit_size_from_export">
-                                        <option disabled value="">Jakkesæt fra</option>
-                                        <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div *ngIf="adminService.userData[0].field_gender_export === '1'" class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">--</label>
-                                      <select class="custom-select form-input1"
-                                        [(ngModel)]="adminService.userData[0].field_suit_size_to_export">
-                                        <option disabled value="">Jakkesæt til</option>
-                                        <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
-                                      </select>
-                                    </div>
-                            </div>
-                            <div *ngIf="adminService.userData[0].field_gender_export === '2'" class="col3">
-                                    <div class="form-row">
-                                      <label class="ansog_select_label">BH STR</label>
-                                      <input [(ngModel)]="adminService.userData[0].field_bra_size_export" type="text" class="form-input1"
-                                        placeholder="BH STR">
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
+                <div class="row">
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">Hårfarve</label>
+                      <select (change)="changeSelect($event)" class=" form-input1 custom-select"
+                        [(ngModel)]="adminService.userData[0].field_hair_color_export">
+                        <option disabled value="">Hårfarve</option>
+                        <option *ngFor="let hairColor of listOfHairColorNames; let i = index"
+                          [selected]="listOfHairColorIDs[i] == adminService.userData[0].field_hair_color_export">
+                          {{ hairColor }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">Øjenfarve</label>
+                      <select class=" form-input1 custom-select"
+                        [(ngModel)]="adminService.userData[0].field_eye_color_export">
+                        <option disabled value="">Øjenfarve</option>
+                        <option *ngFor="let eyeColor of listOfEyeColorNames; let i = index"
+                          [selected]="listOfEyeColorIDs[i] == adminService.userData[0].field_eye_color_export">
+                          {{ eyeColor }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="step-block2 w-360">
+                  <div class="row">
+                    <div class="col3">
+                      <div class="form-row">
+                        <label class="ansog_select_label">Højde</label>
+                        <input [(ngModel)]="adminService.userData[0].field_height" type="text" class="form-input1"
+                          placeholder="Højde">
                       </div>
-                 </div><!--close form-area-->
-                 
-                 
-                 <div class="form-area">
-                       <div class="form-inner5">
-                             <div class="row">
-                                   
-                                <div class="textarea-sec">
-                                             <h3>LIDT OM MIG</h3>
-                                             
-                                             <div class="form_box">
-                                                   <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2" [(ngModel)]="adminService.userData[0].field_about_me_export"></textarea>
-                                                     <a href="javascript:void(0)" class="edit2"></a>
-                                             </div>
-                                             <h3>SPORT &amp; HOBBY</h3>
-                                             <div class="form_box">
-                                                   <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2" [(ngModel)]="adminService.userData[0].field_sports_and_hobby_export" ></textarea>
-                                                     <a href="javascript:void(0)" class="edit2"></a>
-                                                  <span class="words">72</span>
-                                             </div>
-                                </div>
-                                
-                                
-                                <div class="categories-sec">
-                                             <h3><strong>KATEGORI</strong> <small>/ Vælg én eller flere</small></h3>
-                                             <div class="form_box">
-                                                  <a (click)="setValue('category', i)" *ngFor="let cid of listOfCategoryIDs; let i = index" href="javascript:void(0)" [ngClass]="{'button2': (adminService.userData[0].field_category_export.includes(cid)), 'button1' : !(adminService.userData[0].field_category_export.includes(cid))  }"> {{ listOfCategoryNames[i] }} <span class="" [ngClass]="{'close-icon': (adminService.userData[0].field_category_export.includes(cid)), 'plus-icon' : !(adminService.userData[0].field_category_export.includes(cid))  }"></span></a>
-                                                  
-                                             </div>
-                                             
-                                             <h3>ERFARING</h3>
-                                             <div class="form_box">
-                                              <a (click)="setValue('skill', i)" *ngFor="let sid of listOfSkillIDs; let i = index" href="javascript:void(0)" [ngClass]="{'button2': (adminService.userData[0].field_skills_export.includes(sid)), 'button1' : !(adminService.userData[0].field_skills_export.includes(sid))  }"> {{ listOfSkillNames[i] }} <span class="" [ngClass]="{'close-icon': (adminService.userData[0].field_skills_export.includes(sid)), 'plus-icon' : !(adminService.userData[0].field_skills_export.includes(sid))  }"></span></a>
-                                             </div>
-                                             
-                                             <h3>KØREKORT</h3>
-                                             <div class="form_box">
-                                              <a (click)="setValue('license', i)" *ngFor="let lid of listOfLicenseIDs; let i = index" href="javascript:void(0)" [ngClass]="{'button2': (adminService.userData[0].field_licenses_export.includes(lid)), 'button1' : !(adminService.userData[0].field_licenses_export.includes(lid))  }"> {{ listOfLicenseNames[i] }} <span class="" [ngClass]="{'close-icon': (adminService.userData[0].field_licenses_export.includes(lid)), 'plus-icon' : !(adminService.userData[0].field_licenses_export.includes(lid))  }"></span></a>
-                                             </div>
-                                        </div>
-                                
-                                
-                           </div>
-                      </div>
-                 </div><!--close form-area-->
-                 
-                 
-                 <div class="form-area">
-                       <div class="form-inner5">
-                             <div class="row">
-                                   
-                                <div class="form-area1">
-                                     <h3>SPROG</h3>
-                                     <div class="fields">
-                                      <div class="form-row">
-                                        <select class="custom-select form-input1" [(ngModel)]="adminService.userData[0].field_language_one_export">
-                                            <option disabled selected value="">{{ 'profileUpdate.mothertongue' | translate }}</option>
-                                            <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_one_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
-                                        </select>
-                                        <span *ngIf="emptyLanguage" class="alert">{{ 'profileUpdate.mandatoryField' | translate }}</span>
-                                 </div>
-                                 <div class="form-row">
-                                        <select class="custom-select form-input1" [(ngModel)]="adminService.userData[0].field_language_two_export">
-                                            <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
-                                            <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_two_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
-                                        </select>
-                                 </div>
-                                 <div class="form-row">
-                                          <select class="custom-select form-input1" [(ngModel)]="adminService.userData[0].field_language_three_export">
-                                            <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
-                                            <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == adminService.userData[0].kfield_language_three_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
-                                         </select>
-                                 </div>
-                                 <div class="form-row">
-                                          <select class="custom-select form-input1" [(ngModel)]="adminService.userData[0].field_language_four_export">
-                                            <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
-                                            <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_four_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
-                                         </select>
-                                 </div>
-                                     </div>
-                                </div>
-                                
-                                
-                                <div class="form-area2">
-                                     <h3>Vælg niveau</h3>
-                                     <div class="form-row">
-                                      <div class="stares">
-                                          <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_one_rating_export">
-                                               <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                  </ng-template>
-                                          </ngb-rating>
-                                          <span *ngIf="emptyRating" class="alert">{{ 'profileUpdate.mandatoryField' | translate }}</span>
-                                   </div>
-                              </div>
-                              <div class="form-row">
-                                      <div class="stares">
-                                  <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_two_rating_export">
-                                               <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                  </ng-template>
-                                          </ngb-rating>
-                                   </div>
-                              </div>
-                              <div class="form-row">
-                                      <div class="stares">
-                                  <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_three_rating_export">
-                                               <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                  </ng-template>
-                                          </ngb-rating>
-                                   </div>
-                              </div>
-                              <div class="form-row">
-                                      <div class="stares">
-                                  <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_four_rating_export">
-                                               <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                                  </ng-template>
-                                          </ngb-rating>
-                                   </div>
-                              </div>
-                                </div>
-                                
-                                
-                                <div class="form-area3">
-                                     <h3>&nbsp;</h3>
-                                     <div class="form_box4">
-                                                   Begynder
-                                                  <span class="ratings2">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                  </span>
-                                             </div>
-                                             
-                                             <div class="form_box4">
-                                                   Mellem
-                                                  <span class="ratings2">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                  </span>
-                                             </div>
-                                             
-                                             <div class="form_box4">
-                                                   Flydende
-                                                  <span class="ratings2">
-                                                          <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img class="opacity-half" src="assets/images/star.svg">
-                                                  </span>
-                                             </div>
-                                             
-                                             <div class="form_box4">
-                                                   Perfekt
-                                                  <span class="ratings2">
-                                                          <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                        <img src="assets/images/star-white.svg">
-                                                  </span>
-                                             </div>
-                                             
-                                             <h3 style="margin-top:30px;">Dealekter</h3>
-                                             <div class="form_box">
-                                                   <input [(ngModel)]="adminService.userData[0].field_dialect_one_export" name="" type="text" class="form-input1" placeholder="Skriv her">
-                                             </div>
-                                             
-                                             <div class="form_box">
-                                                   <input [(ngModel)]="adminService.userData[0].field_dialect_two_export" name="" type="text" class="form-input1" placeholder="Skriv her">
-                                             </div>
-                                             
-                                             <div class="form_box">
-                                                   <input [(ngModel)]="adminService.userData[0].field_dialect_three_export" name="" type="text" class="form-input1" placeholder="Skriv her">
-                                             </div>
-                                </div>
-                                
-                           </div>
-                      </div>
-                 </div><!--close form-area-->
-                 
-                 
-                 
-                 <div class="button-area">
-                      <a class="btn_1" href="javascript:void(0)">Afvis</a>
-                     <a class="btn_2" href="javascript:void(0)" (click)="saveUser()">Godkend</a>
-                 </div>
-                 
-                 <div class="toolbar-bottom">
-                      <div class="tool-left">
-                           <a class="back-btn" href="javascript:void(0)">Tilbage</a>
-                      </div>
-                      <div class="tool-right">
-                              <ul>
-                                <!-- <li><a href="javascript:void(0)">Castingsheet</a></li>
+                    </div>
+
+                    <div class="col3">
+                      <div class="form-row">
+                        <label class="ansog_select_label">Vægt</label>
+                        <input [(ngModel)]="adminService.userData[0].field_weight" type="text" class="form-input1"
+                          placeholder="Vægt"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div *ngIf="adminService.userData[0].field_gender_export === '1'" class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">Jakkesæt STR.</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_suit_size_from_export">
+                        <option disabled value="">Jakkesæt fra</option>
+                        <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div *ngIf="adminService.userData[0].field_gender_export === '1'" class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">--</label>
+                      <select class="custom-select form-input1"
+                        [(ngModel)]="adminService.userData[0].field_suit_size_to_export">
+                        <option disabled value="">Jakkesæt til</option>
+                        <option *ngFor="let item of listofSuitSizes" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div *ngIf="adminService.userData[0].field_gender_export === '2'" class="col3">
+                    <div class="form-row">
+                      <label class="ansog_select_label">BH STR</label>
+                      <input [(ngModel)]="adminService.userData[0].field_bra_size_export" type="text"
+                        class="form-input1" placeholder="BH STR">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--close form-area-->
+
+
+        <div class="form-area">
+          <div class="form-inner5">
+            <div class="row">
+
+              <div class="textarea-sec">
+                <h3>LIDT OM MIG</h3>
+
+                <div class="form_box">
+                  <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2"
+                    [(ngModel)]="adminService.userData[0].field_about_me_export"></textarea>
+                  <a href="javascript:void(0)" class="edit2"></a>
+                </div>
+                <h3>SPORT &amp; HOBBY</h3>
+                <div class="form_box">
+                  <textarea name="" cols="" rows="" placeholder="Skriv her..." class="textarea2"
+                    [(ngModel)]="adminService.userData[0].field_sports_and_hobby_export"></textarea>
+                  <a href="javascript:void(0)" class="edit2"></a>
+                  <span class="words">72</span>
+                </div>
+              </div>
+
+
+              <div class="categories-sec">
+                <h3><strong>KATEGORI</strong> <small>/ Vælg én eller flere</small></h3>
+                <div class="form_box">
+                  <a (click)="setValue('category', i)" *ngFor="let cid of listOfCategoryIDs; let i = index"
+                    href="javascript:void(0)"
+                    [ngClass]="{'button2': (adminService.userData[0].field_category_export.includes(cid)), 'button1' : !(adminService.userData[0].field_category_export.includes(cid))  }">
+                    {{ listOfCategoryNames[i] }} <span class=""
+                      [ngClass]="{'close-icon': (adminService.userData[0].field_category_export.includes(cid)), 'plus-icon' : !(adminService.userData[0].field_category_export.includes(cid))  }"></span></a>
+
+                </div>
+
+                <h3>ERFARING</h3>
+                <div class="form_box">
+                  <a (click)="setValue('skill', i)" *ngFor="let sid of listOfSkillIDs; let i = index"
+                    href="javascript:void(0)"
+                    [ngClass]="{'button2': (adminService.userData[0].field_skills_export.includes(sid)), 'button1' : !(adminService.userData[0].field_skills_export.includes(sid))  }">
+                    {{ listOfSkillNames[i] }} <span class=""
+                      [ngClass]="{'close-icon': (adminService.userData[0].field_skills_export.includes(sid)), 'plus-icon' : !(adminService.userData[0].field_skills_export.includes(sid))  }"></span></a>
+                </div>
+
+                <h3>KØREKORT</h3>
+                <div class="form_box">
+                  <a (click)="setValue('license', i)" *ngFor="let lid of listOfLicenseIDs; let i = index"
+                    href="javascript:void(0)"
+                    [ngClass]="{'button2': (adminService.userData[0].field_licenses_export.includes(lid)), 'button1' : !(adminService.userData[0].field_licenses_export.includes(lid))  }">
+                    {{ listOfLicenseNames[i] }} <span class=""
+                      [ngClass]="{'close-icon': (adminService.userData[0].field_licenses_export.includes(lid)), 'plus-icon' : !(adminService.userData[0].field_licenses_export.includes(lid))  }"></span></a>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <!--close form-area-->
+
+
+        <div class="form-area">
+          <div class="form-inner5">
+            <div class="row">
+
+              <div class="form-area1">
+                <h3>SPROG</h3>
+                <div class="fields">
+                  <div class="form-row">
+                    <select class="custom-select form-input1"
+                      [(ngModel)]="adminService.userData[0].field_language_one_export">
+                      <option disabled selected value="">{{ 'profileUpdate.mothertongue' | translate }}</option>
+                      <option *ngFor="let language of listOfLanguageNames; let i = index"
+                        [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_one_export"
+                        [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
+                    </select>
+                    <span *ngIf="emptyLanguage" class="alert">{{ 'profileUpdate.mandatoryField' | translate }}</span>
+                  </div>
+                  <div class="form-row">
+                    <select class="custom-select form-input1"
+                      [(ngModel)]="adminService.userData[0].field_language_two_export">
+                      <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                      <option *ngFor="let language of listOfLanguageNames; let i = index"
+                        [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_two_export"
+                        [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
+                    </select>
+                  </div>
+                  <div class="form-row">
+                    <select class="custom-select form-input1"
+                      [(ngModel)]="adminService.userData[0].field_language_three_export">
+                      <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                      <option *ngFor="let language of listOfLanguageNames; let i = index"
+                        [selected]="listOfLanguageIDs[i] == adminService.userData[0].kfield_language_three_export"
+                        [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
+                    </select>
+                  </div>
+                  <div class="form-row">
+                    <select class="custom-select form-input1"
+                      [(ngModel)]="adminService.userData[0].field_language_four_export">
+                      <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                      <option *ngFor="let language of listOfLanguageNames; let i = index"
+                        [selected]="listOfLanguageIDs[i] == adminService.userData[0].field_language_four_export"
+                        [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-area2">
+                <h3>Vælg niveau</h3>
+                <div class="form-row">
+                  <div class="stares">
+                    <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_one_rating_export">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                    <span *ngIf="emptyRating" class="alert">{{ 'profileUpdate.mandatoryField' | translate }}</span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="stares">
+                    <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_two_rating_export">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="stares">
+                    <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_three_rating_export">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="stares">
+                    <ngb-rating max="4" [(rate)]="adminService.userData[0].field_language_four_rating_export">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-area3">
+                <h3>&nbsp;</h3>
+                <div class="form_box4">
+                  Begynder
+                  <span class="ratings2">
+                    <img src="assets/images/star-white.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                  </span>
+                </div>
+
+                <div class="form_box4">
+                  Mellem
+                  <span class="ratings2">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                  </span>
+                </div>
+
+                <div class="form_box4">
+                  Flydende
+                  <span class="ratings2">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                    <img class="opacity-half" src="assets/images/star.svg">
+                  </span>
+                </div>
+
+                <div class="form_box4">
+                  Perfekt
+                  <span class="ratings2">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                    <img src="assets/images/star-white.svg">
+                  </span>
+                </div>
+
+                <h3 style="margin-top:30px;">Dealekter</h3>
+                <div class="form_box">
+                  <input [(ngModel)]="adminService.userData[0].field_dialect_one_export" name="" type="text"
+                    class="form-input1" placeholder="Skriv her">
+                </div>
+
+                <div class="form_box">
+                  <input [(ngModel)]="adminService.userData[0].field_dialect_two_export" name="" type="text"
+                    class="form-input1" placeholder="Skriv her">
+                </div>
+
+                <div class="form_box">
+                  <input [(ngModel)]="adminService.userData[0].field_dialect_three_export" name="" type="text"
+                    class="form-input1" placeholder="Skriv her">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--close form-area-->
+
+
+
+        <div class="button-area">
+          <a class="btn_1" href="javascript:void(0)">Afvis</a>
+          <a class="btn_2" href="javascript:void(0)" (click)="saveUser()">Godkend</a>
+        </div>
+
+        <div class="toolbar-bottom">
+          <div class="tool-left">
+            <a class="back-btn" href="javascript:void(0)">Tilbage</a>
+          </div>
+          <div class="tool-right">
+            <ul>
+              <!-- <li><a href="javascript:void(0)">Castingsheet</a></li>
                                 <li><a href="javascript:void(0)">KALENDER</a></li>
                                 <li><a href="javascript:void(0)">FOTO/VIDEO</a></li> -->
-                            </ul>
-                      </div>
-                 </div>
-            </div>
-       </div><!--close page-bottom-->
-      
-  </div><!--close content-->
- 
-</div><!--close wrapper--> 
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--close page-bottom-->
+
+  </div>
+  <!--close content-->
+
+</div>
+<!--close wrapper-->

@@ -24,6 +24,7 @@ import { AdminUserInfoComponent } from './admin-user-info/admin-user-info.compon
 import { AdminUserMediaComponent } from './admin-user-media/admin-user-media.component';
 import { HomecarouselComponent } from './homecarousel/homecarousel.component';
 import { ResetpasswordInfoComponent } from './resetpassword-info/resetpassword-info.component';
+import { ResetpasswordSuccessComponent } from './resetpassword-success/resetpassword-success.component';
 
 
 const routes: Routes = [
@@ -93,6 +94,10 @@ const routes: Routes = [
   {
     path: 'reset-password-info',
     component: ResetpasswordInfoComponent
+  },
+  {
+    path: 'reset-password-success',
+    component: ResetpasswordSuccessComponent
   },
   {
     path: 'new-password',

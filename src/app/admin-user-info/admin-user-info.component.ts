@@ -77,6 +77,9 @@ export class AdminUserInfoComponent implements OnInit {
   listOfEyeColorIDs: string[];
   emptyLanguage = false;
   emptyRating = false;
+  listOfStatuses: any;
+  listOfStatus: any;
+  listOfStatusID: any;
   constructor(
     public appData: AppDataService,
     public userprofileService: UserprofileService,
@@ -113,7 +116,19 @@ export class AdminUserInfoComponent implements OnInit {
     this.listOfLicenseNames = JSON.parse(localStorage.getItem('listOfLicenseNames'));
     this.listOfLanguageIDs = JSON.parse(localStorage.getItem('listOfLanguageIDs'));
     this.listOfLanguageNames = JSON.parse(localStorage.getItem('listOfLanguageNames'));
+    this.listOfStatus = JSON.parse(localStorage.getItem('listOfStatus'));
+    this.listOfStatusID = JSON.parse(localStorage.getItem('listOfStatusID'));
 
+
+    if (!this.listOfStatuses) {
+    this.appData.getFieldAvailableOptions('field_profile_status').subscribe(res => {
+      const response: any = res;
+      this.listOfStatuses = response.settings.allowed_values;
+      this.listOfStatusID = Object.keys(this.listOfStatuses);
+      this.listOfStatus = Object.values(this.listOfStatuses);
+      localStorage.setItem('listOfStatus', JSON.stringify(this.listOfStatus));
+      localStorage.setItem('listOfStatusID', JSON.stringify(this.listOfStatusID));
+    }); }
 
     if (!this.listOfCountryIDs) {
     this.appData.getFieldAvailableOptions('field_country').subscribe(res => {
@@ -338,7 +353,8 @@ export class AdminUserInfoComponent implements OnInit {
       const response: any = res;
       if (response && response.message && response.message === 'create success' ||
           response && response.message && response.message === 'update success') {
-        this.adminService.userData[0].uid_export = response.uid;
+            alert('Profile updated');
+            this.adminService.userData[0].uid_export = response.uid;
         // localStorage.setItem('currentUserProfileByAdmin', JSON.stringify(this.adminService.userData));
         // this.router.navigate(['/login/7']);
       }
@@ -369,5 +385,20 @@ export class AdminUserInfoComponent implements OnInit {
       // this.adminService.userData[0].field_new_profile_export = response.profile_new_status;
     });
   }
+
+  setNewProfileNumber() {
+    const newProfileType = this.adminService.userData[0].field_profile_type_export;
+    const uid = this.adminService.userData[0].uid_export;
+    this.adminService.updateProfileTypeAndNumber(newProfileType, uid).subscribe(res => {
+      const response: any = res;
+      if (response.message === 'success') {
+        this.adminService.userData[0].field_profile_number_export = response.field_profile_number;
+        if (newProfileType === 'B') {
+          this.adminService.userData[0].field_profile_status_export = '5';
+        }
+      }
+    });
+  }
+
 
 }

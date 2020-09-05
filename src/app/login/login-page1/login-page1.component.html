@@ -1,5 +1,5 @@
 <div class="wrapper-black">
-
+<!-- {{ userprofileService.userProfile[0] | json }} -->
      <div *ngIf="showHeader" class="popup-header">
           <div class="container-lg">
                <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a>
@@ -27,7 +27,7 @@
                     <div class="step-right">
                          <h4>{{ 'profileUpdate.caption' | translate }} </h4>
                          <div class="step-block1">
-                              <div class="form-row"><input 
+                              <div class="form-row"><input
                                         [(ngModel)]="userprofileService.userProfile[0].field_first_name_export"
                                         type="text" class="input1"
                                         placeholder="{{ 'profileUpdate.firstname' | translate }}">
@@ -65,7 +65,7 @@
                               <div class="form-row">
                                    <select class="custom-select"
                                         [(ngModel)]="userprofileService.userProfile[0].field_country_export">
-                                        <option>{{ 'profileUpdate.country' | translate }}</option>
+                                        <option value="" disabled selected>{{ 'profileUpdate.country' | translate }}</option>
                                         <option *ngFor="let country of listOfCountryNames; let i = index"
                                              [selected]="listOfCountryIDs[i] == userprofileService.userProfile[0].field_country_export"
                                              [(ngValue)]="listOfCountryIDs[i]">{{ country }}</option>

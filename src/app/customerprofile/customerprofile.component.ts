@@ -16,6 +16,8 @@ export class CustomerprofileComponent implements OnInit {
     name: ''
   };
   initiateAddLightbox = false;
+  loadSpinner = false;
+  showPopup = false;
   constructor(
     public userprofileService: UserprofileService,
     private appData: AppDataService,
@@ -62,11 +64,18 @@ export class CustomerprofileComponent implements OnInit {
     });
   }
   saveUser(role) {
+    this.loadSpinner = true;
     this.userprofileService.saveProfile(role).subscribe((res) => {
       const response: any = res;
-      if (response && response.message && response.message === 'create success') {
+      this.loadSpinner = false;
+      if (response && response.message && response.message === 'create success' || response && response.message && response.message === 'update success') {
         console.log('Profile updated');
+        this.showPopup = true;
       }
     });
+  }
+
+  logout() {
+    this.userprofileService.logout();
   }
 }

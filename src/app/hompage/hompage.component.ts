@@ -25,6 +25,7 @@ export class HompageComponent implements OnInit {
   dobMax: any;
   searchPerformed = false;
   searchPN: string;
+  showProfile = false;
 
   constructor(
     public appService: AppDataService,
@@ -74,7 +75,7 @@ export class HompageComponent implements OnInit {
       this.appService.loadedProfileData = this.data;
 
       this.appService.getYProfiles().subscribe(resp => {
-        let yData = resp;
+        const yData = resp;
         // yData = this.shuffle(yData);
         this.appService.loadedProfileData = this.appService.loadedProfileData.concat(yData);
         this.data = this.appService.loadedProfileData;
@@ -135,7 +136,9 @@ export class HompageComponent implements OnInit {
 
   loadProfile(id) {
     this.appService.getSingleProfile(id);
-    this.router.navigate(['/details', id]);
+    this.appService.showProfile = true;
+    this.appService.profileId = id;
+    // this.router.navigate(['/details', id]);
     // this.router.navigate(['/details']);
   }
   setGender(id) {

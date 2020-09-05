@@ -1,15 +1,15 @@
-
+<app-lightboxsidebar></app-lightboxsidebar>
     <div class="wrapper-black">
-    
+
         <div class="popup-header">
               <div class="container-lg">
                   <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
-                  <a download="profileData.field_first_name_export" target="_blank" [href]="loadedAssetUrl" class="download-btn"><span class="download-icon"></span>DOWNLOAD</a>
+                  <a [href]="loadedAssetUrl" [download]="(loadedAssetUrl) ? profileData.field_first_name_export : ''" target="_blank" class="download-btn"><span class="download-icon"></span>DOWNLOAD</a>
                   <a href="javascript:void(0)" (click)="addModelToLightbox(profileData)"  class="add-btn"><span class="add-icon"></span>ADD TO LIGHTBOX</a>
                   <a  (click)="closeDetails()" class="close-icon"></a>
              </div>
         </div><!--popup-header-->
-        
+
         <div class="popup-content">
              <div class="container-lg">
                  <div class="popup-left">
@@ -22,18 +22,18 @@
                            <h3>{{ profileData.field_videos_export.length }}</h3>
                       </div>
                  </div>
-                 
+
                  <div class="popup-right">
                         <div class="popup-right-block1">
-                              <ul class="list4 list-photos" *ngIf="profileData.field_photos_export.length"> 
+                              <ul class="list4 list-photos" *ngIf="profileData.field_photos_export.length">
                                <li *ngFor="let photo of profileData.field_photos_export; index as i"><a href="javascript:void(0)"><img class="profile-photos" (click)="loadAsset(i, 'image')" [lazyLoad]="photo" [defaultImage]="defaultImage" [errorImage]="profileFallback" alt=""/></a></li>
-                               
+
                            </ul>
-                           <ul class="list2 list-videos" *ngIf="profileData.field_videos_export.length"> 
+                           <ul class="list2 list-videos" *ngIf="profileData.field_videos_export.length">
                                <li *ngFor="let thumb of profileData.field_video_thumbnails_export; index as i"><a href="javascript:void(0)"><img class="profile-videos" (click)="loadAsset(i, 'video')" [lazyLoad]="thumb" [defaultImage]="defaultImage" [errorImage]="profileFallback" alt=""/></a></li>
                            </ul>
                       </div>
-                      
+
                       <div class="popup-right-block2">
                             <div class="big-thumb">
                             <img *ngIf="!showImage && !showVideo" src="assets/images/thumb4.png">
@@ -45,7 +45,7 @@
                                 <a href="javascript:void(0)" class="next1"></a>
                            </div>
                       </div>
-                      
+
                       <div class="popup-right-block3">
                               <h2>{{profileData.field_first_name_export}}. <strong>{{profileData.field_profile_number_export}}</strong></h2>
                            <h3 class="categories">{{ assignedCategories || ''}}</h3>
@@ -86,12 +86,12 @@
                                </tbody>
                            </table>
                            <h4>{{ 'userinfo.sporthobby' | translate }}</h4>
-                           <p>{{profileData.field_sports_and_hobby_export || '-'}}</p>
-                           
+                           <p>{{ (profileData.field_sports_and_hobby_export && profileData.field_sports_and_hobby_export != ' ') ? profileData.field_sports_and_hobby_export : '-'}}</p>
+
                            <h4>{{ 'userinfo.skill' | translate }}</h4>
-                           <p>{{assignedSkills || '-'}}</p>
-                           
-                           
+                           <p>{{(assignedSkills && assignedSkills != ' ') ? assignedSkills : '-'}}</p>
+
+
                             <h4>{{ 'userinfo.language' | translate }}</h4>
                             <div class="row" *ngIf="profileData.field_language_one">
                                 <p class="col-6">
@@ -141,6 +141,9 @@
                                     </ngb-rating>
                                 </div>
                             </div>
+                            <div *ngIf="!profileData.field_language_one && !profileData.field_language_two && !profileData.field_language_three && !profileData.field_language_four">
+                              <p> - </p>
+                            </div>
 
                             <h4>{{ 'userinfo.license' | translate }}</h4>
                            <p>{{assignedLicenses || '-'}}</p>
@@ -148,9 +151,7 @@
                  </div>
              </div>
         </div><!--popup-content-->
-        
-   </div><!--popup1-->
 
-   <app-lightboxsidebar></app-lightboxsidebar>
+   </div><!--popup1-->
    <app-addtolightbox *ngIf="userprofileService.showAddToLightboxComponent"></app-addtolightbox>
    <router-outlet></router-outlet>

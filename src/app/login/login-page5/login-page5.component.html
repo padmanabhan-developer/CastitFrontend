@@ -1,13 +1,13 @@
-    
+
     <div class="wrapper-black">
-    
+
         <div class="popup-header">
               <div class="container-lg">
                   <div class="popup-logo"><a routerLink="/profiles"><img src="assets/images/logo-white.svg" alt=""></a></div>
                   <a href="javascript:void(0)" class="close-icon" routerLink="/profiles" ></a>
              </div>
         </div><!--popup-header-->
-        
+
         <div class="popup-content">
              <div class="container-lg">
                   <div class="cnt">
@@ -25,9 +25,9 @@
 
                     <div class="step-right">
                             <div class="step-block1 w-315">
-                                 
+
                                  <div class="step-block3">
-                                      <h4>SPROG</h4>
+                                      <h4>{{ 'profileUpdate.language' | translate }}</h4>
                                         <div class="form-row">
                                              <select class="custom-select" [(ngModel)]="userprofileService.userProfile[0].field_language_one_export">
                                                  <option disabled selected value="">{{ 'profileUpdate.mothertongue' | translate }}</option>
@@ -37,24 +37,24 @@
                                       </div>
                                       <div class="form-row">
                                              <select class="custom-select" [(ngModel)]="userprofileService.userProfile[0].field_language_two_export">
-                                                 <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                                                 <option disabled selected value="">{{ 'profileUpdate.languageCapitalCase' | translate }}</option>
                                                  <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == userprofileService.userProfile[0].field_language_two_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
                                              </select>
                                       </div>
                                       <div class="form-row">
                                                <select class="custom-select" [(ngModel)]="userprofileService.userProfile[0].field_language_three_export">
-                                                 <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                                                 <option disabled selected value="">{{ 'profileUpdate.languageCapitalCase' | translate }}</option>
                                                  <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == userprofileService.userProfile[0].field_language_three_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
                                               </select>
                                       </div>
                                       <div class="form-row">
                                                <select class="custom-select" [(ngModel)]="userprofileService.userProfile[0].field_language_four_export">
-                                                 <option disabled selected value="">{{ 'profileUpdate.language' | translate }}</option>
+                                                 <option disabled selected value="">{{ 'profileUpdate.languageCapitalCase' | translate }}</option>
                                                  <option *ngFor="let language of listOfLanguageNames; let i = index" [selected]="listOfLanguageIDs[i] == userprofileService.userProfile[0].field_language_four_export" [(ngValue)]="listOfLanguageIDs[i]">{{ language }}</option>
                                               </select>
                                       </div>
                                  </div>
-                                 
+
                                  <div class="step-block4">
                                       <h4>DIT NIVEAU</h4>
                                         <div class="form-row">
@@ -95,10 +95,10 @@
                                            </div>
                                       </div>
                                  </div>
-                                 
-                                 
+
+
                             </div>
-                            
+
                             <div class="step-block2 w-400">
                                  <div class="step-block5">
                                       <h4>NIVEAU SKALA</h4>
@@ -139,7 +139,7 @@
                                            </div>
                                       </div>
                                  </div>
-                                 
+
                                  <div class="step-block6">
                                       <h4>DIALEKTER</h4>
                                         <div class="form-row">
@@ -152,12 +152,12 @@
                                                <input [(ngModel)]="userprofileService.userProfile[0].field_dialect_three_export" id="dialect3" type="text" class="input1" placeholder="Noter her">
                                       </div>
                                  </div>
-                                 
+
                             </div>
                        </div>
-                       
+
                   </div>
-                  
+
                   <div class="step-bottom">
                        <div class="bottom-left">
                             <h2><span>05</span>/07</h2>
@@ -166,5 +166,5 @@
                   </div>
              </div>
         </div><!--popup-content-->
-        
+
    </div><!--popup1-->

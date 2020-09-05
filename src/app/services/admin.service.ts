@@ -358,4 +358,10 @@ export class AdminService {
         const data = {value, uid};
         return this.http.post(updateProfileNewStatusUrl, data);
     }
+
+    updateProfileTypeAndNumber(value, uid) {
+      const updateProfileTypeAndNumberUrl = environment.backendBaseUrl + '/en' + '/api/set-profile-type';
+      const data = {value, uid};
+      return this.http.post(updateProfileTypeAndNumberUrl, data);
+    }
 }

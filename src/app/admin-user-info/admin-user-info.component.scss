@@ -8,8 +8,8 @@
 // OLD styles
 /*!
 Theme Name: Castit child
-Theme URI: 
-Author: 
+Theme URI:
+Author:
 
 /*--------------------------------------------------------------
 # Normalize
@@ -1506,8 +1506,24 @@ opacity: 0.8;
     color: #fff;
     font-size: 12px;
     text-align: left;
-    padding-right: 50px;
+    padding-right: 0px;
     line-height: 30px;
+}
+.profile-number-type-label{
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-size: 22px;
+  color: #fff;
+  font-size: 12px;
+  text-align: left;
+  padding-right: 50px;
+  line-height: 30px;
+}
+.box0 {
+  input, select {
+    height: 20px;
+    font-size: 12px;
+  }
 }
 
 .box1 .check-area {
@@ -2099,7 +2115,7 @@ input#upload, input#complete {
     overflow: auto;
     background-color: black;
   }
-  
+
   /* Modal Content */
   .modal-gallery-content {
     position: relative;
@@ -2110,7 +2126,7 @@ input#upload, input#complete {
     max-width: 1200px;
     text-align: center;
   }
-  
+
   .gallery-image {
 	width: 100%;
 	height: 70vh;
@@ -2128,22 +2144,22 @@ input#upload, input#complete {
     font-size: 35px;
     font-weight: bold;
   }
-  
+
   .close:hover,
   .close:focus {
     color: #999;
     text-decoration: none;
     cursor: pointer;
   }
-  
+
   .mySlides {
     display: none;
   }
-  
+
   .cursor {
     cursor: pointer;
   }
-  
+
   /* Next & previous buttons */
   .prev,
   .next {
@@ -2162,20 +2178,20 @@ input#upload, input#complete {
     user-select: none;
     -webkit-user-select: none;
   }
-  
+
   /* Position the "next button" to the right */
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
   }
-  
+
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover,
   .next:hover {
       color: #FFF;
     /* background-color: rgba(0, 0, 0, 0.8); */
   }
-  
+
   /* Number text (1/3 etc) */
   .numbertext {
     color: #f2f2f2;
@@ -2184,31 +2200,31 @@ input#upload, input#complete {
     position: relative;
     top: 0;
   }
-  
+
   img {
     margin-bottom: -4px;
   }
-  
+
   .caption-container {
     text-align: center;
     background-color: black;
     padding: 2px 16px;
     color: white;
   }
-  
+
   .demo {
     opacity: 0.6;
   }
-  
+
   .active,
   .demo:hover {
     opacity: 1;
   }
-  
+
   img.hover-shadow {
     transition: 0.3s;
   }
-  
+
   .hover-shadow:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -2233,16 +2249,16 @@ input#upload, input#complete {
     padding: 0 6px;
     margin: 10px 0 0;
   }
-  
+
   .radio-item input[type='radio'] {
     display: none;
   }
-  
+
   .radio-item label {
     color: #666;
     font-weight: normal;
   }
-  
+
   .radio-item label:before {
     content: " ";
     display: inline-block;
@@ -2255,7 +2271,7 @@ input#upload, input#complete {
     border: 2px solid #004c97;
     background-color: transparent;
   }
-  
+
   .radio-item input[type=radio]:checked + label:after {
     border-radius: 11px;
     width: 12px;
@@ -2359,7 +2375,10 @@ input[id="update_media_pending"] {
 .box0 .radio-info input[type="radio"]:checked + label::after{display:none !important;}
 
 .box0 .check-area {
-    margin-top: 0; margin-bottom:15px;
+    margin-top: 0;
+    margin-bottom:15px;
+    margin-left: 5px;
+    width: 40%;
 }
 .box0 .chek-box{padding-right: 50px;}
 .box0 .chek-box input {
@@ -2378,13 +2397,13 @@ input[id="update_media_pending"] {
  @media screen and (max-width:1199px){
 	.upload-sec {
     width: 100%;
-} 
+}
  }
 
 @media screen and (max-width:991px){
 .box0 {
     margin: 0;
-}	
+}
 .box1 {
     margin-bottom: 15px;
 }
@@ -2427,7 +2446,7 @@ input[id="update_media_pending"] {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -2540,7 +2559,7 @@ input[id="update_media_pending"] {
   .td1{
       width: 330px;
   }
-  
+
 .star {
     font-size: 15px;
     color: #32333b;
@@ -2565,7 +2584,7 @@ input[id="update_media_pending"] {
     margin-left: 10px;
     margin-top: 6px;
   }
-  
+
   .star-img:first-child {
     margin-left: 0;
   }

@@ -52,6 +52,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { HomecarouselComponent } from './homecarousel/homecarousel.component';
 import { PopupComponent } from './popup/popup.component';
 import { ResetpasswordInfoComponent } from './resetpassword-info/resetpassword-info.component';
+import { ResetpasswordSuccessComponent } from './resetpassword-success/resetpassword-success.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -119,7 +120,8 @@ import { ResetpasswordInfoComponent } from './resetpassword-info/resetpassword-i
     MediaModalComponent,
     HomecarouselComponent,
     PopupComponent,
-    ResetpasswordInfoComponent
+    ResetpasswordInfoComponent,
+    ResetpasswordSuccessComponent
   ],
   bootstrap: [
     AppComponent

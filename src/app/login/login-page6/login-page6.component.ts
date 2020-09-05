@@ -37,7 +37,7 @@ export class LoginPage6Component implements OnInit {
         setTimeout(() => {
           this.showPopup = false;
           this.router.navigate(['/login/7']);
-        }, 4000);
+        }, 400000);
       }
     },
     (err) => {

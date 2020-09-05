@@ -58,7 +58,7 @@ export class NewpasswordComponent implements OnInit {
     if (!this.mismatch) {
       this.userprofileService.updatePassword(this.email, this.passOne).subscribe(res => {
         this.showPopup = true;
-        // this.router.navigate(['/login']);
+        this.router.navigate(['/reset-password-success']);
       });
     }
   }

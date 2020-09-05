@@ -27,14 +27,21 @@ export class PopupComponent implements OnInit {
       case 'userSave':
         this.redirectRoute = '/login/7';
         break;
-
+      case 'customerSave':
+        // window.location.reload();
+        this.redirectRoute = '/customer-profile';
+        break;
       default:
         break;
     }
   }
 
   closeToRedirect() {
-    this.router.navigate([this.redirectRoute]);
+    if (this.redirectRoute) {
+      this.router.navigate([this.redirectRoute]);
+    } else {
+      window.location.reload();
+    }
   }
 
 }

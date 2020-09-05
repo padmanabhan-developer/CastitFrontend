@@ -54,7 +54,7 @@
                                    <div class="col-4">
                                         <div class="">
                                              <select [(ngModel)]="day" class="custom-select">
-                                                  <option value="">{{'profileUpdate.day' | translate }}</option>
+                                                  <option disabled selected value="">{{'profileUpdate.day' | translate }}</option>
                                                   <option [value]="i+1" *ngFor="let item of [].constructor(31); let i = index">{{i+1}}</option>
                                              </select>
                                         </div>
@@ -62,7 +62,7 @@
                                    <div class="col-4">
                                         <div class="">
                                              <select [(ngModel)]="month" class="custom-select">
-                                                  <option>{{'profileUpdate.month' | translate }}</option>
+                                                  <option disabled selected value="">{{'profileUpdate.month' | translate }}</option>
                                                   <option [value]="i+1" *ngFor="let item of [].constructor(12); let i = index">{{i+1}}</option>
                                              </select>
                                         </div>
@@ -70,13 +70,13 @@
                                    <div class="col-4">
                                         <div class="">
                                              <select [(ngModel)]="year" class="custom-select">
-                                                  <option>{{'profileUpdate.year' | translate }}</option>
+                                                  <option disabled selected value="">{{'profileUpdate.year' | translate }}</option>
                                                   <option [value]="item" *ngFor="let item of years(); let i = index">{{item}}</option>
                                              </select>
                                         </div>
                                    </div>
                               </div>
-                              <div class="form-row"><input
+                              <div class="form-row ethnic-margin-top"><input
                                         [(ngModel)]="userprofileService.userProfile[0].field_ethnic_origin_export"
                                         type="text" class="input1" placeholder="{{ 'profileUpdate.ethnic' | translate }}"></div>
                               <div class="form-row">

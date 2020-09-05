@@ -44,25 +44,26 @@
     background-color: #222222;
     opacity: 0.95;
     z-index: 2;
+    padding-right: 8%;
 }
 
 .popup-title {
   font-size: 3vw;
-  color: #ccc;
+  color: #a9a9a9;
   text-align: center;
   font-weight: bold;
   line-height: 3vw;
 }
 .popup-message {
   font-size: 3vw;
-  color: #ccc;
+  color: #a9a9a9;
   text-align: center;
   font-weight: bold;
   line-height: 3vw;
 }
 .close-icon {
-  position: absolute;
-  float: none;
-	top: 50px;
-	right: 50px;
+  position: relative;
+  float: right;
+	top: 30px;
+	// right: 50px;
 }

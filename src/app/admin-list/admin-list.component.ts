@@ -309,11 +309,11 @@ export class AdminListComponent implements OnInit, OnChanges {
           case 'info':
           default:
             this.adminService.showInfoComponent = true;
-            this.router.navigate(['/admin/info/' + uid]);
+            // this.router.navigate(['/admin/info/' + uid]);
             break;
           case 'media':
             this.adminService.showMediaComponent = true;
-            this.router.navigate(['/admin/media/' + uid]);
+            // this.router.navigate(['/admin/media/' + uid]);
             break;
         }
       }, 0);
