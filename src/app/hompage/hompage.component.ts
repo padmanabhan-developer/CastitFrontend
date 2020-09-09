@@ -71,12 +71,12 @@ export class HompageComponent implements OnInit {
   loadTiles() {
     this.appService.getCProfiles().subscribe(res => {
       this.data = res;
-      // this.data = this.shuffle(this.data);
+      this.data = this.shuffle(this.data);
       this.appService.loadedProfileData = this.data;
 
       this.appService.getYProfiles().subscribe(resp => {
-        const yData = resp;
-        // yData = this.shuffle(yData);
+        let yData = resp;
+        yData = this.shuffle(yData);
         this.appService.loadedProfileData = this.appService.loadedProfileData.concat(yData);
         this.data = this.appService.loadedProfileData;
 

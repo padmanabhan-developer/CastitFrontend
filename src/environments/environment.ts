@@ -1,11 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+const protocol = location.protocol;
 export const environment = {
   production: false,
-  backendBaseUrl: 'http://docker/web'
-  // backendBaseUrl: 'http://backend.castit.dk'
+  // backendBaseUrl: 'http://docker/web'
+  backendBaseUrl: protocol + '//backend.castit.dk'
 };
 
 /*

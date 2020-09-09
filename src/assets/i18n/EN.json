@@ -161,7 +161,7 @@
         "instructionTwo":"When you have finished editing, click on send"
     },
     "customer":{
-      "mineLightboxInfo":"Here you can manage your saved Lightbox"
+      "mineLightboxInfo":"Here you can manage your saved Lightbox."
     },
     "messages":{},
     "password":{},

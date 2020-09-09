@@ -1,4 +1,4 @@
-<app-lightboxsidebar></app-lightboxsidebar>
+<app-lightboxsidebar *ngIf="!profileId && !appService.showProfile"></app-lightboxsidebar>
     <div class="wrapper-black">
 
         <div class="popup-header">

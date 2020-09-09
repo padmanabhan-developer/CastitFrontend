@@ -1,4 +1,5 @@
+const protocol = location.protocol;
 export const environment = {
   production: true,
-  backendBaseUrl: 'http://backend.castit.dk'
+  backendBaseUrl: protocol + '//backend.castit.dk'
 };
